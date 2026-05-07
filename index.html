@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamza AbdElKadir | Mechanical Design Portfolio</title>
+    <title>Hamza Abd ElKadir | Mechanical Design Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -32,7 +32,6 @@
 
     <script>
         // 1. REORDER YOUR PROJECTS HERE
-        // Rearrange the words in these lists to change the order on the website.
         const CONFIG = {
             FAST_ORDER: ['flowmeter', 'conveyor', 'rover', 'stirling'],
             DETAILED_ORDER: ['flowmeter', 'conveyor', 'rover', 'stirling', 'thermo', 'elevator', 'canon', 'die', 'lantern']
@@ -41,7 +40,7 @@
         const DATA = {
             // === PERSONAL INFO ===
             initials: "HM",
-            name: "Hamza Mohamed Abd ElKadir",
+            name: "Hamza Abd ElKadir",
             bio: "Based in Cairo, specializing in precision hardware design, CAD modeling, and industrial process automation. I thrive on solving complex kinematic challenges and bridging the gap between raw theory and physical implementation.",
             phone: "+20 103 377 0304",
             resumeLink: "https://drive.google.com/file/d/17oHOxpbiz0MyvyAi3WDIeMPT_mURHRCG/view?usp=sharing", 
@@ -70,7 +69,7 @@
             rover_Title: "Rover Suspension",
             rover_Subtitle: "ERC Mars Yard Joint Design",
             rover_Skills: "SolidWorks, Tolerance Stack-Up, DFM",
-            rover_BG: "https://github.com/Hamza442004/Hamza442004.github.io/blob/main/media/portfilio_bg.webm",
+            rover_BG: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&w=1920&q=80",
             rover_Obj: "Developed a robust rocker-to-chassis connection for an ERC Mars Yard rover prototype to prevent axial and radial play under extreme dynamic loading conditions.",
             rover_Out: "Designed a custom connection utilizing rolling element bearings in SolidWorks. Conducted thorough tolerance stack-up analysis to ensure an exact interference fit within the housing.",
             rover_Detail1_Title: "Mars Yard Constraints",
@@ -82,12 +81,13 @@
             rover_Gallery: "https://github.com/yourprofile/rover",
 
             // ==========================================
-            // PROJECT 3: FLOWMETER
+            // PROJECT 3: FLOWMETER (Includes Video Link!)
             // ==========================================
-            flowmeter_Title: "Flowmeter Turbine",
+            flowmeter_Title: "Smart Turbine Flowmeter",
             flowmeter_Subtitle: "Fluid Dynamics Rendering",
             flowmeter_Skills: "Blender 3D, Material Shaders, Rendering",
             flowmeter_BG: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1920&q=80",
+            flowmeter_Video: "https://github.com/Hamza442004/Hamza442004.github.io/blob/main/media/portfilio_bg.webm", // <--- THE VIDEO LINK IS HERE
             flowmeter_Obj: "Created a professional engineering portfolio hero-shot and animation of a mechanical flowmeter turbine to demonstrate the internal mechanism to non-technical stakeholders.",
             flowmeter_Out: "Configured Three-Point lighting and advanced metal shaders in Blender. Fine-tuned material roughness and anisotropy to accurately reflect machined aluminum surfaces.",
             flowmeter_Detail1_Title: "Digital Twin Rendering",
@@ -298,13 +298,16 @@
                     </article>
 
                     <article class="project-item mb-24 bg-white shadow-xl border-t border-slate-200" data-project-id="flowmeter">
-                        <div class="project-hero" data-bg="flowmeter_BG">
-                            <div class="text-center bg-slate-900/80 p-12 rounded backdrop-blur-md border border-slate-700/50 mx-4">
+                        <div class="project-hero relative overflow-hidden" data-bg="flowmeter_BG">
+                            <video data-src="flowmeter_Video" class="absolute inset-0 w-full h-full object-cover z-0 scroll-video" muted loop playsinline preload="auto"></video>
+                            
+                            <div class="text-center bg-slate-900/80 p-12 rounded backdrop-blur-md border border-slate-700/50 mx-4 relative z-10">
                                 <h2 data-text="flowmeter_Title" class="text-5xl font-extrabold text-white mb-4"></h2>
                                 <p data-text="flowmeter_Subtitle" class="text-xl text-slate-300 mb-6"></p>
                                 <div class="flex flex-wrap justify-center gap-2" data-skills-inject="flowmeter"></div>
                             </div>
                         </div>
+
                         <div class="py-24 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                             <div class="prose prose-slate prose-lg max-w-none">
                                 <h3 class="text-3xl font-bold text-slate-900 mb-6">Objective</h3>
@@ -380,7 +383,15 @@
                     </article>
 
                     <article class="project-item mb-24 shadow-2xl" data-project-id="flowmeter">
-                        <div class="project-hero" data-bg="flowmeter_BG"><div class="text-center bg-slate-900/80 p-12 rounded backdrop-blur-md mx-4"><h2 class="text-5xl font-extrabold text-white mb-4" data-text="flowmeter_Title"></h2><div class="flex flex-wrap justify-center gap-2" data-skills-inject="flowmeter"></div></div></div>
+                        <div class="project-hero relative overflow-hidden" data-bg="flowmeter_BG">
+                            <video data-src="flowmeter_Video" class="absolute inset-0 w-full h-full object-cover z-0 scroll-video" muted loop playsinline preload="auto"></video>
+
+                            <div class="text-center bg-slate-900/80 p-12 rounded backdrop-blur-md mx-4 relative z-10">
+                                <h2 class="text-5xl font-extrabold text-white mb-4" data-text="flowmeter_Title"></h2>
+                                <div class="flex flex-wrap justify-center gap-2" data-skills-inject="flowmeter"></div>
+                            </div>
+                        </div>
+
                         <div class="py-24 bg-white border-b border-slate-200 px-6">
                             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                                 <div class="lg:col-span-5 prose prose-slate prose-lg"><h3 class="text-3xl font-bold mb-4" data-text="flowmeter_Detail1_Title"></h3><p data-text="flowmeter_Detail1_Text"></p></div>
@@ -511,16 +522,16 @@
                             </div>
                         </div>
                     </article>
+
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        // 1. Core Data Injection & Setup
         document.addEventListener("DOMContentLoaded", () => {
             
-            // Inject Text, Images, and Links
+            // 1. Inject Text, Images, and Links
             document.querySelectorAll('[data-text]').forEach(el => { el.textContent = DATA[el.getAttribute('data-text')]; });
             document.querySelectorAll('[data-src]').forEach(el => { el.src = DATA[el.getAttribute('data-src')]; });
             document.querySelectorAll('[data-href]').forEach(el => { el.href = DATA[el.getAttribute('data-href')]; });
@@ -528,17 +539,14 @@
 
             // 2. Build & Inject Skills Tags
             let allSkillsSet = new Set();
-            
             document.querySelectorAll('[data-skills-inject]').forEach(container => {
                 const projectId = container.getAttribute('data-skills-inject');
                 const skillsString = DATA[projectId + '_Skills'];
-                
                 if (skillsString) {
                     const skillsArray = skillsString.split(',').map(s => s.trim());
                     skillsArray.forEach(skill => {
                         if(skill) {
-                            allSkillsSet.add(skill); // Save unique skill for the filter dropdown
-                            // Create the HTML pill tag
+                            allSkillsSet.add(skill);
                             const span = document.createElement('span');
                             span.className = "px-4 py-1.5 bg-slate-800 text-slate-200 text-sm font-semibold rounded border border-slate-700";
                             span.textContent = skill;
@@ -551,7 +559,6 @@
             // 3. Populate Skill Filter Dropdown
             const filterDropdown = document.getElementById('skillFilter');
             const sortedSkills = Array.from(allSkillsSet).sort();
-            
             sortedSkills.forEach(skill => {
                 const option = document.createElement('option');
                 option.value = skill.toLowerCase();
@@ -563,13 +570,28 @@
             const fastWrapper = document.getElementById('fast-projects-wrapper');
             CONFIG.FAST_ORDER.forEach(id => {
                 const projectHtml = fastWrapper.querySelector(`article[data-project-id="${id}"]`);
-                if (projectHtml) fastWrapper.appendChild(projectHtml); // Moves it to the correct order
+                if (projectHtml) fastWrapper.appendChild(projectHtml);
             });
 
             const detailedWrapper = document.getElementById('detailed-projects-wrapper');
             CONFIG.DETAILED_ORDER.forEach(id => {
                 const projectHtml = detailedWrapper.querySelector(`article[data-project-id="${id}"]`);
-                if (projectHtml) detailedWrapper.appendChild(projectHtml); // Moves it to the correct order
+                if (projectHtml) detailedWrapper.appendChild(projectHtml);
+            });
+
+            // 5. Video Scroll-Trigger Engine (Specifically for Flowmeter)
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.play();
+                    } else {
+                        entry.target.pause();
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            document.querySelectorAll('.scroll-video').forEach(video => {
+                videoObserver.observe(video);
             });
         });
 
@@ -586,7 +608,6 @@
             const btnFast = document.getElementById('btn-fast');
             const btnDetailed = document.getElementById('btn-detailed');
             
-            // Reset filters when switching views to prevent confusion
             document.getElementById('skillFilter').value = 'all';
             filterProjects(); 
 
