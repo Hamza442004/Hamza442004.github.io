@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Hamza Abd ElKadir | Mechanical Design Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET ─────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#c8102e; --redlt:#f7e8ea;
+  --ink:#0f172a; --ink2:#334155; --ink3:#64748b;
+  --paper:#f8fafc; --white:#fff; --rule:#e2e8f0;
+  --fd:'Inter', sans-serif;
+  --fb:'Inter', sans-serif;
+  --mw:1160px; --g:clamp(1.25rem,4vw,3.5rem); --nh:60px;
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+html{font-size:16px; scroll-behavior: smooth;}
+body{font-family:var(--fb);background:var(--paper);color:var(--ink);
+     line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--fd);letter-spacing:-.025em;line-height:1.15}
+a{color:inherit;text-decoration:none}
+img, video{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ── UTILS ──────────────────────────────── */
+.wrap{width:100%;max-width:var(--mw);margin-inline:auto;padding-inline:var(--g)}
+.eyebrow{font-family:var(--fd);font-size:.65rem;font-weight:700;
+         letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.divrow{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem}
+.divrow::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+.img-container { position: relative; background: #fff; overflow: hidden; border: 1px solid #cbd5e1; padding: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
+.ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--fd); font-size: .65rem; letter-spacing: .1em; color: var(--ink3); text-align: center; padding: 1rem; text-transform: uppercase; z-index: 1; background: var(--rule); }
+.img-container img, .img-container video { position: relative; z-index: 2; width: 100%; height: auto; }
+
+/* ── BUTTONS ───────────────────────────── */
+.btn{font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em;
+     text-transform:uppercase;padding:.8rem 1.6rem;border:1.5px solid var(--ink);
+     background:var(--ink);color:var(--white);cursor:pointer;display:inline-block;
+     transition:background .18s,border-color .18s,transform .12s; border-radius: 4px;}
+.btn:hover{background:var(--red);border-color:var(--red);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--white)}
+
+/* ── PAGE SYSTEM ───────────────────────── */
+.pg{display:none; animation: fadeIn 0.4s ease;}
+.pg.on{display:block}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── NAV ────────────────────────────────── */
+nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
+    background:rgba(255,255,255,.98);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--rule); box-shadow: 0 1px 2px rgba(0,0,0,0.03);}
+.nav-in{max-width:var(--mw);margin-inline:auto;padding-inline:var(--g);
+        height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:800;cursor:pointer; letter-spacing: -0.02em;}
+.nav-logo b{color:var(--red)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.7rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+             color:var(--ink3);position:relative;transition:color .15s;cursor:pointer}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;
+                    background:var(--red);transform:scaleX(0);transform-origin:left;
+                    transition:transform .2s var(--ease)}
+.nav-links a:hover,.nav-links a.act{color:var(--ink)}
+.nav-links a.act::after,.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cv{font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.05em;
+        text-transform:uppercase;padding:.4rem 1.2rem; border-radius: 4px;
+        border:1.5px solid var(--ink);color:var(--ink);transition:background .18s,color .18s; cursor: pointer;}
+.nav-cv:hover{background:var(--ink);color:var(--white)}
+
+/* ── HOME PAGE ─────────────────────────── */
+#pg-home{padding-top:calc(var(--nh) + 5rem);padding-bottom:5rem}
+.hero-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:6rem}
+.hero-ey{display:flex;align-items:center;gap:.65rem;margin-bottom:1.2rem}
+.hero-ey-line{width:2rem;height:2px;background:var(--red);flex-shrink:0}
+.hero-h1{font-size:clamp(2.8rem,5vw,5rem);font-weight:800;line-height:1.05;margin-bottom:.5rem; letter-spacing: -0.03em;}
+.hero-h1 em{font-style:normal;color:var(--red)}
+.hero-uni{font-family:var(--fd);font-size:.85rem;font-weight:600;color:var(--ink3);letter-spacing:.02em;margin-bottom:1.5rem}
+.hero-bio{font-size:1.05rem;font-weight:400;color:var(--ink2);line-height:1.8;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.hero-photo{aspect-ratio:4/5; border-radius: 6px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.15); overflow: hidden; position: relative;}
+
+.about-strip{padding-top:5rem;border-top:1px solid var(--rule)}
+.about-grid{display:grid;grid-template-columns:240px 1fr;gap:4rem;align-items:start;margin-top:2rem}
+.about-portrait{aspect-ratio:1; border-radius: 50%; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); overflow: hidden; position: relative;}
+.about-h{font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:800;margin-bottom:1.2rem; letter-spacing: -0.02em;}
+.about-p{font-size:1rem;font-weight:400;color:var(--ink2);line-height:1.8;margin-bottom:1rem}
+.about-p strong{font-weight:600;color:var(--ink)}
+
+.contact-strip{padding-top:5rem;border-top:1px solid var(--rule);margin-top:5rem}
+.cform-wrap{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.clinks{list-style:none;display:flex;flex-direction:column;gap:1.2rem}
+.clinks a{display:flex;align-items:center;gap:.8rem;font-size:.95rem;font-weight:500;color:var(--ink2);transition:color .15s}
+.clinks a:hover{color:var(--red)}
+.ci{width:18px;height:18px;color:var(--red);flex-shrink:0}
+.cform{display:flex;flex-direction:column;gap:1.2rem}
+.fg{display:flex;flex-direction:column;gap:.4rem}
+.fl{font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.fi,.fta{font-family:var(--fb);font-size:.95rem;color:var(--ink);background:var(--white);
+         border:1px solid var(--rule);padding:.8rem 1rem;outline:none; border-radius: 4px;
+         transition:border-color .15s;width:100%;resize:vertical}
+.fi:focus,.fta:focus{border-color:var(--ink)}
+.fta{min-height:120px}
+
+/* ── CARDS (PROJECTS GRID) ──────────────── */
+#pg-projects{padding-top:calc(var(--nh)+4rem);padding-bottom:5rem}
+.filter-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:3rem}
+.fb{font-family:var(--fd);font-size:.65rem;font-weight:600;letter-spacing:.05em;
+    text-transform:uppercase;padding:.5rem 1.2rem;border:1px solid var(--rule); border-radius: 4px;
+    background:var(--white);color:var(--ink3);cursor:pointer;transition:all .15s}
+.fb:hover{border-color:var(--ink3);color:var(--ink2)}
+.fb.act{border-color:var(--red);background:var(--red);color:var(--white)}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-top:1px solid var(--rule);
+  border-left:1px solid var(--rule);
+}
+.card{
+  background:var(--white);
+  display:flex;
+  flex-direction:column;
+  cursor:pointer;
+  position:relative;
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  transition: z-index 0.3s ease;
+}
+
+.card-cover{
+  overflow:hidden;
+  aspect-ratio:3/2;
+  position:relative;
+  background:var(--rule);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  z-index: 1;
+}
+.card:hover { z-index: 10; }
+.card:hover .card-cover {
+  transform: scale(1.06) translateY(-4px);
+  box-shadow: 0 15px 35px -5px rgba(0,0,0,0.25);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.card-num{position:absolute;top:.8rem;left:1rem;font-family:var(--fd);font-size:.6rem;font-weight:800;letter-spacing:.05em;color:rgba(255,255,255,.9);z-index:3; text-shadow: 0 2px 4px rgba(0,0,0,0.6);}
+.card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.card-tags{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+.tag{font-family:var(--fd);font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .6rem;background:var(--redlt);color:var(--red); border-radius: 3px;}
+.award{font-family:var(--fd);font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .6rem;background:#fef3c7;color:#b45309;border:1px solid #fde68a; border-radius: 3px;}
+.card-title{font-family:var(--fd);font-size:1.05rem;font-weight:800;line-height:1.2;margin-bottom:.5rem; letter-spacing: -0.01em;}
+.card-sum{font-size:.85rem;color:var(--ink2);line-height:1.6;border-left:2px solid var(--red);padding-left:.6rem;margin-bottom:1.2rem;flex:1}
+.card-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem}
+.tool{font-family:var(--fd);font-size:.55rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--rule);color:var(--ink3); border-radius: 3px;}
+.card-cta{font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;border-bottom:1.5px solid var(--ink);padding-bottom:1px;transition:color .15s,border-color .15s;align-self:flex-start}
+.card-cta:hover{color:var(--red);border-color:var(--red)}
+
+/* ── SCIENTIFIC PAPER DETAIL PAGES (IMAGE FOCUSED) ────── */
+.det-cover{position:relative;height:70vh;min-height:400px;overflow:hidden;background:#111}
+.cov-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,0.95) 0%,rgba(15,23,42,0.1) 60%,transparent 100%); z-index: 10;}
+.cov-txt{position:absolute;bottom:0;left:0;right:0;padding:3rem var(--g);max-width:1300px;margin-inline:auto; z-index: 20;}
+.cov-back{display:inline-flex;align-items:center;font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.7);cursor:pointer;margin-bottom:1.5rem;transition:color .15s}
+.cov-back:hover{color:var(--white)}
+
+/* The Strict Academic Layout - Expanded width for larger images */
+.sci-paper {
+    max-width: 1250px; /* Much wider to allow massive images next to text */
+    margin: -60px auto 4rem; 
+    background: #ffffff;
+    padding: 5rem 4rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 30;
+    font-family: 'Lora', serif; 
+    color: #000;
+}
+.sci-title { font-family: 'Inter', sans-serif; font-size: 2.2rem; font-weight: 800; text-align: center; line-height: 1.3; margin-bottom: 1rem; letter-spacing: -0.02em; max-width: 900px; margin-inline: auto; }
+.sci-auth { text-align: center; font-size: 1rem; font-style: italic; margin-bottom: 3rem; color: #444; }
+.sci-abs-wrap { display: flex; justify-content: center; margin-bottom: 5rem; border-bottom: 2px solid #000; padding-bottom: 3rem; }
+.sci-abs { max-width: 800px; font-size: 1.05rem; font-weight: 500; text-align: justify; line-height: 1.8; }
+
+/* Side-by-Side Blended Grid (Text and Large Images) */
+.sci-section { 
+    display: grid; 
+    grid-template-columns: 4fr 7fr; /* Text gets 40%, Images get 60% for massive visual focus */
+    gap: 4rem; 
+    align-items: start; 
+    margin-bottom: 6rem; 
+}
+.sci-section.rev {
+    grid-template-columns: 7fr 4fr; /* Reverses the layout for the Z-Pattern */
+}
+
+.sci-text { text-align: justify; font-size: 1.05rem; line-height: 1.8; }
+.sci-h2 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin: 0 0 1.5rem; color: #000; letter-spacing: 0.05em; border-bottom: 1px solid #cbd5e1; padding-bottom: 0.4rem; }
+.sci-p { margin-bottom: 1.2rem; }
+.sci-list { padding-left: 1.2rem; margin-bottom: 1.5rem; list-style-type: disc; }
+.sci-list li { margin-bottom: 0.6rem; padding-left: 0.3rem;}
+
+.sci-table { width: 100%; border-top: 2px solid #000; border-bottom: 2px solid #000; border-collapse: collapse; margin-bottom: 2rem; font-family: 'Inter', sans-serif; font-size: 0.85rem; text-align: left; }
+.sci-table th, .sci-table td { padding: 0.8rem 0.5rem; border-bottom: 1px solid #e2e8f0; }
+.sci-table tr:last-child td { border-bottom: none; }
+.sci-table dt { font-weight: 700; color: #000; }
+
+.sci-visual { display: flex; flex-direction: column; gap: 3rem; }
+.sci-fig { width: 100%; }
+.sci-cap { font-family: 'Inter', sans-serif; font-size: 0.85rem; text-align: center; margin-top: 1rem; color: #475569; }
+
+/* ── GALLERY ───────────────────────────── */
+#pg-gallery{padding-top:calc(var(--nh)+4rem);padding-bottom:5rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+.gal-item{aspect-ratio:4/3;overflow:hidden;cursor:pointer;position:relative;background:var(--rule); border-radius: 6px;}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease); position: relative; z-index: 2;}
+.gal-item:hover img{transform:scale(1.05)}
+.gal-item.wide{grid-column:span 2}
+.gal-cap{position:absolute;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:flex-end;padding:1.5rem;opacity:0;transition:opacity .25s; z-index: 5;}
+.gal-item:hover .gal-cap{opacity:1}
+.gal-cap span{font-family:var(--fd);font-size:.8rem;font-weight:600;letter-spacing:.05em;color:#fff}
+
+#lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.98);align-items:center;justify-content:center}
+#lightbox.open{display:flex}
+#lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;display:block}
+#lb-close{position:absolute;top:2rem;right:3rem;font-family:var(--fd);font-size:2rem;color:#fff;cursor:pointer;opacity:.6;transition:opacity .15s}
+#lb-close:hover{opacity:1}
+
+footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--white);}
+.foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.foot-c{font-size:.85rem;color:var(--ink3); font-weight: 500;}
+
+@media(max-width:1024px){
+  .sci-section { grid-template-columns: 1fr; gap: 2rem; }
+  .sci-section.rev { grid-template-columns: 1fr; }
+  .sci-section.rev .sci-text { order: 1; }
+  .sci-section.rev .sci-visual { order: 2; }
+}
+@media(max-width:900px){
+  .hero-split{grid-template-columns:1fr;}
+  .hero-photo{max-width:380px;aspect-ratio:4/3;order:-1;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-portrait{max-width: 250px;}
+  .cards, .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .cform-wrap{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .sci-paper { padding: 3rem 2rem; margin-top: -30px; }
+}
+@media(max-width:560px){
+  .cards, .gallery-grid{grid-template-columns:1fr}
+  .gal-item.wide{grid-column:span 1}
+  .sci-paper { padding: 2rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<script>
+    const PROJECT_ORDER = ['flowmeter', 'conveyor', 'rover', 'stirling', 'thermo', 'elevator', 'canon', 'die', 'lantern'];
+
+    const DATA = {
+        // --- GLOBAL INFO ---
+        initials: "HM",
+        name: "Hamza Abd ElKadir",
+        title: "Mechanical Design & Production Engineer",
+        uni: "B.Eng. Mechanical Engineering — Ain Shams University (2022–2027)",
+        bio: "I design mechanical systems that are precise, manufacturable, and built to solve real problems — from award-winning flow instrumentation to fully automated industrial machinery. Two competition first-places, one industry role, nine engineering projects.",
+        about1: "I am a 3rd-year Mechanical Engineering student at Ain Shams University, specialising in Design & Production. My work sits at the intersection of precision mechanical design, DFMA, and hands-on manufacturing supervision — I do not just model parts, I see them through to the shop floor.",
+        about2: "My experience spans elevator systems, flow instrumentation, packaging automation, and space-rover suspension. CSWA-certified in SolidWorks. Currently designing the suspension for a Mars rover targeting the European Rover Challenge in Poland with ASU Racing Team (ROAR).",
+        email: "hamzahamza050875@gmail.com",
+        phone: "+20 103 377 0304",
+        linkedin: "linkedin.com/in/hamza-abdelkadir",
+        linkedinLink: "https://www.linkedin.com/in/hamza-abdelkadir-6407b81a8",
+        grabcad: "grabcad.com/YOUR_USERNAME",
+        grabcadLink: "https://grabcad.com/",
+        resumeLink: "Hamza_CV.pdf", 
+        heroPic: "media/YOUR_PHOTO.jpg",
+        profilePic: "media/YOUR_PORTRAIT.jpg",
+        
+        // --- PROJECT 1: FLOWMETER ---
+        flowmeter_CardTags: "Instrumentation",
+        flowmeter_CardAward: "🏆 1st Place",
+        flowmeter_CardTitle: "Smart Turbine Flowmeter",
+        flowmeter_CardSum: "Most accurate of 35 teams. 6-inch turbine, 0.05–0.6 m³/s, calibrated tachometer + pressure + temperature.",
+        flowmeter_Tools: "SolidWorks|DFMA|Python|Blender",
+        flowmeter_Cover: "media/flowmeter-cover.jpg",
+        flowmeter_Video: "media/portfilio_bg.webm",  // THE VIDEO LINK!
+        flowmeter_PaperTitle: "Design and Fabrication of a Conventionally-Machinable Smart Turbine Flowmeter with Integrated Multi-Sensor Calibration",
+        flowmeter_Auth: "Hamza Abd ElKadir — Ain Shams University Design Competition, Sep 2024 – Feb 2025",
+        flowmeter_Abs: "A 6-inch turbine flowmeter was designed for a flow range of 0.05–0.6 m³/s using only conventional cutting machines. A smart control system integrating tachometer, pressure, and temperature sensors was programmed and individually calibrated, achieving the highest measurement accuracy among 35 competing teams and winning 1st place.",
+        flowmeter_Obj: "Design a turbine flowmeter manufacturable entirely by conventional cutting processes while maximising measurement accuracy. Integrate a smart sensing system and compete against 35 teams at the ASU Design Competition.",
+        flowmeter_Contrib: "Designed turbine blade geometry for full conventional machinability using DFMA principles.|Programmed the complete smart control system (tachometer, pressure transducer, temperature sensor).|Individually calibrated each sensor — achieved ±16% accuracy, best in competition.|Supervised all manufacturing stages from raw stock to final assembly.|Created Blender 3D fluid-dynamics rendering for visual documentation.",
+        flowmeter_Specs: "Pipe diameter : 6 inches | Flow range : 0.05 – 0.6 m³/s | Accuracy : ±16% — best of 35 teams | Manufacturing : Conventional cutting only | Sensors : Tachometer, pressure transducer, temperature",
+        flowmeter_Outcomes: "1st place at the ASU Design Competition 2024–2025. Most accurate flowmeter among all 35 teams. Smart control system programmed and calibrated from scratch.",
+        flowmeter_Fig1: "media/flowmeter-fig1.jpg",
+        flowmeter_Fig1Cap: "Turbine rotor and flowmeter assembly",
+        flowmeter_Fig2: "media/flowmeter-fig2.jpg",
+        flowmeter_Fig2Cap: "Smart sensor system and calibration setup",
+        flowmeter_Fig3: "media/flowmeter-fig3.jpg", // Optional 3rd Image!
+        flowmeter_Fig3Cap: "Fluid dynamics trajectory mapping",
+        flowmeter_Fig4: "media/flowmeter-fig4.jpg", // Optional 4th Image!
+        flowmeter_Fig4Cap: "Final machined prototype prior to assembly",
+
+        // --- PROJECT 2: CONVEYOR ---
+        conveyor_CardTags: "Automation",
+        conveyor_CardAward: "🏆 1st Place",
+        conveyor_CardTitle: "Tea Bag Packaging Automation",
+        conveyor_CardSum: "60 s → 9 s cycle time (6.6×). Fully validated by physics simulation before build.",
+        conveyor_Tools: "SolidWorks|Physics Sim|DFMA",
+        conveyor_Cover: "media/packaging-cover.jpg",
+        conveyor_PaperTitle: "Mechanical Design of a High-Speed Automated Tea Bag Packaging System with Physics-Based Process Validation",
+        conveyor_Auth: "Hamza Abd ElKadir — Royal Herbs IHUB Competition, Jan 2026 – Apr 2026",
+        conveyor_Abs: "A complete mechanical packaging system was designed to fully automate tea bag insertion into boxes for Royal Herbs. A solid-body physics simulation validated the process before any physical build, achieving a cycle-time reduction from 60 s to 9 s per box and winning 1st place at the IHUB Competition.",
+        conveyor_Obj: "Fully automate the tea bag packaging process to reach near-zero error rate and dramatically reduce cycle time. Validate the design via simulation before committing to physical build.",
+        conveyor_Contrib: "Designed the complete mechanical packaging mechanism from concept to detailed design.|Built a solid-body physics simulation to validate timing and detect collisions.|Resolved critical timing and interference issues during simulation phase.|Achieved 6.6× speed improvement (60 s → 9 s) with near-zero error rate.",
+        conveyor_Specs: "Cycle time (before) : 60 seconds per box | Cycle time (after) : 9 seconds per box | Improvement : 6.6× faster | Validation : Solid-body physics simulation | Error rate : Near zero",
+        conveyor_Outcomes: "1st place, Royal Herbs IHUB Competition 2026. Design validated entirely in simulation before build, eliminating costly redesigns.",
+        conveyor_Fig1: "media/packaging-fig1.jpg",
+        conveyor_Fig1Cap: "Full mechanical packaging system",
+        conveyor_Fig2: "media/packaging-fig2.jpg",
+        conveyor_Fig2Cap: "Physics simulation validation",
+
+        // --- PROJECT 3: ROVER ---
+        rover_CardTags: "Competition",
+        rover_CardTitle: "Mars Rover Suspension",
+        rover_CardSum: "Designed, optimised and manufactured for the European Rover Challenge, Poland.",
+        rover_Tools: "SolidWorks|FEA|Mech Design",
+        rover_Cover: "media/rover-cover.jpg",
+        rover_PaperTitle: "Design and Optimisation of a 4WD Differential Rod Suspension Mechanism for a Mars Surface Exploration Rover",
+        rover_Auth: "Hamza Abd ElKadir — ASU Racing Team (ROAR), Oct 2025 – Present",
+        rover_Abs: "A 4WD differential rod suspension mechanism was designed for the ROAR Mars rover to improve stability on uneven terrain. The mechanism was modelled, parametrically optimised, and fully manufactured for the European Rover Challenge in Poland.",
+        rover_Obj: "Develop a robust rocker-to-chassis connection for an ERC Mars Yard rover prototype to prevent axial and radial play under extreme dynamic loading conditions.",
+        rover_Contrib: "Designed 4WD differential rod suspension geometry from scratch.|Modelled and optimised suspension travel and ground clearance.|Engineered a custom connection utilizing rolling element bearings in SolidWorks.|Conducted thorough tolerance stack-up analysis to ensure an exact interference fit within the housing.|Manufactured and assembled all suspension components.",
+        rover_Specs: "Team : ASU Racing Team (ROAR) | Competition : European Rover Challenge, Poland | Drive : 4WD differential rod",
+        rover_Outcomes: "Full suspension designed, parametrically optimised, and manufactured for competition.",
+        rover_Fig1: "media/rover-fig1.jpg",
+        rover_Fig1Cap: "Suspension assembly and bearing housing",
+        rover_Fig2: "media/rover-fig2.jpg",
+        rover_Fig2Cap: "Full rover assembly",
+
+        // --- PROJECT 4: STIRLING ---
+        stirling_CardTags: "Design",
+        stirling_CardTitle: "Stirling Engine",
+        stirling_CardSum: "Precise phase angle kinematics modeled for sustained thermodynamic operation.",
+        stirling_Tools: "SolidWorks|Kinematics",
+        stirling_Cover: "media/stirling-cover.jpg",
+        stirling_PaperTitle: "Kinematic Modeling of a Functioning Stirling Engine Assembly",
+        stirling_Auth: "Hamza Abd ElKadir",
+        stirling_Abs: "Modeled a functioning Stirling engine assembly, focusing on the precise phase angle differences between the displacer and power pistons required for operation.",
+        stirling_Obj: "Design the complex linkage system connecting the displacer piston, power piston, and flywheel, ensuring smooth translation of linear thermal expansion into rotational energy.",
+        stirling_Contrib: "Modeled all components and mechanical linkages in SolidWorks.|Performed kinematic motion studies to perfect the 90-degree phase difference required for the thermodynamic cycle.|Verified clearance tolerances at top-dead-center.",
+        stirling_Specs: "Cycle : Thermodynamic expansion/compression | Phase Difference : 90 Degrees | Validation : Motion Study",
+        stirling_Outcomes: "Kinematic motion successfully verified prior to physical prototyping.",
+        stirling_Fig1: "media/stirling-fig1.jpg",
+        stirling_Fig1Cap: "Kinematic linkage design",
+        stirling_Fig2: "media/stirling-fig2.jpg",
+        stirling_Fig2Cap: "Phase angle alignment study",
+
+        // --- PROJECT 5: THERMO ---
+        thermo_CardTags: "Analysis",
+        thermo_CardTitle: "Stirling Thermodynamics",
+        thermo_CardSum: "Heat transfer FEA mapping and comprehensive mechanical efficiency lab report.",
+        thermo_Tools: "Thermodynamics|FEA",
+        thermo_Cover: "media/thermo-cover.jpg",
+        thermo_PaperTitle: "Heat Transfer Mapping and Mechanical Efficiency Analysis of a Stirling Cycle",
+        thermo_Auth: "Hamza Abd ElKadir",
+        thermo_Abs: "Analyzed the heat conduction through the hot cylinder walls to determine the optimal material thickness, balancing structural integrity with thermal efficiency.",
+        thermo_Obj: "Calculate mechanical efficiency based on varying temperature gradients.",
+        thermo_Contrib: "Conducted FEA heat transfer mapping.|Compiled a comprehensive lab report calculating mechanical efficiency.|Incorporated three distinct data samples collected across varying temperature gradients.",
+        thermo_Specs: "Analysis : Thermal Conduction | Data Samples : 3 Temperature Gradients",
+        thermo_Outcomes: "Optimal material thickness identified to maximize thermal efficiency safely.",
+        thermo_Fig1: "media/thermo-fig1.jpg",
+        thermo_Fig1Cap: "Thermal conduction heat-map",
+        thermo_Fig2: "media/thermo-fig2.jpg",
+        thermo_Fig2Cap: "Sample plotting and efficiency results",
+
+        // --- PROJECT 6: ELEVATOR ---
+        elevator_CardTags: "Design",
+        elevator_CardTitle: "Elevator Cabin & Chassis",
+        elevator_CardSum: "Zero assembly errors across 100+ part systems, supervised end-to-end.",
+        elevator_Tools: "Sheet Metal|DFMA",
+        elevator_Cover: "media/elevator-cover.jpg",
+        elevator_PaperTitle: "DFMA-Driven Sheet Metal Design of Elevator Cabins and Chassis for Cost-Effective Manufacturing",
+        elevator_Auth: "Hamza Abd ElKadir — GOBA for Elevators, Cairo, Jun – Oct 2025",
+        elevator_Abs: "Elevator cabins and chassis were designed in SolidWorks sheet metal with DFMA standards. Full documentation — BOM, cost reports, assembly drawings — was generated. Manufacturing of 100+ part systems was supervised with zero assembly errors.",
+        elevator_Obj: "Design manufacturable elevator cabins and chassis that minimise production cost while meeting structural requirements and safety constraints.",
+        elevator_Contrib: "Designed cabins and chassis in SolidWorks sheet metal with DFMA.|Calculated required braking torque and designed the overspeed governor mechanism.|Generated complete BOM, cost reports, and assembly drawings.|Supervised manufacturing and assembly of 100+ part systems — zero errors.",
+        elevator_Specs: "Assembly errors : Zero | Parts per system : 100+ | Standard : DFMA | Mechanisms : Overspeed governor, mechanical safety wedges",
+        elevator_Outcomes: "Complete production-ready documentation delivered. All systems assembled efficiently and safely.",
+        elevator_Fig1: "media/elevator-fig1.jpg",
+        elevator_Fig1Cap: "Cabin sheet metal design",
+        elevator_Fig2: "media/elevator-fig2.jpg",
+        elevator_Fig2Cap: "Assembly drawing and safety mechanism",
+
+        // --- PROJECT 7: CANON ---
+        canon_CardTags: "Design",
+        canon_CardTitle: "Pneumatic Canon",
+        canon_CardSum: "3-DOF MATLAB trajectory calculator and pressure vessel design.",
+        canon_Tools: "MATLAB|Pneumatics",
+        canon_Cover: "media/canon-cover.jpg",
+        canon_PaperTitle: "Pneumatic Pressure Vessel Design and 3-DOF MATLAB Trajectory Simulation",
+        canon_Auth: "Hamza Abd ElKadir",
+        canon_Abs: "Engineered a pneumatic chamber capable of safely retaining high PSI air limits, designing a fast-actuating valve system for instant air release.",
+        canon_Obj: "Develop a complex MATLAB script to calculate a pneumatic 3-DOF rocket launcher trajectory, simulating both the internal sliding phase and external impact phases.",
+        canon_Contrib: "Designed pneumatic chamber for high PSI retention.|Engineered fast-actuating valve geometry.|Developed 3-DOF MATLAB script to map trajectory physics.",
+        canon_Specs: "Simulation : MATLAB 3-DOF | Mechanism : Fast-actuating pneumatic valve",
+        canon_Outcomes: "Accurate physical trajectory prediction mapped directly from CAD pressure constraints.",
+        canon_Fig1: "media/canon-fig1.jpg",
+        canon_Fig1Cap: "Pressure vessel schematic",
+        canon_Fig2: "media/canon-fig2.jpg",
+        canon_Fig2Cap: "MATLAB trajectory plotting",
+
+        // --- PROJECT 8: PROGRESSIVE DIE ---
+        die_CardTags: "Manufacturing",
+        die_CardTitle: "Progressive Die",
+        die_CardSum: "Sheet metal strip layout and heavy-duty punch block architecture.",
+        die_Tools: "SolidWorks|Tooling",
+        die_Cover: "media/die-cover.jpg",
+        die_PaperTitle: "Strip Layout Planning and Tool Architecture for Progressive Die Manufacturing",
+        die_Auth: "Hamza Abd ElKadir",
+        die_Abs: "Designed an optimized sheet metal strip layout to maximize material utilization, calculating exact station progression for punching and blanking operations.",
+        die_Obj: "Model heavy-duty punch and die blocks, accounting for shear stress and stripper plate clearance to prevent material binding.",
+        die_Contrib: "Optimized sheet metal strip layout.|Calculated exact station progression.|Modeled heavy-duty punch and die blocks in SolidWorks.",
+        die_Specs: "Operations : Punching, Bending, Blanking | Mitigation : Stripper plate clearance, Shear stress",
+        die_Outcomes: "Maximized material utilization and prevented binding during upstroke.",
+        die_Fig1: "media/die-fig1.jpg",
+        die_Fig1Cap: "Sheet metal strip progression layout",
+        die_Fig2: "media/die-fig2.jpg",
+        die_Fig2Cap: "Comprehensive die block architecture",
+
+        // --- PROJECT 9: LANTERN ---
+        lantern_CardTags: "Design",
+        lantern_CardTitle: "Chinese Lantern",
+        lantern_CardSum: "Thermal draft analysis for interlocking mechanical frame.",
+        lantern_Tools: "Thermodynamics|CAD",
+        lantern_Cover: "media/lantern-cover.jpg",
+        lantern_PaperTitle: "Thermal Drafting and Interlocking Structural Integration of a Paper Lantern",
+        lantern_Auth: "Hamza Abd ElKadir",
+        lantern_Abs: "Undertook a specialized CAD project combining mechanical structure with traditional cultural forms. Engineered an interlocking, collapsible frame that eliminated the need for chemical adhesives.",
+        lantern_Obj: "Calculate internal volume and estimate convective heat transfer from the candle element needed to generate sufficient upward lift.",
+        lantern_Contrib: "Engineered interlocking, collapsible frame without adhesives.|Calculated internal volume.|Estimated convective heat transfer for thermal drafting.",
+        lantern_Specs: "Structure : Adhesiveless Interlocking | Analysis : Convective heat transfer",
+        lantern_Outcomes: "Successful structural integration yielding sufficient thermal lift.",
+        lantern_Fig1: "media/lantern-fig1.jpg",
+        lantern_Fig1Cap: "Interlocking structural frame",
+        lantern_Fig2: "media/lantern-fig2.jpg",
+        lantern_Fig2Cap: "Internal volume convection estimates"
+    };
+</script>
+
+<div id="lightbox">
+  <span id="lb-close" onclick="closeLB()">✕</span>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-logo" onclick="go('pg-home')"><span data-text="initials"></span><b>.</b></div>
+    <ul class="nav-links">
+      <li><a onclick="go('pg-home')" data-pg="pg-home">Home</a></li>
+      <li><a onclick="go('pg-projects')" data-pg="pg-projects">Projects</a></li>
+      <li><a onclick="go('pg-gallery')" data-pg="pg-gallery">Gallery</a></li>
+      <li><a onclick="go('pg-home','contact-strip')" data-pg="pg-home">Contact</a></li>
+    </ul>
+    <a data-href="resumeLink" target="_blank" class="nav-cv" download>Resume &darr;</a>
+  </div>
+</nav>
+
+<div id="pg-home" class="pg on">
+<div style="padding-top:calc(var(--nh)+5rem);padding-bottom:5rem">
+<div class="wrap">
+
+  <div class="hero-split">
+    <div>
+      <div class="hero-ey"><div class="hero-ey-line"></div><span class="eyebrow" data-text="title"></span></div>
+      <h1 class="hero-h1" data-text="name"></h1>
+      <p class="hero-uni" data-text="uni"></p>
+      <p class="hero-bio" data-text="bio"></p>
+      <div class="hero-btns">
+        <button class="btn" onclick="go('pg-projects')">View Projects</button>
+        <button class="btn btn-ghost" onclick="scrollTo_contact()">Get in Touch</button>
+      </div>
+    </div>
+    
+    <div class="img-container hero-photo">
+      <div class="ph">[ ADD PHOTO: heroPic ]</div>
+      <img data-src="heroPic" alt="Hero Photo" onerror="this.style.display='none';"/>
+    </div>
+  </div>
+
+  <div class="about-strip">
+    <div class="divrow"><span class="eyebrow">About Me</span></div>
+    <div class="about-grid">
+      <div class="img-container about-portrait">
+        <div class="ph">[ ADD PHOTO ]</div>
+        <img data-src="profilePic" alt="Portrait" onerror="this.style.display='none';"/>
+      </div>
+      <div>
+        <h2 class="about-h">Turning design intent into manufacturable reality.</h2>
+        <p class="about-p" data-text="about1"></p>
+        <p class="about-p" data-text="about2"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-strip" id="contact-strip">
+    <div class="divrow"><span class="eyebrow">Contact</span></div>
+    <h2 style="font-size:clamp(2rem,3vw,2.5rem);font-weight:800;margin-bottom:1rem; letter-spacing:-0.02em;">Let's work together.</h2>
+    <p style="font-size:1.05rem;font-weight:400;color:var(--ink2);line-height:1.8;max-width:52ch">I am looking for internship and graduate opportunities in mechanical design, product development, and manufacturing engineering.</p>
+    
+    <div class="cform-wrap">
+      <ul class="clinks">
+        <li><a data-href="email" id="link-email">
+            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            <span data-text="email"></span>
+          </a></li>
+        <li><a data-href="phone" id="link-phone">
+            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.22 2 2 0 0 1 2.98 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 5.5 5.5l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span data-text="phone"></span>
+          </a></li>
+        <li><a data-href="linkedinLink" target="_blank" rel="noopener">
+            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H9V9h4v2a6 6 0 0 1 3-3zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn — <span data-text="linkedin"></span>
+          </a></li>
+        <li><a data-href="grabcadLink" target="_blank" rel="noopener">
+            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            GrabCAD — <span data-text="grabcad"></span>
+          </a></li>
+      </ul>
+
+      <form class="cform" onsubmit="submitForm(event)">
+        <div class="fg"><label class="fl">Full Name</label><input class="fi" type="text" placeholder="Jane Smith" required/></div>
+        <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="jane@company.com" required/></div>
+        <div class="fg"><label class="fl">Message</label><textarea class="fta" placeholder="Tell me about your project…" required></textarea></div>
+        <button type="submit" class="btn" style="align-self:flex-start; margin-top: 0.5rem;">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+</div>
+<footer><div class="wrap"><div class="foot-in">
+  <p class="foot-c">© 2026 <span data-text="name"></span></p>
+  <ul class="foot-links"><li><span onclick="go('pg-projects')">Projects</span></li><li><span onclick="go('pg-gallery')">Gallery</span></li></ul>
+</div></div></footer>
+</div><div id="pg-projects" class="pg">
+<div style="padding-top:calc(var(--nh)+4rem);padding-bottom:6rem">
+<div class="wrap">
+
+  <div class="divrow"><span class="eyebrow">Selected Work</span></div>
+  <h1 style="font-size:clamp(2rem,4vw,3.5rem);font-weight:800;margin-bottom:2rem; letter-spacing: -0.03em;">Engineering Projects</h1>
+
+  <div class="filter-bar" id="auto-filter-bar">
+    <button class="fb act" data-f="all">All</button>
+  </div>
+
+  <div class="cards" id="project-cards-container">
+    </div>
+</div>
+</div>
+<footer><div class="wrap"><div class="foot-in">
+  <p class="foot-c">© 2026 <span data-text="name"></span></p>
+  <ul class="foot-links"><li><span onclick="go('pg-home')">Home</span></li><li><span onclick="go('pg-gallery')">Gallery</span></li></ul>
+</div></div></footer>
+</div><div id="dynamic-pages-container"></div>
+
+
+<div id="pg-gallery" class="pg">
+<div style="padding-top:calc(var(--nh)+4rem);padding-bottom:6rem">
+<div class="wrap">
+
+  <div class="divrow"><span class="eyebrow">Gallery</span></div>
+  <h1 style="font-size:clamp(2rem,4vw,3.5rem);font-weight:800;margin-bottom:1rem; letter-spacing: -0.03em;">Project Gallery</h1>
+  <p style="font-size:1rem;color:var(--ink3);margin-bottom:3rem">Click any image to enlarge.</p>
+
+  <div class="gallery-grid" id="auto-gallery-grid"></div>
+</div>
+</div>
+<footer><div class="wrap"><div class="foot-in">
+  <p class="foot-c">© 2026 <span data-text="name"></span></p>
+  <ul class="foot-links"><li><span onclick="go('pg-home')">Home</span></li><li><span onclick="go('pg-projects')">Projects</span></li></ul>
+</div></div></footer>
+</div><script>
+document.addEventListener("DOMContentLoaded", () => {
+    if(DATA.email) document.getElementById('link-email').href = "mailto:" + DATA.email;
+    if(DATA.phone) document.getElementById('link-phone').href = "tel:" + DATA.phone.replace(/\s+/g, '');
+
+    // Inject Text, Images, and Links for static elements
+    document.querySelectorAll('[data-text]').forEach(el => { el.textContent = DATA[el.getAttribute('data-text')] || ''; });
+    document.querySelectorAll('[data-src]').forEach(el => { el.src = DATA[el.getAttribute('data-src')] || ''; });
+    document.querySelectorAll('[data-href]').forEach(el => { el.href = DATA[el.getAttribute('data-href')] || '#'; });
+
+    const cardsContainer = document.getElementById('project-cards-container');
+    const pagesContainer = document.getElementById('dynamic-pages-container');
+    const galleryContainer = document.getElementById('auto-gallery-grid');
+    const filterContainer = document.getElementById('auto-filter-bar');
+    
+    let counter = 1;
+    let categoriesSet = new Set();
+
+    PROJECT_ORDER.forEach(id => {
+        const numStr = counter < 10 ? '0'+counter : counter;
+        if(DATA[id+'_CardTags']) { categoriesSet.add(DATA[id+'_CardTags']); }
+
+        // --- 1. BUILD THE CARD ---
+        let mediaHtml = `<img src="${DATA[id+'_Cover']}" alt="" onerror="this.style.display='none';"/>`;
+        if(id === 'flowmeter' && DATA.flowmeter_Video) {
+             mediaHtml = `<video src="${DATA.flowmeter_Video}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
+        }
+
+        const toolsArray = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '');
+        const toolsHtml = toolsArray.map(t => `<span class="tool">${t.trim()}</span>`).join('');
+        const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + 
+                         (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
+
+        const cardHTML = `
+            <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" onclick="go('pg-det-${id}')">
+              <div class="card-cover img-container">
+                <div class="ph">[ COVER ]</div>
+                ${mediaHtml}
+                <span class="card-num">${numStr}</span>
+              </div>
+              <div class="card-body">
+                <div class="card-tags">${tagsHtml}</div>
+                <div class="card-title">${DATA[id+'_CardTitle'] || ''}</div>
+                <div class="card-sum">${DATA[id+'_CardSum'] || ''}</div>
+                <div class="card-tools">${toolsHtml}</div>
+                <span class="card-cta">View Full Project &rarr;</span>
+              </div>
+            </div>
+        `;
+        cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
+
+        // --- 2. BUILD THE SCIENTIFIC PAPER DETAIL PAGE (IMAGE FOCUSED Z-PATTERN) ---
+        const contribArray = (DATA[id+'_Contrib'] || '').split('|').filter(t => t.trim() !== '');
+        const contribHtml = contribArray.map(c => `<li>${c.trim()}</li>`).join('');
+
+        const specsArray = (DATA[id+'_Specs'] || '').split('|').filter(t => t.trim() !== '');
+        const specsHtml = specsArray.map(pair => {
+            const [k, v] = pair.split(':');
+            return k && v ? `<tr><td><dt>${k.trim()}</dt></td><td>${v.trim()}</td></tr>` : '';
+        }).join('');
+        const specsTableHtml = specsHtml ? `<table class="sci-table">${specsHtml}</table>` : '';
+
+        // Dynamically add figures 3 and 4 if they exist in the DATA object
+        let extraFigsHtml = '';
+        if(DATA[id+'_Fig3']) {
+            extraFigsHtml += `
+            <div class="sci-fig">
+              <div class="img-container" style="background: #fff; padding: 6px;">
+                <img src="${DATA[id+'_Fig3']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/>
+                <div class="ph">[ FIG 3 ]</div>
+              </div>
+              <p class="sci-cap"><b>Fig. 3.</b> ${DATA[id+'_Fig3Cap'] || ''}</p>
+            </div>`;
+        }
+        if(DATA[id+'_Fig4']) {
+            extraFigsHtml += `
+            <div class="sci-fig">
+              <div class="img-container" style="background: #fff; padding: 6px;">
+                <img src="${DATA[id+'_Fig4']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/>
+                <div class="ph">[ FIG 4 ]</div>
+              </div>
+              <p class="sci-cap"><b>Fig. 4.</b> ${DATA[id+'_Fig4Cap'] || ''}</p>
+            </div>`;
+        }
+
+        let pageCoverMedia = `<img src="${DATA[id+'_Cover']}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/>`;
+        if(id === 'flowmeter' && DATA.flowmeter_Video) {
+            pageCoverMedia = `<video src="${DATA.flowmeter_Video}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
+        }
+
+        const pageHTML = `
+        <div id="pg-det-${id}" class="pg">
+          <div class="det-cover" style="position:relative;background:#111;">
+            <div class="ph" style="position:absolute;inset:0;color:#fff;">[ COVER PHOTO ]</div>
+            ${pageCoverMedia}
+            <div class="cov-grad z-10"></div>
+            <div class="cov-txt z-20">
+              <div class="cov-back" onclick="go('pg-projects')">&larr; Back to Projects</div>
+            </div>
+          </div>
+          
+          <div class="sci-paper">
+            <h1 class="sci-title">${DATA[id+'_PaperTitle']}</h1>
+            <p class="sci-auth">${DATA[id+'_Auth']}</p>
+            
+            <div class="sci-abs-wrap">
+                <p class="sci-abs"><b>Abstract</b>—${DATA[id+'_Abs']}</p>
+            </div>
+            
+            <div class="sci-section">
+              <div class="sci-text">
+                <h2 class="sci-h2">I. Objectives & Methodology</h2>
+                <p class="sci-p">${DATA[id+'_Obj']}</p>
+                <ul class="sci-list">${contribHtml}</ul>
+              </div>
+              <div class="sci-visual">
+                <div class="sci-fig">
+                  <div class="img-container" style="background: #fff; padding: 6px;">
+                    <img src="${DATA[id+'_Fig1']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/>
+                    <div class="ph">[ FIG 1 ]</div>
+                  </div>
+                  <p class="sci-cap"><b>Fig. 1.</b> ${DATA[id+'_Fig1Cap']}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="sci-section rev">
+              <div class="sci-visual">
+                <div class="sci-fig">
+                  <div class="img-container" style="background: #fff; padding: 6px;">
+                    <img src="${DATA[id+'_Fig2']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/>
+                    <div class="ph">[ FIG 2 ]</div>
+                  </div>
+                  <p class="sci-cap"><b>Fig. 2.</b> ${DATA[id+'_Fig2Cap']}</p>
+                </div>
+                ${extraFigsHtml}
+              </div>
+              <div class="sci-text">
+                <h2 class="sci-h2">II. Technical Specifications & Outcomes</h2>
+                ${specsTableHtml}
+                <p class="sci-p">${DATA[id+'_Outcomes']}</p>
+              </div>
+            </div>
+            
+            <div style="text-align:center; margin-top:4rem;">
+                <button class="btn btn-ghost" onclick="go('pg-projects')">&larr; Return to All Projects</button>
+            </div>
+          </div>
+          
+          <footer style="background:#f8fafc; border-top:1px solid #e2e8f0; padding-block:2rem;"><div class="wrap"><div class="foot-in">
+            <p class="foot-c" style="font-family:'Inter', sans-serif;">© 2026 ${DATA.name}</p>
+            <ul class="foot-links" style="font-family:'Inter', sans-serif;"><li><span onclick="go('pg-projects')">All Projects</span></li></ul>
+          </div></div></footer>
+        </div>
+        `;
+        pagesContainer.insertAdjacentHTML('beforeend', pageHTML);
+
+        // --- 3. BUILD THE AUTO GALLERY ---
+        if(DATA[id+'_Fig1']) {
+            galleryContainer.insertAdjacentHTML('beforeend', `
+            <div class="gal-item ${counter % 3 === 1 ? 'wide' : ''} img-container" onclick="openLB(this)">
+              <div class="ph">[ PHOTO ]</div>
+              <img src="${DATA[id+'_Fig1']}" alt="" onerror="this.style.display='none';"/>
+              <div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig1Cap']}</span></div>
+            </div>`);
+        }
+        if(DATA[id+'_Fig2']) {
+            galleryContainer.insertAdjacentHTML('beforeend', `
+            <div class="gal-item img-container" onclick="openLB(this)">
+              <div class="ph">[ PHOTO ]</div>
+              <img src="${DATA[id+'_Fig2']}" alt="" onerror="this.style.display='none';"/>
+              <div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig2Cap']}</span></div>
+            </div>`);
+        }
+        if(DATA[id+'_Fig3']) {
+            galleryContainer.insertAdjacentHTML('beforeend', `
+            <div class="gal-item img-container" onclick="openLB(this)">
+              <div class="ph">[ PHOTO ]</div>
+              <img src="${DATA[id+'_Fig3']}" alt="" onerror="this.style.display='none';"/>
+              <div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig3Cap'] || ''}</span></div>
+            </div>`);
+        }
+        if(DATA[id+'_Fig4']) {
+            galleryContainer.insertAdjacentHTML('beforeend', `
+            <div class="gal-item img-container" onclick="openLB(this)">
+              <div class="ph">[ PHOTO ]</div>
+              <img src="${DATA[id+'_Fig4']}" alt="" onerror="this.style.display='none';"/>
+              <div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig4Cap'] || ''}</span></div>
+            </div>`);
+        }
+        counter++;
+    });
+
+    // Populate Filters
+    categoriesSet.forEach(cat => {
+        filterContainer.insertAdjacentHTML('beforeend', `<button class="fb" data-f="${cat}">${cat}</button>`);
+    });
+
+    // Attach Filter Event Listeners
+    document.querySelectorAll('.fb').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.fb').forEach(x => x.classList.remove('act'));
+        b.classList.add('act');
+        const f = b.dataset.f;
+        document.querySelectorAll('.proj-card').forEach(c => {
+          c.style.display = (f === 'all' || c.dataset.cat === f) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // Video Scroll-Trigger Engine
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.play();
+            } else {
+                entry.target.pause();
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-video').forEach(video => { videoObserver.observe(video); });
+});
+
+/* ── PAGE ROUTER ── */
+function go(pageId, scrollTarget) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  const pg = document.getElementById(pageId);
+  if (!pg) return;
+  pg.classList.add('on');
+  window.scrollTo(0, 0);
+
+  // nav highlight
+  document.querySelectorAll('.nav-links a').forEach(a => {
+      if(a.dataset.pg){
+         a.classList.toggle('act', a.dataset.pg === pageId);
+      }
+  });
+
+  if (scrollTarget) {
+    setTimeout(() => {
+      const el = document.getElementById(scrollTarget);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 60);
+  }
+}
+
+function scrollTo_contact() {
+  if (!document.getElementById('pg-home').classList.contains('on')) {
+    go('pg-home', 'contact-strip');
+  } else {
+    document.getElementById('contact-strip').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+/* ── LIGHTBOX ── */
+function openLB(el) {
+  const img = el.querySelector('img');
+  if (!img || img.style.display === 'none') return;
+  document.getElementById('lb-img').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLB() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLB();
+});
+
+/* ── CONTACT FORM ── */
+function submitForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  btn.textContent = 'Sent ✓';
+  btn.style.background = '#0f172a';
+  btn.style.borderColor = '#0f172a';
+  setTimeout(() => {
+    btn.textContent = 'Send Message';
+    e.target.reset();
+  }, 3000);
+}
+</script>
+</body>
+</html>
