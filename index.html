@@ -161,16 +161,15 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .card-cta{font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;border-bottom:1.5px solid var(--ink);padding-bottom:1px;transition:color .15s,border-color .15s;align-self:flex-start}
 .card-cta:hover{color:var(--red);border-color:var(--red)}
 
-/* ── SCIENTIFIC PAPER DETAIL PAGES (IMAGE FOCUSED) ────── */
+/* ── SCIENTIFIC PAPER DETAIL PAGES ────── */
 .det-cover{position:relative;height:70vh;min-height:400px;overflow:hidden;background:#111}
 .cov-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,0.95) 0%,rgba(15,23,42,0.1) 60%,transparent 100%); z-index: 10;}
 .cov-txt{position:absolute;bottom:0;left:0;right:0;padding:3rem var(--g);max-width:1300px;margin-inline:auto; z-index: 20;}
 .cov-back{display:inline-flex;align-items:center;font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.7);cursor:pointer;margin-bottom:1.5rem;transition:color .15s}
 .cov-back:hover{color:var(--white)}
 
-/* The Strict Academic Layout */
 .sci-paper {
-    max-width: 1250px;
+    max-width: 1250px; 
     margin: -60px auto 4rem; 
     background: #ffffff;
     padding: 5rem 4rem;
@@ -185,18 +184,8 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .sci-abs-wrap { display: flex; justify-content: center; margin-bottom: 5rem; border-bottom: 2px solid #000; padding-bottom: 3rem; }
 .sci-abs { max-width: 800px; font-size: 1.05rem; font-weight: 500; text-align: justify; line-height: 1.8; }
 
-/* Side-by-Side Blended Grid */
-.sci-section { 
-    display: grid; 
-    grid-template-columns: 4fr 7fr;
-    gap: 4rem; 
-    align-items: start; 
-    margin-bottom: 6rem; 
-}
-.sci-section.rev {
-    grid-template-columns: 7fr 4fr;
-}
-
+.sci-section { display: grid; grid-template-columns: 4fr 7fr; gap: 4rem; align-items: start; margin-bottom: 6rem; }
+.sci-section.rev { grid-template-columns: 7fr 4fr; }
 .sci-text { text-align: justify; font-size: 1.05rem; line-height: 1.8; }
 .sci-h2 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin: 0 0 1.5rem; color: #000; letter-spacing: 0.05em; border-bottom: 1px solid #cbd5e1; padding-bottom: 0.4rem; }
 .sci-p { margin-bottom: 1.2rem; }
@@ -281,21 +270,14 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         profilePic: "media/YOUR_PORTRAIT.jpg",
         
         // --- PROJECT 1: FLOWMETER ---
-        /*
-          NEW MEDIA CONTROLS:
-          _CardVideo: Put the video link here to ONLY show it on the small grid card thumbnail
-          _DetailVideo: Put the video link here to ONLY show it on the huge detailed page header
-          _CardImage: The photo for the grid card
-          _DetailImage: The photo for the detailed page
-          (If you just leave _Cover and _Video, it will automatically apply to both pages)
-        */
+        flowmeter_Show: 1, // Set to 0 to completely hide this project
         flowmeter_CardTags: "Instrumentation",
         flowmeter_CardAward: "🏆 1st Place",
         flowmeter_CardTitle: "Smart Turbine Flowmeter",
         flowmeter_CardSum: "Most accurate of 35 teams. 6-inch turbine, 0.05–0.6 m³/s, calibrated tachometer + pressure + temperature.",
         flowmeter_Tools: "SolidWorks|DFMA|Python|Blender",
-        flowmeter_CardVideo: "media/flowmeter_Cpage.webm",  // THIS SPINS ON THE SMALL GRID CARD
-        flowmeter_DetailImage: "media/flowmeter-cover.jpg", // THIS IS A STATIC PHOTO ON THE DETAILED PAGE
+        flowmeter_CardVideo: "media/flowmeter_Cpage.webm", 
+        flowmeter_DetailImage: "media/flowmeter-cover.jpg", 
         flowmeter_PaperTitle: "Design and Fabrication of a Conventionally-Machinable Smart Turbine Flowmeter with Integrated Multi-Sensor Calibration",
         flowmeter_Auth: "Hamza Abd ElKadir — Ain Shams University Design Competition, Sep 2024 – Feb 2025",
         flowmeter_Abs: "A 6-inch turbine flowmeter was designed for a flow range of 0.05–0.6 m³/s using only conventional cutting machines. A smart control system integrating tachometer, pressure, and temperature sensors was programmed and individually calibrated, achieving the highest measurement accuracy among 35 competing teams and winning 1st place.",
@@ -313,6 +295,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         flowmeter_Fig4Cap: "Final machined prototype prior to assembly",
 
         // --- PROJECT 2: CONVEYOR ---
+        conveyor_Show: 1, 
         conveyor_CardTags: "Automation",
         conveyor_CardAward: "🏆 1st Place",
         conveyor_CardTitle: "Tea Bag Packaging Automation",
@@ -332,6 +315,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         conveyor_Fig2Cap: "Physics simulation validation",
 
         // --- PROJECT 3: ROVER ---
+        rover_Show: 1, 
         rover_CardTags: "Competition",
         rover_CardTitle: "Mars Rover Suspension",
         rover_CardSum: "Designed, optimised and manufactured for the European Rover Challenge, Poland.",
@@ -350,6 +334,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         rover_Fig2Cap: "Full rover assembly",
 
         // --- PROJECT 4: STIRLING ---
+        stirling_Show: 1, 
         stirling_CardTags: "Design",
         stirling_CardTitle: "Stirling Engine",
         stirling_CardSum: "Precise phase angle kinematics modeled for sustained thermodynamic operation.",
@@ -368,6 +353,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         stirling_Fig2Cap: "Phase angle alignment study",
 
         // --- PROJECT 5: THERMO ---
+        thermo_Show: 1, 
         thermo_CardTags: "Analysis",
         thermo_CardTitle: "Stirling Thermodynamics",
         thermo_CardSum: "Heat transfer FEA mapping and comprehensive mechanical efficiency lab report.",
@@ -386,6 +372,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         thermo_Fig2Cap: "Sample plotting and efficiency results",
 
         // --- PROJECT 6: ELEVATOR ---
+        elevator_Show: 1, 
         elevator_CardTags: "Design",
         elevator_CardTitle: "Elevator Cabin & Chassis",
         elevator_CardSum: "Zero assembly errors across 100+ part systems, supervised end-to-end.",
@@ -404,6 +391,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         elevator_Fig2Cap: "Assembly drawing and safety mechanism",
 
         // --- PROJECT 7: CANON ---
+        canon_Show: 1, 
         canon_CardTags: "Design",
         canon_CardTitle: "Pneumatic Canon",
         canon_CardSum: "3-DOF MATLAB trajectory calculator and pressure vessel design.",
@@ -422,6 +410,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         canon_Fig2Cap: "MATLAB trajectory plotting",
 
         // --- PROJECT 8: PROGRESSIVE DIE ---
+        die_Show: 1, 
         die_CardTags: "Manufacturing",
         die_CardTitle: "Progressive Die",
         die_CardSum: "Sheet metal strip layout and heavy-duty punch block architecture.",
@@ -440,6 +429,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         die_Fig2Cap: "Comprehensive die block architecture",
 
         // --- PROJECT 9: LANTERN ---
+        lantern_Show: 1, 
         lantern_CardTags: "Design",
         lantern_CardTitle: "Chinese Lantern",
         lantern_CardSum: "Thermal draft analysis for interlocking mechanical frame.",
@@ -610,6 +600,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let categoriesSet = new Set();
 
     PROJECT_ORDER.forEach(id => {
+        // --- MASTER VISIBILITY TOGGLE ---
+        // If the project's _Show variable is 0, completely skip generating it!
+        if(DATA[id+'_Show'] === 0) return;
+
         const numStr = counter < 10 ? '0'+counter : counter;
         if(DATA[id+'_CardTags']) { categoriesSet.add(DATA[id+'_CardTags']); }
 
@@ -617,11 +611,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const cardImgSrc = DATA[id+'_CardImage'] || DATA[id+'_Cover'];
         let mediaHtml = `<img src="${cardImgSrc}" alt="" onerror="this.style.display='none';"/>`;
         
-        // Use specific CardVideo if available, otherwise fallback to generic Video
+        // Setup Hover Video if provided
+        // NOTE: Autoplay is completely removed! The video will only play on hover via the onmouseenter event below.
         if(DATA[id+'_CardVideo']) {
-             mediaHtml = `<video src="${DATA[id+'_CardVideo']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" muted loop playsinline autoplay class="scroll-video"></video>`;
-        } else if(DATA[id+'_Video']) {
-             mediaHtml = `<video src="${DATA[id+'_Video']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" muted loop playsinline autoplay class="scroll-video"></video>`;
+             mediaHtml = `<video src="${DATA[id+'_CardVideo']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata"></video>`;
+        } else if(DATA[id+'_Video'] && !DATA[id+'_CardImage']) {
+             mediaHtml = `<video src="${DATA[id+'_Video']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata"></video>`;
         }
 
         const toolsArray = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '');
@@ -629,8 +624,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + 
                          (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
 
+        // Hover events trigger ONLY the video inside the hovered card
         const cardHTML = `
-            <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" onclick="go('pg-det-${id}')">
+            <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" onclick="go('pg-det-${id}')"
+                 onmouseenter="const v = this.querySelector('.card-cover video'); if(v) v.play();"
+                 onmouseleave="const v = this.querySelector('.card-cover video'); if(v) { v.pause(); v.currentTime = 0; }">
               <div class="card-cover img-container">
                 <div class="ph">[ COVER ]</div>
                 ${mediaHtml}
@@ -647,7 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
 
-        // --- 2. BUILD THE SCIENTIFIC PAPER DETAIL PAGE (IMAGE FOCUSED Z-PATTERN) ---
+        // --- 2. BUILD THE SCIENTIFIC PAPER DETAIL PAGE ---
         const contribArray = (DATA[id+'_Contrib'] || '').split('|').filter(t => t.trim() !== '');
         const contribHtml = contribArray.map(c => `<li>${c.trim()}</li>`).join('');
 
@@ -658,7 +656,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join('');
         const specsTableHtml = specsHtml ? `<table class="sci-table">${specsHtml}</table>` : '';
 
-        // Dynamically add figures 3 and 4 if they exist
         let extraFigsHtml = '';
         if(DATA[id+'_Fig3']) {
             extraFigsHtml += `
@@ -684,17 +681,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const detImgSrc = DATA[id+'_DetailImage'] || DATA[id+'_Cover'];
         let pageCoverMedia = `<img src="${detImgSrc}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/>`;
         
-        // Use specific DetailVideo if available, otherwise fallback to generic Video
+        // Detail video still auto-plays when scrolled to (using the scroll-video class)
         if(DATA[id+'_DetailVideo']) {
             pageCoverMedia = `<video src="${DATA[id+'_DetailVideo']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
-        } else if(DATA[id+'_Video']) {
+        } else if(DATA[id+'_Video'] && !DATA[id+'_DetailImage']) {
             pageCoverMedia = `<video src="${DATA[id+'_Video']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
         }
 
         const pageHTML = `
         <div id="pg-det-${id}" class="pg">
           <div class="det-cover" style="position:relative;background:#111;">
-            <div class="ph" style="position:absolute;inset:0;color:#fff;">[ COVER PHOTO ]</div>
+            <div class="ph" style="position:absolute;inset:0;color:#fff;z-index:1;">[ COVER PHOTO ]</div>
             ${pageCoverMedia}
             <div class="cov-grad z-10"></div>
             <div class="cov-txt z-20">
@@ -791,6 +788,8 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig4Cap'] || ''}</span></div>
             </div>`);
         }
+        
+        // Only increment the counter if the project was actually generated
         counter++;
     });
 
@@ -811,7 +810,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Video Scroll-Trigger Engine
+    // Scroll-triggered Video Engine for the detailed page headers ONLY
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
