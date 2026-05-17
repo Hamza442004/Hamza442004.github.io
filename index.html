@@ -1098,10 +1098,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const toolsHtml = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '').map(t => `<span class="tool">${t.trim()}</span>`).join('');
         const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
 
-        // Base card media — if a CardVideo exists, autoplay it silently on the card itself
+        // Base card media — if CardVideo exists, show paused at frame 1. Hover JS will play/pause it.
         let baseMedia = '';
         if (DATA[id+'_CardVideo']) {
-            baseMedia = `<video src="${DATA[id+'_CardVideo']}" muted loop playsinline autoplay preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;"></video>`;
+            baseMedia = `<video src="${DATA[id+'_CardVideo']}" muted loop playsinline preload="auto" class="card-base-video" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;"></video>`;
         } else if (cardImgSrc) {
             baseMedia = `<img src="${cardImgSrc}" alt="${DATA[id+'_CardTitle']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;"/>`;
         }
@@ -1315,7 +1315,12 @@ document.addEventListener("DOMContentLoaded", () => {
             else { entry.target.pause(); }
         });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.scroll-video, .card-cover video').forEach(video => { videoObserver.observe(video); });
+    document.querySelectorAll('.scroll-video').forEach(video => { videoObserver.observe(video); });
+
+    // Seek all base card videos to t=0 so the first frame renders immediately (no black box)
+    document.querySelectorAll('.card-base-video').forEach(v => {
+        v.addEventListener('loadeddata', () => { v.currentTime = 0; }, { once: true });
+    });
 
     // Back-to-top visibility
     window.addEventListener('scroll', () => {
@@ -1334,12 +1339,20 @@ function scrollSlider(id, dir) {
 
 /* ── HOVER VIDEO ── */
 function playHoverVideo(card) {
-    const v = card.querySelector('.card-hover-panel video');
-    if(v) v.play().catch(()=>{});
+    // Play the base card video (frame-1 -> animation starts)
+    const base = card.querySelector('.card-base-video');
+    if(base) base.play().catch(()=>{});
+    // Also play the hover panel video
+    const panel = card.querySelector('.card-hover-panel video');
+    if(panel) panel.play().catch(()=>{});
 }
 function pauseHoverVideo(card) {
-    const v = card.querySelector('.card-hover-panel video');
-    if(v) { v.pause(); v.currentTime = 0; }
+    // Pause base video but keep it at frame 1 (do NOT reset to 0 — that clears the frame)
+    const base = card.querySelector('.card-base-video');
+    if(base) { base.pause(); base.currentTime = 0; }
+    // Reset hover panel video
+    const panel = card.querySelector('.card-hover-panel video');
+    if(panel) { panel.pause(); panel.currentTime = 0; }
 }
 
 /* ── MOBILE MENU ── */
