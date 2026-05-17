@@ -1098,8 +1098,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const toolsHtml = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '').map(t => `<span class="tool">${t.trim()}</span>`).join('');
         const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
 
-        // Base card media
-        let baseMedia = `<img src="${cardImgSrc}" alt="${DATA[id+'_CardTitle']}"/>`;
+        // Base card media — if a CardVideo exists, autoplay it silently on the card itself
+        let baseMedia = '';
+        if (DATA[id+'_CardVideo']) {
+            baseMedia = `<video src="${DATA[id+'_CardVideo']}" muted loop playsinline autoplay preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;"></video>`;
+        } else if (cardImgSrc) {
+            baseMedia = `<img src="${cardImgSrc}" alt="${DATA[id+'_CardTitle']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;"/>`;
+        }
 
         // Hover panel content
         const popPhotos = DATA[id+'_PopPhotos'] || [];
@@ -1123,9 +1128,9 @@ document.addEventListener("DOMContentLoaded", () => {
                  onmouseleave="pauseHoverVideo(this)">
               
               <!-- BASE CARD COVER
-                   Image: 1200×800 px (3:2 landscape) for ${id} -->
-              <div class="card-cover img-container">
-                <div class="ph">Cover: 1200×800 px (3:2 landscape)</div>
+                   Image/Video: 1200×800 px (3:2 landscape) for ${id} -->
+              <div class="card-cover" style="position:relative;overflow:hidden;aspect-ratio:3/2;background:#111;">
+                <div class="ph" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.6rem;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;background:var(--rule);z-index:1;">Cover: 1200×800 px (3:2)</div>
                 ${baseMedia}
                 <span class="card-num">${numStr}</span>
               </div>
@@ -1303,14 +1308,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Scroll-triggered video
+    // Scroll-triggered video — covers both detail-page banners and card cover videos
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) { entry.target.play().catch(()=>{}); }
             else { entry.target.pause(); }
         });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.scroll-video').forEach(video => { videoObserver.observe(video); });
+    document.querySelectorAll('.scroll-video, .card-cover video').forEach(video => { videoObserver.observe(video); });
 
     // Back-to-top visibility
     window.addEventListener('scroll', () => {
