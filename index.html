@@ -6,7 +6,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-R45T9C7D1G');
 </script>
   
@@ -46,20 +45,6 @@ img, video{display:block;width:100%;height:100%;object-fit:cover}
 .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--fd); font-size: .65rem; letter-spacing: .1em; color: var(--ink3); text-align: center; padding: 1rem; text-transform: uppercase; z-index: 1; background: var(--rule); }
 .img-container img, .img-container video { position: relative; z-index: 2; width: 100%; height: auto; }
 
-/* ── BUTTONS ───────────────────────────── */
-.btn{font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em;
-     text-transform:uppercase;padding:.8rem 1.6rem;border:1.5px solid var(--ink);
-     background:var(--ink);color:var(--white);cursor:pointer;display:inline-block;
-     transition:background .18s,border-color .18s,transform .12s; border-radius: 4px;}
-.btn:hover{background:var(--red);border-color:var(--red);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--ink)}
-.btn-ghost:hover{background:var(--ink);color:var(--white)}
-
-/* ── PAGE SYSTEM ───────────────────────── */
-.pg{display:none; animation: fadeIn 0.4s ease;}
-.pg.on{display:block}
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
 /* ── NAV ────────────────────────────────── */
 nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
     background:rgba(255,255,255,.98);backdrop-filter:blur(14px);
@@ -81,7 +66,16 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
         border:1.5px solid var(--ink);color:var(--ink);transition:background .18s,color .18s; cursor: pointer;}
 .nav-cv:hover{background:var(--ink);color:var(--white)}
 
-/* ── HOME PAGE ─────────────────────────── */
+/* ── PAGE SYSTEM & BUTTONS ───────────────────────── */
+.pg{display:none; animation: fadeIn 0.4s ease;}
+.pg.on{display:block}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.btn{font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em; text-transform:uppercase;padding:.8rem 1.6rem;border:1.5px solid var(--ink); background:var(--ink);color:var(--white);cursor:pointer;display:inline-block; transition:background .18s,border-color .18s,transform .12s; border-radius: 4px;}
+.btn:hover{background:var(--red);border-color:var(--red);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--white)}
+
+/* ── HOME & CONTACT ─────────────────────────── */
 #pg-home{padding-top:calc(var(--nh) + 5rem);padding-bottom:5rem}
 .hero-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:6rem}
 .hero-ey{display:flex;align-items:center;gap:.65rem;margin-bottom:1.2rem}
@@ -109,103 +103,112 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .cform{display:flex;flex-direction:column;gap:1.2rem}
 .fg{display:flex;flex-direction:column;gap:.4rem}
 .fl{font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
-.fi,.fta{font-family:var(--fb);font-size:.95rem;color:var(--ink);background:var(--white);
-         border:1px solid var(--rule);padding:.8rem 1rem;outline:none; border-radius: 4px;
-         transition:border-color .15s;width:100%;resize:vertical}
+.fi,.fta{font-family:var(--fb);font-size:.95rem;color:var(--ink);background:var(--white); border:1px solid var(--rule);padding:.8rem 1rem;outline:none; border-radius: 4px; transition:border-color .15s;width:100%;resize:vertical}
 .fi:focus,.fta:focus{border-color:var(--ink)}
 .fta{min-height:120px}
 
 /* ── CARDS (PROJECTS GRID) ──────────────── */
 #pg-projects{padding-top:calc(var(--nh)+4rem);padding-bottom:5rem}
 .filter-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:3rem}
-.fb{font-family:var(--fd);font-size:.65rem;font-weight:600;letter-spacing:.05em;
-    text-transform:uppercase;padding:.5rem 1.2rem;border:1px solid var(--rule); border-radius: 4px;
-    background:var(--white);color:var(--ink3);cursor:pointer;transition:all .15s}
+.fb{font-family:var(--fd);font-size:.65rem;font-weight:600;letter-spacing:.05em; text-transform:uppercase;padding:.5rem 1.2rem;border:1px solid var(--rule); border-radius: 4px; background:var(--white);color:var(--ink3);cursor:pointer;transition:all .15s}
 .fb:hover{border-color:var(--ink3);color:var(--ink2)}
 .fb.act{border-color:var(--red);background:var(--red);color:var(--white)}
 
 .cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--rule); border-left:1px solid var(--rule); }
-.card{ background:var(--white); display:flex; flex-direction:column; cursor:pointer; position:relative; border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); transition: z-index 0.3s ease; }
-.card-cover{ overflow:hidden; aspect-ratio:3/2; position:relative; background:var(--rule); transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); z-index: 1; }
+.card{ background:var(--white); display:flex; flex-direction:column; cursor:pointer; position:relative; border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), z-index 0.3s; }
+.card-cover{ overflow:hidden; aspect-ratio:3/2; position:relative; background:var(--rule); z-index: 1; border-bottom: 1px solid var(--rule); }
 
-/* 🌟 POP-OUT STRIP */
-.card-popout { position: absolute; bottom: -60px; left: 10px; right: 10px; display: flex; gap: 8px; transition: bottom 0.4s var(--ease), opacity 0.3s var(--ease); z-index: 20; opacity: 0; pointer-events: none; }
-.card-popout img { width: 45px; height: 45px; object-fit: cover; border-radius: 4px; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3); background: #fff; }
+/* 🌟 NEW HOVER TAKEOVER SYSTEM */
+.card:hover, .card.is-hovered { transform: scale(1.05); box-shadow: 0 20px 40px -5px rgba(0,0,0,0.25); z-index: 50; border-radius: 6px; overflow: hidden; }
 
-/* Hover States (Mouse & Mobile Tap) */
-.card.is-hovered, .card:hover { z-index: 10; }
-.card.is-hovered .card-cover, .card:hover .card-cover { transform: scale(1.06) translateY(-4px); box-shadow: 0 15px 35px -5px rgba(0,0,0,0.25); border-radius: 4px; z-index: 10; }
-.card.is-hovered .card-popout, .card:hover .card-popout { bottom: 10px; opacity: 1; }
+/* The Hover overlay that fades in */
+.card-hover-panel {
+    position: absolute; inset: 0; background: #fff; z-index: 20; 
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    display: flex; flex-direction: column;
+}
+.card:hover .card-hover-panel, .card.is-hovered .card-hover-panel { opacity: 1; pointer-events: auto; }
 
+/* Top Half: Cover/Video */
+.ch-cover { flex: 1; width: 100%; position: relative; background: #111; border-bottom: 1px solid var(--rule); min-height: 50%; }
+.ch-cover video, .ch-cover img { width: 100%; height: 100%; object-fit: cover; }
+.ch-cover video::-webkit-media-controls { display: none !important; }
+
+/* Bottom Half: 3 Images & CTA */
+.ch-bottom { padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; flex: 1; background: var(--paper); }
+.ch-3imgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.ch-3imgs img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; border: 1px solid #cbd5e1; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.ch-cta { text-align: center; font-family: var(--fd); font-size: 0.75rem; font-weight: 800; color: var(--red); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1rem; }
+
+/* Base Card Content (Hidden on hover due to panel) */
 .card-num{position:absolute;top:.8rem;left:1rem;font-family:var(--fd);font-size:.6rem;font-weight:800;letter-spacing:.05em;color:rgba(255,255,255,.9);z-index:3; text-shadow: 0 2px 4px rgba(0,0,0,0.6);}
-.card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column; position: relative;}
 .card-tags{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
 .tag{font-family:var(--fd);font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .6rem;background:var(--redlt);color:var(--red); border-radius: 3px;}
 .award{font-family:var(--fd);font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .6rem;background:#fef3c7;color:#b45309;border:1px solid #fde68a; border-radius: 3px;}
 .card-title{font-family:var(--fd);font-size:1.05rem;font-weight:800;line-height:1.2;margin-bottom:.5rem; letter-spacing: -0.01em;}
 .card-sum{font-size:.85rem;color:var(--ink2);line-height:1.6;border-left:2px solid var(--red);padding-left:.6rem;margin-bottom:1.2rem;flex:1}
-.card-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem}
+.card-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:0}
 .tool{font-family:var(--fd);font-size:.55rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--rule);color:var(--ink3); border-radius: 3px;}
-.card-cta{font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;border-bottom:1.5px solid var(--ink);padding-bottom:1px;transition:color .15s,border-color .15s;align-self:flex-start}
-.card-cta:hover{color:var(--red);border-color:var(--red)}
 
-/* ── NEW SCIENTIFIC PAPER STRUCTURE (LEFT PAPER, RIGHT GALLERY) ────── */
+/* ── SCIENTIFIC PAPER DETAIL PAGES ────── */
 .det-cover{position:relative;height:70vh;min-height:400px;overflow:hidden;background:#111}
 .cov-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,0.95) 0%,rgba(15,23,42,0.1) 60%,transparent 100%); z-index: 10;}
-.cov-txt{position:absolute;bottom:0;left:0;right:0;padding:3rem var(--g);max-width:1300px;margin-inline:auto; z-index: 20;}
+.cov-txt{position:absolute;bottom:0;left:0;right:0;padding:3rem var(--g);max-width:1450px;margin-inline:auto; z-index: 20;}
 .cov-back{display:inline-flex;align-items:center;font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.7);cursor:pointer;margin-bottom:1.5rem;transition:color .15s}
 .cov-back:hover{color:var(--white)}
 
-/* The Flex Container */
+/* 🌟 WIDE LAYOUT: Paper Left, Gallery Right */
 .det-layout {
-    max-width: 1350px;
+    max-width: 1450px;
     margin: -60px auto 4rem;
     position: relative;
     z-index: 30;
     display: flex;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 4rem; /* Wide gap based on your drawing */
     padding-inline: var(--g);
 }
 
-/* The Left Side Paper */
 .sci-paper {
     flex: 1;
-    min-width: 0; /* Prevents flex blowout */
+    min-width: 0;
     background: #ffffff;
-    padding: 5rem 4rem;
+    padding: 5rem 4.5rem;
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     font-family: 'Lora', serif; 
     color: #000;
 }
 
-/* The Right Side Sticky Gallery */
+/* 🌟 STICKY 2-COLUMN SIDEBAR */
 .det-sidebar {
-    width: 280px;
+    width: 320px;
     flex-shrink: 0;
     position: sticky;
-    top: calc(var(--nh) + 20px);
-    max-height: calc(100vh - var(--nh) - 40px);
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+    top: calc(var(--nh) + 20px); /* Snips in place below nav */
+    max-height: calc(100vh - 100px);
+    overflow-y: auto; /* Allows scroll if gallery is very long */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 Columns */
     gap: 0.8rem;
+    align-content: start;
     background: #fff;
     padding: 1rem;
     border: 1px solid var(--rule);
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     border-radius: 6px;
 }
+/* Custom Scrollbar for the sidebar */
 .det-sidebar::-webkit-scrollbar { width: 6px; }
 .det-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-.side-gal-img { width: 100%; height: auto; border-radius: 4px; cursor: pointer; border: 1px solid var(--rule); transition: transform 0.2s, border-color 0.2s; }
-.side-gal-img:hover { transform: scale(1.03); border-color: var(--red); }
+.side-gal-title { grid-column: 1 / -1; margin-bottom: 0.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; text-align: center; }
+.side-gal-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid var(--rule); transition: transform 0.2s, border-color 0.2s; }
+.side-gal-img:hover { transform: scale(1.05); border-color: var(--red); z-index: 5; position: relative;}
 
 .sci-title { font-family: 'Inter', sans-serif; font-size: 2.2rem; font-weight: 800; text-align: center; line-height: 1.3; margin-bottom: 1rem; letter-spacing: -0.02em; max-width: 900px; margin-inline: auto; }
 .sci-auth { text-align: center; font-size: 1rem; font-style: italic; margin-bottom: 3rem; color: #444; }
 .sci-abs-wrap { display: flex; justify-content: center; margin-bottom: 5rem; border-bottom: 2px solid #000; padding-bottom: 3rem; }
 .sci-abs { max-width: 800px; font-size: 1.05rem; font-weight: 500; text-align: justify; line-height: 1.8; }
-
 .sci-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 6rem; }
 .sci-section.rev { grid-template-columns: 7fr 4fr; }
 .sci-text { text-align: justify; font-size: 1.05rem; line-height: 1.8; }
@@ -213,12 +216,10 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .sci-p { margin-bottom: 1.2rem; }
 .sci-list { padding-left: 1.2rem; margin-bottom: 1.5rem; list-style-type: disc; }
 .sci-list li { margin-bottom: 0.6rem; padding-left: 0.3rem;}
-
 .sci-table { width: 100%; border-top: 2px solid #000; border-bottom: 2px solid #000; border-collapse: collapse; margin-bottom: 2rem; font-family: 'Inter', sans-serif; font-size: 0.85rem; text-align: left; }
 .sci-table th, .sci-table td { padding: 0.8rem 0.5rem; border-bottom: 1px solid #e2e8f0; }
 .sci-table tr:last-child td { border-bottom: none; }
 .sci-table dt { font-weight: 700; color: #000; }
-
 .sci-visual { display: flex; flex-direction: column; gap: 3rem; }
 .sci-fig { width: 100%; }
 .sci-cap { font-family: 'Inter', sans-serif; font-size: 0.85rem; text-align: center; margin-top: 1rem; color: #475569; }
@@ -234,25 +235,30 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .gal-item:hover .gal-cap{opacity:1}
 .gal-cap span{font-family:var(--fd);font-size:.8rem;font-weight:600;letter-spacing:.05em;color:#fff}
 
+/* 🌟 LIGHTBOX CAROUSEL ── */
 #lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.98);align-items:center;justify-content:center}
 #lightbox.open{display:flex}
-#lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;display:block}
-#lb-close{position:absolute;top:2rem;right:3rem;font-family:var(--fd);font-size:2rem;color:#fff;cursor:pointer;opacity:.6;transition:opacity .15s}
+#lightbox img{max-width:85vw;max-height:85vh;object-fit:contain;display:block; user-select: none;}
+#lb-close{position:absolute;top:2rem;right:3rem;font-family:var(--fd);font-size:2rem;color:#fff;cursor:pointer;opacity:.6;transition:opacity .15s; z-index: 10;}
 #lb-close:hover{opacity:1}
+
+/* Nav Arrows */
+.lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 3rem; color: #fff; cursor: pointer; user-select: none; opacity: 0.5; padding: 1rem; z-index: 10; transition: opacity 0.2s; }
+.lb-arrow:hover { opacity: 1; }
+#lb-prev { left: 2rem; }
+#lb-next { right: 2rem; }
 
 footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--white);}
 .foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .foot-c{font-size:.85rem;color:var(--ink3); font-weight: 500;}
 
 @media(max-width:1024px){
-  .sci-section { grid-template-columns: 1fr; gap: 2rem; }
-  .sci-section.rev { grid-template-columns: 1fr; }
+  .sci-section, .sci-section.rev { grid-template-columns: 1fr; gap: 2rem; }
   .sci-section.rev .sci-text { order: 1; }
   .sci-section.rev .sci-visual { order: 2; }
-  /* Switch Sidebar to Top Horizontal Scroll */
-  .det-layout { flex-direction: column; margin-top: -30px; gap: 1rem; }
-  .det-sidebar { width: 100%; position: static; max-height: none; flex-direction: row; overflow-x: auto; overflow-y: hidden; padding: 0.5rem; }
-  .side-gal-img { width: 150px; height: 100px; object-fit: cover; flex-shrink: 0; }
+  /* Drop Sidebar Below Paper on Mobile */
+  .det-layout { flex-direction: column; gap: 2rem;}
+  .det-sidebar { width: 100%; position: static; max-height: none; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
 }
 @media(max-width:900px){
   .hero-split{grid-template-columns:1fr;}
@@ -263,6 +269,10 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
   .cform-wrap{grid-template-columns:1fr}
   .nav-links{display:none}
   .sci-paper { padding: 3rem 2rem; }
+  
+  /* Disable hover pop-out on mobile for usability, fall back to normal card click */
+  .card:hover, .card.is-hovered { transform: none; box-shadow: none; z-index: 1; }
+  .card-hover-panel { display: none !important; }
 }
 @media(max-width:560px){
   .cards, .gallery-grid{grid-template-columns:1fr}
@@ -304,6 +314,14 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         flowmeter_Tools: "SolidWorks|DFMA|Python|Blender",
         flowmeter_CardVideo: "media/thumbnail_anime.webm", 
         flowmeter_DetailVideo: "media/flowmeter_Cpage.webm", 
+        
+        // 🌟 NEW: Array of exactly 3 images for the hover pop-up
+        flowmeter_PopPhotos: [
+            "media/flowmeter_fig1.jpeg",
+            "media/turbine_manu.png",
+            "media/flowmeter_fig2.jpeg"
+        ],
+
         flowmeter_PaperTitle: "Design and Fabrication of a Conventionally-Machinable Smart Turbine Flowmeter with Integrated Multi-Sensor Calibration",
         flowmeter_Auth: "Ain Shams University Design Competition, Sep 2024 – Feb 2025",
         flowmeter_Abs: "A 6-inch turbine flowmeter was designed for a flow range of 0.05–0.6 m³/s using only conventional cutting machines. A smart control system integrating tachometer, pressure, and temperature sensors was programmed and individually calibrated, achieving the highest measurement accuracy among 35 competing teams and winning 1st place.",
@@ -315,8 +333,8 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         flowmeter_Fig2: "media/flowmeter_fig2.jpeg", flowmeter_Fig2Cap: "Smart sensor system and calibration setup",
         flowmeter_Fig3: "media/turbine_manu.png", flowmeter_Fig3Cap: "Fluid dynamics trajectory mapping",
         
-        // 🌟 NEW GALLERY ARRAY
-        flowmeter_Gallery: ["media/flowmeter_fig1.jpeg", "media/flowmeter_fig2.jpeg", "media/turbine_manu.png"],
+        // Detailed Page Sidebar Gallery
+        flowmeter_Gallery: ["media/flowmeter_fig1.jpeg", "media/flowmeter_fig2.jpeg", "media/turbine_manu.png", "media/flowmeter-cover.jpg"],
 
         // --- PROJECT 2: CONVEYOR ---
         conveyor_Show: 1, 
@@ -326,6 +344,14 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         conveyor_CardSum: "60 s → 9 s cycle time (6.6×). Fully validated by physics simulation before build.",
         conveyor_Tools: "SolidWorks|Physics Sim|DFMA",
         conveyor_Cover: "media/tawlefa_Cpage.jpeg",
+        
+        // 🌟 Pop-up photos
+        conveyor_PopPhotos: [
+            "media/tawlefa_fig1.png",
+            "media/tawlefa_Cpage.jpeg",
+            "media/tawlefa_fig1.png" // Replace with 3rd photo
+        ],
+
         conveyor_PaperTitle: "Mechanical Design of a High-Speed Automated Tea Bag Packaging System with Physics-Based Process Validation",
         conveyor_Auth: "Hamza Abd ElKadir — Royal Herbs IHUB Competition, Jan 2026 – Apr 2026",
         conveyor_Abs: "A complete mechanical packaging system was designed to fully automate tea bag insertion into boxes for Royal Herbs. A solid-body physics simulation validated the process before any physical build, achieving a cycle-time reduction from 60 s to 9 s per box and winning 1st place at the IHUB Competition.",
@@ -334,8 +360,6 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         conveyor_Specs: "Cycle time (before) : 60 seconds per box | Cycle time (after) : 9 seconds per box | Improvement : 6.6× faster | Validation : Solid-body physics simulation | Error rate : Near zero",
         conveyor_Outcomes: "1st place, Royal Herbs IHUB Competition 2026. Design validated entirely in simulation before build, eliminating costly redesigns.",
         conveyor_Fig1: "media/tawlefa_fig1.png", conveyor_Fig1Cap: "Full mechanical packaging system",
-        
-        // 🌟 NEW GALLERY ARRAY
         conveyor_Gallery: ["media/tawlefa_fig1.png", "media/tawlefa_Cpage.jpeg"],
 
         // --- PROJECT 3: ROVER ---
@@ -345,6 +369,14 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         rover_CardSum: "Designed, optimised and manufactured for the European Rover Challenge, Poland.",
         rover_Tools: "SolidWorks|FEA|Mech Design",
         rover_Cover: "media/sus_fig4.png",
+        
+        // 🌟 Pop-up photos
+        rover_PopPhotos: [
+            "media/sus_fig2.png",
+            "media/sus_fig3.png",
+            "media/sus_fig4.png"
+        ],
+
         rover_PaperTitle: "Design and Optimisation of a 4WD Differential Rod Suspension Mechanism for a Mars Surface Exploration Rover",
         rover_Auth: "Hamza Abd ElKadir — ASU Racing Team (ROAR), Oct 2025 – Present",
         rover_Abs: "A 4WD differential rod suspension mechanism was designed for the ROAR Mars rover to improve stability on uneven terrain. The mechanism was modelled, parametrically optimised, and fully manufactured for the European Rover Challenge in Poland.",
@@ -354,8 +386,6 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         rover_Outcomes: "Full suspension designed, parametrically optimised, and manufactured for competition.",
         rover_Fig1: "media/sus_fig2.png", rover_Fig1Cap: "Suspension assembly and bearing housing",
         rover_Fig2: "media/sus_fig3.png", rover_Fig2Cap: "Full rover assembly",
-        
-        // 🌟 NEW GALLERY ARRAY
         rover_Gallery: ["media/sus_fig2.png", "media/sus_fig3.png", "media/sus_fig4.png"],
 
         // --- PROJECT 4: STIRLING ---
@@ -365,6 +395,14 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         stirling_CardSum: "Precise phase angle kinematics modeled for sustained thermodynamic operation.",
         stirling_Tools: "SolidWorks|Kinematics",
         stirling_CardVideo: "media/stirling_thumbnail.webm",
+        
+        // 🌟 Pop-up photos
+        stirling_PopPhotos: [
+            "media/stiriling-fig1.png",
+            "media/stiriling-fig2.png",
+            "media/stiriling-fig1.png" // Replace
+        ],
+
         stirling_PaperTitle: "Kinematic Modeling of a Functioning Stirling Engine Assembly",
         stirling_Auth: "Hamza Abd ElKadir",
         stirling_Abs: "Modeled a functioning Stirling engine assembly, focusing on the precise phase angle differences between the displacer and power pistons required for operation.",
@@ -374,26 +412,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         stirling_Outcomes: "Kinematic motion successfully verified prior to physical prototyping.",
         stirling_Fig1: "media/stiriling-fig1.png", stirling_Fig1Cap: "Kinematic linkage design",
         stirling_Fig2: "media/stiriling-fig2.png", stirling_Fig2Cap: "Phase angle alignment study",
-        
         stirling_Gallery: ["media/stiriling-fig1.png", "media/stiriling-fig2.png"],
-
-        // --- PROJECT 5: THERMO ---
-        thermo_Show: 0, 
-        thermo_CardTags: "Analysis",
-        thermo_CardTitle: "Stirling Thermodynamics",
-        thermo_CardSum: "Heat transfer FEA mapping and comprehensive mechanical efficiency lab report.",
-        thermo_Tools: "Thermodynamics|FEA",
-        thermo_Cover: "media/thermo-cover.jpg",
-        thermo_PaperTitle: "Heat Transfer Mapping and Mechanical Efficiency Analysis of a Stirling Cycle",
-        thermo_Auth: "Hamza Abd ElKadir",
-        thermo_Abs: "Analyzed the heat conduction through the hot cylinder walls to determine the optimal material thickness, balancing structural integrity with thermal efficiency.",
-        thermo_Obj: "Calculate mechanical efficiency based on varying temperature gradients.",
-        thermo_Contrib: "Conducted FEA heat transfer mapping.|Compiled a comprehensive lab report calculating mechanical efficiency.|Incorporated three distinct data samples collected across varying temperature gradients.",
-        thermo_Specs: "Analysis : Thermal Conduction | Data Samples : 3 Temperature Gradients",
-        thermo_Outcomes: "Optimal material thickness identified to maximize thermal efficiency safely.",
-        thermo_Fig1: "media/thermo-fig1.jpg", thermo_Fig1Cap: "Thermal conduction heat-map",
-        thermo_Fig2: "media/thermo-fig2.jpg", thermo_Fig2Cap: "Sample plotting and efficiency results",
-        thermo_Gallery: [],
 
         // --- PROJECT 6: ELEVATOR ---
         elevator_Show: 1, 
@@ -402,6 +421,14 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         elevator_CardSum: "Zero assembly errors across 100+ part systems, supervised end-to-end.",
         elevator_Tools: "Sheet Metal|DFMA",
         elevator_Cover: "media/elevator_cabin.png",
+        
+        // 🌟 Pop-up photos
+        elevator_PopPhotos: [
+            "media/elevator_cabin.png",
+            "media/elevator_mc.png",
+            "media/elevator_cabin.png" // Replace
+        ],
+
         elevator_PaperTitle: "DFMA-Driven Sheet Metal Design of Elevator Cabins and Chassis for Cost-Effective Manufacturing",
         elevator_Auth: "Hamza Abd ElKadir — GOBA for Elevators, Cairo, Jun – Oct 2025",
         elevator_Abs: "Elevator cabins and chassis were designed in SolidWorks sheet metal with DFMA standards. Full documentation — BOM, cost reports, assembly drawings — was generated. Manufacturing of 100+ part systems was supervised with zero assembly errors.",
@@ -413,24 +440,6 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         elevator_Fig2: "media/elevator_mc.png", elevator_Fig2Cap: "Assembly drawing and safety mechanism",
         elevator_Gallery: ["media/elevator_cabin.png", "media/elevator_mc.png"],
 
-        // --- PROJECT 7: CANON ---
-        canon_Show: 0, 
-        canon_CardTags: "Design",
-        canon_CardTitle: "Pneumatic Canon",
-        canon_CardSum: "3-DOF MATLAB trajectory calculator and pressure vessel design.",
-        canon_Tools: "MATLAB|Pneumatics",
-        canon_Cover: "media/canon-cover.jpg",
-        canon_PaperTitle: "Pneumatic Pressure Vessel Design and 3-DOF MATLAB Trajectory Simulation",
-        canon_Auth: "Hamza Abd ElKadir",
-        canon_Abs: "Engineered a pneumatic chamber capable of safely retaining high PSI air limits, designing a fast-actuating valve system for instant air release.",
-        canon_Obj: "Develop a complex MATLAB script to calculate a pneumatic 3-DOF rocket launcher trajectory, simulating both the internal sliding phase and external impact phases.",
-        canon_Contrib: "Designed pneumatic chamber for high PSI retention.|Engineered fast-actuating valve geometry.|Developed 3-DOF MATLAB script to map trajectory physics.",
-        canon_Specs: "Simulation : MATLAB 3-DOF | Mechanism : Fast-actuating pneumatic valve",
-        canon_Outcomes: "Accurate physical trajectory prediction mapped directly from CAD pressure constraints.",
-        canon_Fig1: "media/canon-fig1.jpg", canon_Fig1Cap: "Pressure vessel schematic",
-        canon_Fig2: "media/canon-fig2.jpg", canon_Fig2Cap: "MATLAB trajectory plotting",
-        canon_Gallery: [],
-
         // --- PROJECT 8: PROGRESSIVE DIE ---
         die_Show: 1, 
         die_CardTags: "Manufacturing",
@@ -438,6 +447,14 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         die_CardSum: "Sheet metal strip layout and heavy-duty punch block architecture.",
         die_Tools: "SolidWorks|Tooling",
         die_Cover: "media/Progressive_die_Cpage.png",
+        
+        // 🌟 Pop-up photos
+        die_PopPhotos: [
+            "media/Progressive_die_Cpage.png",
+            "media/Progressive_die_Cpage.png", // Replace
+            "media/Progressive_die_Cpage.png" // Replace
+        ],
+
         die_PaperTitle: "Strip Layout Planning and Tool Architecture for Progressive Die Manufacturing",
         die_Auth: "Hamza Abd ElKadir",
         die_Abs: "Designed an optimized sheet metal strip layout to maximize material utilization, calculating exact station progression for punching and blanking operations.",
@@ -446,30 +463,14 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         die_Specs: "Operations : Punching, Bending, Blanking | Mitigation : Stripper plate clearance, Shear stress",
         die_Outcomes: "Maximized material utilization and prevented binding during upstroke.",
         die_Fig1: "media/Progressive_die_Cpage.png", die_Fig1Cap: "Sheet metal strip progression layout",
-        die_Gallery: ["media/Progressive_die_Cpage.png"],
-
-        // --- PROJECT 9: LANTERN ---
-        lantern_Show: 0, 
-        lantern_CardTags: "Design",
-        lantern_CardTitle: "Chinese Lantern",
-        lantern_CardSum: "Thermal draft analysis for interlocking mechanical frame.",
-        lantern_Tools: "Thermodynamics|CAD",
-        lantern_Cover: "media/lantern-cover.jpg",
-        lantern_PaperTitle: "Thermal Drafting and Interlocking Structural Integration of a Paper Lantern",
-        lantern_Auth: "Hamza Abd ElKadir",
-        lantern_Abs: "Undertook a specialized CAD project combining mechanical structure with traditional cultural forms. Engineered an interlocking, collapsible frame that eliminated the need for chemical adhesives.",
-        lantern_Obj: "Calculate internal volume and estimate convective heat transfer from the candle element needed to generate sufficient upward lift.",
-        lantern_Contrib: "Engineered interlocking, collapsible frame without adhesives.|Calculated internal volume.|Estimated convective heat transfer for thermal drafting.",
-        lantern_Specs: "Structure : Adhesiveless Interlocking | Analysis : Convective heat transfer",
-        lantern_Outcomes: "Successful structural integration yielding sufficient thermal lift.",
-        lantern_Fig1: "media/lantern-fig1.jpg", lantern_Fig1Cap: "Interlocking structural frame",
-        lantern_Fig2: "media/lantern-fig2.jpg", lantern_Fig2Cap: "Internal volume convection estimates",
-        lantern_Gallery: []
+        die_Gallery: ["media/Progressive_die_Cpage.png"]
     };
 </script>
 
 <div id="lightbox">
   <span id="lb-close" onclick="closeLB()">✕</span>
+  <span id="lb-prev" class="lb-arrow" onclick="navLB(-1)">&#10094;</span>
+  <span id="lb-next" class="lb-arrow" onclick="navLB(1)">&#10095;</span>
   <img id="lb-img" src="" alt=""/>
 </div>
 
@@ -627,21 +628,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const numStr = counter < 10 ? '0'+counter : counter;
         if(DATA[id+'_CardTags']) { categoriesSet.add(DATA[id+'_CardTags']); }
 
-        // --- 1. BUILD THE CARD ---
+        // --- 1. BUILD THE CARD (NOW WITH TAKEOVER HOVER PANEL) ---
         const cardImgSrc = DATA[id+'_CardImage'] || DATA[id+'_Cover'];
         let mediaHtml = `<img src="${cardImgSrc}" alt="" onerror="this.style.display='none';"/>`;
         
+        // Base Cover Video logic
+        let baseVideoSrc = '';
         if(DATA[id+'_CardVideo']) {
-             mediaHtml = `<video src="${DATA[id+'_CardVideo']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata"></video>`;
+             baseVideoSrc = DATA[id+'_CardVideo'];
+             mediaHtml = `<video src="${baseVideoSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata"></video>`;
         } else if(DATA[id+'_Video'] && !DATA[id+'_CardImage']) {
-             mediaHtml = `<video src="${DATA[id+'_Video']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata"></video>`;
+             baseVideoSrc = DATA[id+'_Video'];
+             mediaHtml = `<video src="${baseVideoSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata"></video>`;
         }
 
-        // 🌟 Generate the Pop-out Image Strip
+        // 🌟 3 Pop-up Photos (From your drawing)
         let popoutHtml = '';
-        if (DATA[id+'_Gallery'] && DATA[id+'_Gallery'].length > 0) {
-            const miniThumbs = DATA[id+'_Gallery'].slice(0, 3).map(img => `<img src="${img}" onerror="this.style.display='none';"/>`).join('');
-            popoutHtml = `<div class="card-popout">${miniThumbs}</div>`;
+        if (DATA[id+'_PopPhotos'] && DATA[id+'_PopPhotos'].length > 0) {
+            const miniThumbs = DATA[id+'_PopPhotos'].slice(0, 3).map(img => `<img src="${img}" onerror="this.style.display='none';"/>`).join('');
+            popoutHtml = `<div class="ch-3imgs">${miniThumbs}</div>`;
         }
 
         const toolsArray = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '');
@@ -649,24 +654,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + 
                          (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
 
-        // 🌟 The card now uses smart click/hover handlers for Mobile
+        // Generate the massive Hover Panel exactly like your drawing
         const cardHTML = `
             <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" 
                  onmouseenter="playVideo(this)" 
                  onmouseleave="pauseVideo(this)"
                  onclick="handleCardClick(event, this, 'pg-det-${id}')">
+                 
               <div class="card-cover img-container">
                 <div class="ph">[ COVER ]</div>
                 ${mediaHtml}
-                ${popoutHtml}
                 <span class="card-num">${numStr}</span>
               </div>
               <div class="card-body">
                 <div class="card-tags">${tagsHtml}</div>
                 <div class="card-title">${DATA[id+'_CardTitle'] || ''}</div>
-                <div class="card-sum">${DATA[id+'_CardSum'] || ''}</div>
+                <div class="card-sum-grid">${DATA[id+'_CardSum'] || ''}</div>
                 <div class="card-tools">${toolsHtml}</div>
-                <span class="card-cta">View Full Project &rarr;</span>
+                
+                <div class="card-hover-panel">
+                  <div class="ch-cover">
+                    ${baseVideoSrc ? `<video src="${baseVideoSrc}" autoplay muted loop playsinline></video>` : `<img src="${cardImgSrc}" alt=""/>`}
+                  </div>
+                  <div class="ch-bottom">
+                    ${popoutHtml}
+                    <div class="ch-cta">Click to explore full project &rarr;</div>
+                  </div>
+                </div>
               </div>
             </div>
         `;
@@ -700,11 +714,11 @@ document.addEventListener("DOMContentLoaded", () => {
             pageCoverMedia = `<video src="${DATA[id+'_Video']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
         }
 
-        // 🌟 Generate the Right-Side Gallery HTML
+        // 🌟 Generate the Static 2-Column Sidebar (It stays clipped in place due to position: sticky)
         let sidebarHtml = '';
         if (DATA[id+'_Gallery']) {
             DATA[id+'_Gallery'].forEach(img => {
-                sidebarHtml += `<img src="${img}" class="side-gal-img" onclick="openLB(this)" onerror="this.style.display='none';"/>`;
+                sidebarHtml += `<img src="${img}" class="side-gal-img" onclick="openLB(this, '.det-sidebar')" onerror="this.style.display='none';"/>`;
             });
         }
 
@@ -769,7 +783,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div class="det-sidebar">
-                <span class="eyebrow" style="color:var(--ink3);">Fabrication Gallery</span>
+                <span class="eyebrow side-gal-title" style="color:var(--ink3);">Fabrication Gallery</span>
                 ${sidebarHtml}
             </div>
 
@@ -783,12 +797,12 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         pagesContainer.insertAdjacentHTML('beforeend', pageHTML);
 
-        // --- 3. BUILD THE AUTO GALLERY ---
+        // --- 3. BUILD THE MAIN PAGE GALLERY ---
         if(DATA[id+'_Fig1']) {
-            galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item ${counter % 3 === 1 ? 'wide' : ''} img-container" onclick="openLB(this)"><div class="ph">[ PHOTO ]</div><img src="${DATA[id+'_Fig1']}" alt="" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig1Cap']}</span></div></div>`);
+            galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item ${counter % 3 === 1 ? 'wide' : ''} img-container" onclick="openLB(this, '.gallery-grid')"><div class="ph">[ PHOTO ]</div><img src="${DATA[id+'_Fig1']}" alt="" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig1Cap']}</span></div></div>`);
         }
         if(DATA[id+'_Fig2']) {
-            galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item img-container" onclick="openLB(this)"><div class="ph">[ PHOTO ]</div><img src="${DATA[id+'_Fig2']}" alt="" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig2Cap']}</span></div></div>`);
+            galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item img-container" onclick="openLB(this, '.gallery-grid')"><div class="ph">[ PHOTO ]</div><img src="${DATA[id+'_Fig2']}" alt="" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig2Cap']}</span></div></div>`);
         }
         
         counter++;
@@ -820,28 +834,31 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.scroll-video').forEach(video => { videoObserver.observe(video); });
 });
 
-/* ── 🌟 SMART CARD HOVER & MOBILE LOGIC ── */
+/* ── SMART CARD HOVER & MOBILE LOGIC ── */
 function playVideo(card) {
     card.classList.add('is-hovered');
     const v = card.querySelector('.card-cover video');
     if(v) v.play();
+    const vHover = card.querySelector('.ch-cover video');
+    if(vHover) vHover.play();
 }
 function pauseVideo(card) {
     card.classList.remove('is-hovered');
     const v = card.querySelector('.card-cover video');
     if(v) { v.pause(); v.currentTime = 0; }
+    const vHover = card.querySelector('.ch-cover video');
+    if(vHover) { vHover.pause(); vHover.currentTime = 0; }
 }
 function handleCardClick(e, card, pageId) {
-    // If on a touch device, the first tap acts as a hover. The second tap navigates.
     if (window.matchMedia("(hover: none)").matches) {
         if (!card.classList.contains('is-hovered')) {
-            e.preventDefault(); // Stop navigation
-            document.querySelectorAll('.proj-card').forEach(c => { if(c !== card) pauseVideo(c); }); // Reset other cards
-            playVideo(card); // Trigger hover state
+            e.preventDefault(); 
+            document.querySelectorAll('.proj-card').forEach(c => { if(c !== card) pauseVideo(c); });
+            playVideo(card); 
             return;
         }
     }
-    go(pageId); // Navigate normally
+    go(pageId);
 }
 
 /* ── PAGE ROUTER ── */
@@ -852,14 +869,10 @@ function go(pageId, scrollTarget) {
   pg.classList.add('on');
   window.scrollTo(0, 0);
 
-  // Stop all card videos from playing when leaving the page
   document.querySelectorAll('.proj-card').forEach(c => pauseVideo(c));
 
-  // nav highlight
   document.querySelectorAll('.nav-links a').forEach(a => {
-      if(a.dataset.pg){
-         a.classList.toggle('act', a.dataset.pg === pageId);
-      }
+      if(a.dataset.pg){ a.classList.toggle('act', a.dataset.pg === pageId); }
   });
 
   if (scrollTarget) {
@@ -878,18 +891,60 @@ function scrollTo_contact() {
   }
 }
 
-/* ── LIGHTBOX ── */
-function openLB(el) {
+/* ── 🌟 INTERACTIVE LIGHTBOX CAROUSEL ── */
+let lbImages = [];
+let lbCurrentIndex = 0;
+
+function openLB(el, containerSelector = null) {
   const img = el.tagName === 'IMG' ? el : el.querySelector('img');
   if (!img || img.style.display === 'none') return;
-  document.getElementById('lb-img').src = img.src;
+  
+  lbImages = [];
+  
+  // Find all images in the specific gallery clicked
+  if (containerSelector) {
+     const container = el.closest(containerSelector);
+     if (container) {
+        container.querySelectorAll('img.side-gal-img, .gal-item img').forEach(i => {
+           if (i.style.display !== 'none' && i.src) lbImages.push(i.src);
+        });
+     }
+  }
+  
+  // Fallback if standalone image
+  if (lbImages.length === 0) lbImages.push(img.src);
+  
+  lbCurrentIndex = lbImages.indexOf(img.src);
+  if(lbCurrentIndex === -1) lbCurrentIndex = 0;
+
+  document.getElementById('lb-img').src = lbImages[lbCurrentIndex];
   document.getElementById('lightbox').classList.add('open');
+  
+  // Show arrows only if there are multiple images
+  document.getElementById('lb-prev').style.display = lbImages.length > 1 ? 'block' : 'none';
+  document.getElementById('lb-next').style.display = lbImages.length > 1 ? 'block' : 'none';
 }
+
+function navLB(dir) {
+  lbCurrentIndex += dir;
+  if (lbCurrentIndex < 0) lbCurrentIndex = lbImages.length - 1;
+  if (lbCurrentIndex >= lbImages.length) lbCurrentIndex = 0;
+  document.getElementById('lb-img').src = lbImages[lbCurrentIndex];
+}
+
 function closeLB() {
   document.getElementById('lightbox').classList.remove('open');
 }
+
+// Close when clicking empty space
 document.getElementById('lightbox').addEventListener('click', function(e) {
   if (e.target === this) closeLB();
+});
+// Allow closing via Esc key
+document.addEventListener('keydown', function(e) {
+  if (e.key === "Escape" && document.getElementById('lightbox').classList.contains('open')) {
+     closeLB();
+  }
 });
 
 /* ── CONTACT FORM ── */
