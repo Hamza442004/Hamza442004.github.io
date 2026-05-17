@@ -66,7 +66,7 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
         border:1.5px solid var(--ink);color:var(--ink);transition:background .18s,color .18s; cursor: pointer;}
 .nav-cv:hover{background:var(--ink);color:var(--white)}
 
-/* ── PAGE SYSTEM ───────────────────────── */
+/* ── BUTTONS ───────────────────────────── */
 .pg{display:none; animation: fadeIn 0.4s ease;}
 .pg.on{display:block}
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -107,60 +107,42 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .fi:focus,.fta:focus{border-color:var(--ink)}
 .fta{min-height:120px}
 
-/* ── FILTER BAR ──────────────── */
+/* ── CARDS (PROJECTS GRID) ──────────────── */
 #pg-projects{padding-top:calc(var(--nh)+4rem);padding-bottom:5rem}
 .filter-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:3rem}
 .fb{font-family:var(--fd);font-size:.65rem;font-weight:600;letter-spacing:.05em; text-transform:uppercase;padding:.5rem 1.2rem;border:1px solid var(--rule); border-radius: 4px; background:var(--white);color:var(--ink3);cursor:pointer;transition:all .15s}
 .fb:hover{border-color:var(--ink3);color:var(--ink2)}
 .fb.act{border-color:var(--red);background:var(--red);color:var(--white)}
 
-/* ── CARDS & HOVER OVERLAY ──────────────── */
 .cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--rule); border-left:1px solid var(--rule); }
+.card{ background:var(--white); display:flex; flex-direction:column; cursor:pointer; position:relative; border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); transition: transform 0.3s ease; }
+.card-cover{ overflow:hidden; aspect-ratio:3/2; position:relative; background:var(--rule); z-index: 1; border-bottom: 1px solid var(--rule); }
 
-.card{ 
-    background:var(--white); display:flex; flex-direction:column; cursor:pointer; 
-    position:relative; border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); 
-}
-.card-cover{ overflow:hidden; aspect-ratio:3/2; position:relative; background:var(--rule); border-bottom: 1px solid var(--rule); }
-.card-cover video::-webkit-media-controls { display: none !important; }
-
-/* The Hover Panel Overlay */
+/* 🌟 MASSIVE HOVER TAKEOVER PANEL */
 .card-hover-panel {
-    position: absolute;
-    top: -15px; left: -15px; right: -15px;
-    height: calc(100% + 30px);
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    z-index: 100;
-    opacity: 0;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    transform: scale(0.98);
+    position: absolute; 
+    top: -15px; left: -15px; right: -15px; bottom: -20px; /* Expands outside the card */
+    background: #fff; z-index: 100; 
+    opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease;
+    border-radius: 8px; box-shadow: 0 35px 70px rgba(0,0,0,0.3);
+    display: flex; flex-direction: column; overflow: hidden;
+    transform: scale(0.95);
 }
+.card:hover { z-index: 50; } /* Brings hovered card to front */
+.card:hover .card-hover-panel { opacity: 1; pointer-events: auto; transform: scale(1); }
 
-.card:hover { z-index: 50; }
-.card:hover .card-hover-panel {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1);
-}
-
-/* Hover Top Half */
-.ch-cover { flex: 1.2; width: 100%; position: relative; background: #111; }
+/* Top Half: Takeover Video */
+.ch-cover { flex: 1.2; width: 100%; position: relative; background: #111; border-bottom: 1px solid var(--rule); }
 .ch-cover video, .ch-cover img { width: 100%; height: 100%; object-fit: cover; }
 .ch-cover video::-webkit-media-controls { display: none !important; }
 
-/* Hover Bottom Half */
-.ch-bottom { flex: 1; padding: 1.2rem; display: flex; flex-direction: column; justify-content: center; background: #fff; border-top: 1px solid var(--rule);}
+/* Bottom Half: Takeover 3 Photos */
+.ch-bottom { flex: 1; padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between; background: #fff; }
 .ch-3imgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1rem; }
-.ch-3imgs img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; border: 1px solid var(--rule); box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+.ch-3imgs img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; border: 1px solid #cbd5e1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
 .ch-cta { text-align: center; font-family: var(--fd); font-size: 0.8rem; font-weight: 800; color: var(--red); text-transform: uppercase; letter-spacing: 0.05em; }
 
-/* Standard Card Inner Info */
+/* Base Card Content */
 .card-num{position:absolute;top:.8rem;left:1rem;font-family:var(--fd);font-size:.6rem;font-weight:800;letter-spacing:.05em;color:rgba(255,255,255,.9);z-index:3; text-shadow: 0 2px 4px rgba(0,0,0,0.6);}
 .card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column;}
 .card-tags{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
@@ -172,8 +154,31 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .tool{font-family:var(--fd);font-size:.55rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--rule);color:var(--ink3); border-radius: 3px;}
 
 /* ── SCIENTIFIC PAPER DETAIL PAGES ────── */
-.det-cover{position:relative;height:70vh;min-height:400px;overflow:hidden;background:#111}
-.cov-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,0.95) 0%,rgba(15,23,42,0.1) 60%,transparent 100%); z-index: 10;}
+.det-cover{position:relative;height:70vh;min-height:400px;overflow:hidden;background:#111;}
+
+/* 🌟 SWIPEABLE HERO CAROUSEL */
+.cover-slider {
+    display: flex; width: 100%; height: 100%;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;
+    position: relative; z-index: 5;
+}
+.cover-slider::-webkit-scrollbar { display: none; }
+.cover-slide {
+    flex: 0 0 100%; width: 100%; height: 100%;
+    scroll-snap-align: start; position: relative;
+}
+.cover-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(15,23,42,0.4); color: #fff; font-size: 2.5rem;
+    padding: 0.5rem 1.2rem; cursor: pointer; z-index: 25;
+    border-radius: 4px; transition: background 0.2s; user-select: none;
+}
+.cover-arrow:hover { background: rgba(15,23,42,0.8); }
+.cover-arrow.left { left: 2rem; }
+.cover-arrow.right { right: 2rem; }
+
+.cov-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,0.95) 0%,rgba(15,23,42,0.1) 60%,transparent 100%); z-index: 10; pointer-events: none;}
 .cov-txt{position:absolute;bottom:0;left:0;right:0;padding:3rem var(--g);max-width:1450px;margin-inline:auto; z-index: 20;}
 .cov-back{display:inline-flex;align-items:center;font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.7);cursor:pointer;margin-bottom:1.5rem;transition:color .15s}
 .cov-back:hover{color:var(--white)}
@@ -185,7 +190,7 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
     position: relative;
     z-index: 30;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; /* CRITICAL for sticky sidebar */
     gap: 4rem;
     padding-inline: var(--g);
 }
@@ -200,13 +205,18 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
     color: #000;
 }
 
-/* 🌟 STATIONARY 2-COLUMN SIDEBAR (NOT STICKY) */
+/* 🌟 STATIONARY 2-COLUMN SIDEBAR */
 .det-sidebar {
     width: 340px; 
     flex-shrink: 0;
-    /* Static layout: Stays at the top of the article, scrolls naturally */
+    /* STATIONARY LOGIC (Sticky keeps it frozen in view) */
+    position: sticky;
+    top: calc(var(--nh) + 20px); 
+    max-height: calc(100vh - var(--nh) - 40px);
+    overflow-y: auto; /* Scrollbar for 20+ photos */
+    
     display: grid;
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: 1fr 1fr;
     gap: 0.8rem;
     align-content: start;
     background: #fff;
@@ -215,6 +225,9 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     border-radius: 6px;
 }
+.det-sidebar::-webkit-scrollbar { width: 6px; }
+.det-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
 .side-gal-title { grid-column: 1 / -1; margin-bottom: 0.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; text-align: center; }
 .side-gal-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid var(--rule); transition: transform 0.2s, border-color 0.2s; }
 .side-gal-img:hover { transform: scale(1.05); border-color: var(--red); z-index: 5; position: relative;}
@@ -249,7 +262,7 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .gal-item:hover .gal-cap{opacity:1}
 .gal-cap span{font-family:var(--fd);font-size:.8rem;font-weight:600;letter-spacing:.05em;color:#fff}
 
-/* 🌟 LIGHTBOX CAROUSEL WITH ARROWS ── */
+/* 🌟 LIGHTBOX CAROUSEL ── */
 #lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.98);align-items:center;justify-content:center}
 #lightbox.open{display:flex}
 #lightbox img{max-width:85vw;max-height:85vh;object-fit:contain;display:block; user-select: none;}
@@ -270,7 +283,8 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
   .sci-section.rev .sci-text { order: 1; }
   .sci-section.rev .sci-visual { order: 2; }
   .det-layout { flex-direction: column; gap: 2rem;}
-  .det-sidebar { width: 100%; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  /* Un-stick sidebar on mobile */
+  .det-sidebar { width: 100%; position: static; max-height: none; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
 }
 @media(max-width:900px){
   .hero-split{grid-template-columns:1fr;}
@@ -281,9 +295,13 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
   .cform-wrap{grid-template-columns:1fr}
   .nav-links{display:none}
   .sci-paper { padding: 3rem 2rem; }
-  
   /* Disable massive hover pop-out on mobile tablets */
   .card-hover-panel { display: none !important; }
+}
+@media(max-width:768px){
+  .cover-arrow { font-size: 1.5rem; padding: 0.3rem 0.8rem; }
+  .cover-arrow.left { left: 0.5rem; }
+  .cover-arrow.right { right: 0.5rem; }
 }
 @media(max-width:560px){
   .cards, .gallery-grid{grid-template-columns:1fr}
@@ -344,6 +362,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         flowmeter_Fig2: "media/flowmeter_fig2.jpeg", flowmeter_Fig2Cap: "Smart sensor system and calibration setup",
         flowmeter_Fig3: "media/turbine_manu.png", flowmeter_Fig3Cap: "Fluid dynamics trajectory mapping",
         
+        // Sidebar Gallery
         flowmeter_Gallery: ["media/flowmeter_fig1.jpeg", "media/flowmeter_fig2.jpeg", "media/turbine_manu.png", "media/flowmeter-cover.jpg"],
 
         // --- PROJECT 2: CONVEYOR ---
@@ -690,39 +709,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const numStr = counter < 10 ? '0'+counter : counter;
         if(DATA[id+'_CardTags']) { categoriesSet.add(DATA[id+'_CardTags']); }
 
-        // --- 1. BUILD THE BASE CARD ---
         const cardImgSrc = DATA[id+'_CardImage'] || DATA[id+'_Cover'];
-        let mediaHtml = `<img src="${cardImgSrc}" alt="" onerror="this.style.display='none';"/>`;
-        
-        let videoSrc = '';
-        if(DATA[id+'_CardVideo']) {
-             videoSrc = DATA[id+'_CardVideo'];
-             mediaHtml = `<video src="${videoSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata"></video>`;
-        } else if(DATA[id+'_Video'] && !DATA[id+'_CardImage']) {
-             videoSrc = DATA[id+'_Video'];
-             mediaHtml = `<video src="${videoSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata"></video>`;
-        }
+        const toolsHtml = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '').map(t => `<span class="tool">${t.trim()}</span>`).join('');
+        const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
 
-        const toolsArray = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '');
-        const toolsHtml = toolsArray.map(t => `<span class="tool">${t.trim()}</span>`).join('');
-        const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + 
-                         (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
+        // 🌟 1. THE BASE CARD (Image only, no duplicate video)
+        let baseMedia = `<img src="${cardImgSrc}" alt=""/>`;
 
-        // 🌟 Massive Hover Panel (Top = Cover, Bottom = 3 Photos + CTA)
+        // 🌟 2. THE HOVER TAKEOVER PANEL (CSS Only to prevent JS crashes)
         const popPhotos = DATA[id+'_PopPhotos'] || [];
         const pop1 = popPhotos[0] || DATA[id+'_Fig1'] || 'media/prof-pic.jpeg';
         const pop2 = popPhotos[1] || DATA[id+'_Fig2'] || 'media/prof-pic.jpeg';
         const pop3 = popPhotos[2] || DATA[id+'_Fig3'] || 'media/prof-pic.jpeg';
+        
+        let hoverMedia = '';
+        if(DATA[id+'_CardVideo'] || DATA[id+'_Video']) {
+            const vidSrc = DATA[id+'_CardVideo'] || DATA[id+'_Video'];
+            hoverMedia = `<video src="${vidSrc}" muted loop playsinline preload="metadata"></video>`;
+        } else {
+            hoverMedia = `<img src="${cardImgSrc}" alt=""/>`;
+        }
 
         const cardHTML = `
-            <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" 
-                 onmouseenter="playVideo(this)" 
-                 onmouseleave="pauseVideo(this)"
-                 onclick="go('pg-det-${id}')">
-                 
+            <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" onclick="go('pg-det-${id}')" onmouseenter="playHoverVideo(this)" onmouseleave="pauseHoverVideo(this)">
+              
               <div class="card-cover img-container">
                 <div class="ph">[ COVER ]</div>
-                ${mediaHtml}
+                ${baseMedia}
                 <span class="card-num">${numStr}</span>
               </div>
               <div class="card-body">
@@ -734,7 +747,7 @@ document.addEventListener("DOMContentLoaded", () => {
               
               <div class="card-hover-panel">
                 <div class="ch-cover">
-                    ${videoSrc ? `<video src="${videoSrc}" muted loop playsinline></video>` : `<img src="${cardImgSrc}" alt=""/>`}
+                    ${hoverMedia}
                     <span class="card-num">${numStr}</span>
                 </div>
                 <div class="ch-bottom">
@@ -746,11 +759,12 @@ document.addEventListener("DOMContentLoaded", () => {
                   <div class="ch-cta">Click to explore full project &rarr;</div>
                 </div>
               </div>
+
             </div>
         `;
         cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
 
-        // --- 2. BUILD THE SCIENTIFIC PAPER DETAIL PAGE ---
+        // --- 3. BUILD THE SCIENTIFIC PAPER DETAIL PAGE ---
         const contribArray = (DATA[id+'_Contrib'] || '').split('|').filter(t => t.trim() !== '');
         const contribHtml = contribArray.map(c => `<li>${c.trim()}</li>`).join('');
 
@@ -762,23 +776,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const specsTableHtml = specsHtml ? `<table class="sci-table">${specsHtml}</table>` : '';
 
         let extraFigsHtml = '';
-        if(DATA[id+'_Fig3']) {
-            extraFigsHtml += `<div class="sci-fig"><div class="img-container" style="background: #fff; padding: 6px;"><img src="${DATA[id+'_Fig3']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/><div class="ph">[ FIG 3 ]</div></div><p class="sci-cap"><b>Fig. 3.</b> ${DATA[id+'_Fig3Cap'] || ''}</p></div>`;
-        }
-        if(DATA[id+'_Fig4']) {
-            extraFigsHtml += `<div class="sci-fig"><div class="img-container" style="background: #fff; padding: 6px;"><img src="${DATA[id+'_Fig4']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/><div class="ph">[ FIG 4 ]</div></div><p class="sci-cap"><b>Fig. 4.</b> ${DATA[id+'_Fig4Cap'] || ''}</p></div>`;
-        }
+        if(DATA[id+'_Fig3']) { extraFigsHtml += `<div class="sci-fig"><div class="img-container" style="background: #fff; padding: 6px;"><img src="${DATA[id+'_Fig3']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/><div class="ph">[ FIG 3 ]</div></div><p class="sci-cap"><b>Fig. 3.</b> ${DATA[id+'_Fig3Cap'] || ''}</p></div>`; }
+        if(DATA[id+'_Fig4']) { extraFigsHtml += `<div class="sci-fig"><div class="img-container" style="background: #fff; padding: 6px;"><img src="${DATA[id+'_Fig4']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/><div class="ph">[ FIG 4 ]</div></div><p class="sci-cap"><b>Fig. 4.</b> ${DATA[id+'_Fig4Cap'] || ''}</p></div>`; }
 
+        // 🌟 SWIPEABLE HERO CAROUSEL 🌟
         const detImgSrc = DATA[id+'_DetailImage'] || DATA[id+'_Cover'];
-        let pageCoverMedia = `<img src="${detImgSrc}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/>`;
-        
+        let baseCover = '';
         if(DATA[id+'_DetailVideo']) {
-            pageCoverMedia = `<video src="${DATA[id+'_DetailVideo']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
+            baseCover = `<video src="${DATA[id+'_DetailVideo']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
         } else if(DATA[id+'_Video'] && !DATA[id+'_DetailImage']) {
-            pageCoverMedia = `<video src="${DATA[id+'_Video']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
+            baseCover = `<video src="${DATA[id+'_Video']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
+        } else {
+            baseCover = `<img src="${detImgSrc}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/>`;
         }
 
-        // 🌟 Generate the STATIC STATIONARY Sidebar
+        let slidesHtml = `<div class="cover-slide">${baseCover}</div>`;
+        if (DATA[id+'_Gallery']) {
+            DATA[id+'_Gallery'].forEach(img => {
+                slidesHtml += `<div class="cover-slide"><img src="${img}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/></div>`;
+            });
+        }
+
+        // 🌟 STATIONARY SIDEBAR
         let sidebarHtml = '';
         if (DATA[id+'_Gallery']) {
             DATA[id+'_Gallery'].forEach(img => {
@@ -789,8 +808,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const pageHTML = `
         <div id="pg-det-${id}" class="pg">
           <div class="det-cover" style="position:relative;background:#111;">
-            <div class="ph" style="position:absolute;inset:0;color:#fff;z-index:1;">[ COVER PHOTO ]</div>
-            ${pageCoverMedia}
+            
+            <div class="cover-slider" id="slider-${id}">
+                ${slidesHtml}
+            </div>
+            <div class="cover-arrow left" onclick="scrollSlider('${id}', -1)">&#10094;</div>
+            <div class="cover-arrow right" onclick="scrollSlider('${id}', 1)">&#10095;</div>
+
             <div class="cov-grad z-10"></div>
             <div class="cov-txt z-20">
               <div class="cov-back" onclick="go('pg-projects')">&larr; Back to Projects</div>
@@ -801,10 +825,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="sci-paper">
               <h1 class="sci-title">${DATA[id+'_PaperTitle']}</h1>
               <p class="sci-auth">${DATA[id+'_Auth']}</p>
-              
-              <div class="sci-abs-wrap">
-                  <p class="sci-abs"><b>Abstract</b>—${DATA[id+'_Abs']}</p>
-              </div>
+              <div class="sci-abs-wrap"><p class="sci-abs"><b>Abstract</b>—${DATA[id+'_Abs']}</p></div>
               
               <div class="sci-section">
                 <div class="sci-text">
@@ -841,43 +862,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
               </div>
               
-              <div style="text-align:center; margin-top:4rem;">
-                  <button class="btn btn-ghost" onclick="go('pg-projects')">&larr; Return to All Projects</button>
-              </div>
+              <div style="text-align:center; margin-top:4rem;"><button class="btn btn-ghost" onclick="go('pg-projects')">&larr; Return to All Projects</button></div>
             </div>
 
             <div class="det-sidebar">
                 <span class="eyebrow side-gal-title" style="color:var(--ink3);">Fabrication Gallery</span>
                 ${sidebarHtml}
             </div>
-
           </div>
           
-          <footer style="background:#f8fafc; border-top:1px solid #e2e8f0; padding-block:2rem;"><div class="wrap"><div class="foot-in">
-            <p class="foot-c" style="font-family:'Inter', sans-serif;">© 2026 ${DATA.name}</p>
-            <ul class="foot-links" style="font-family:'Inter', sans-serif;"><li><span onclick="go('pg-projects')">All Projects</span></li></ul>
-          </div></div></footer>
+          <footer style="background:#f8fafc; border-top:1px solid #e2e8f0; padding-block:2rem;"><div class="wrap"><div class="foot-in"><p class="foot-c" style="font-family:'Inter', sans-serif;">© 2026 ${DATA.name}</p></div></div></footer>
         </div>
         `;
         pagesContainer.insertAdjacentHTML('beforeend', pageHTML);
 
-        // --- 3. BUILD THE MAIN PAGE GALLERY ---
-        if(DATA[id+'_Fig1']) {
-            galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item ${counter % 3 === 1 ? 'wide' : ''} img-container" onclick="openLB(this, '.gallery-grid')"><div class="ph">[ PHOTO ]</div><img src="${DATA[id+'_Fig1']}" alt="" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig1Cap']}</span></div></div>`);
-        }
-        if(DATA[id+'_Fig2']) {
-            galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item img-container" onclick="openLB(this, '.gallery-grid')"><div class="ph">[ PHOTO ]</div><img src="${DATA[id+'_Fig2']}" alt="" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig2Cap']}</span></div></div>`);
-        }
-        
+        // --- 4. BUILD THE MAIN PAGE GALLERY ---
+        if(DATA[id+'_Fig1']) { galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item ${counter % 3 === 1 ? 'wide' : ''} img-container" onclick="openLB(this, '.gallery-grid')"><img src="${DATA[id+'_Fig1']}" alt="" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig1Cap']}</span></div></div>`); }
+        if(DATA[id+'_Fig2']) { galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item img-container" onclick="openLB(this, '.gallery-grid')"><img src="${DATA[id+'_Fig2']}" alt="" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig2Cap']}</span></div></div>`); }
         counter++;
     });
 
     // Populate Filters
-    categoriesSet.forEach(cat => {
-        filterContainer.insertAdjacentHTML('beforeend', `<button class="fb" data-f="${cat}">${cat}</button>`);
-    });
+    categoriesSet.forEach(cat => { filterContainer.insertAdjacentHTML('beforeend', `<button class="fb" data-f="${cat}">${cat}</button>`); });
 
-    // Attach Filter Event Listeners
+    // Filter Logic
     document.querySelectorAll('.fb').forEach(b => {
       b.addEventListener('click', () => {
         document.querySelectorAll('.fb').forEach(x => x.classList.remove('act'));
@@ -891,25 +899,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Scroll-triggered Video Engine
     const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) { entry.target.play(); } else { entry.target.pause(); }
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.play(); } else { entry.target.pause(); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.scroll-video').forEach(video => { videoObserver.observe(video); });
 });
 
-/* ── SMART CARD HOVER LOGIC ── */
-function playVideo(card) {
-    const vBase = card.querySelector('.card-cover video');
-    if(vBase) vBase.play();
-    const vHover = card.querySelector('.ch-cover video');
-    if(vHover) vHover.play();
+/* ── HERO SLIDER LOGIC ── */
+function scrollSlider(id, dir) {
+    const slider = document.getElementById('slider-' + id);
+    if (!slider) return;
+    const slideWidth = slider.offsetWidth;
+    slider.scrollBy({ left: dir * slideWidth, behavior: 'smooth' });
 }
-function pauseVideo(card) {
-    const vBase = card.querySelector('.card-cover video');
-    if(vBase) { vBase.pause(); vBase.currentTime = 0; }
-    const vHover = card.querySelector('.ch-cover video');
-    if(vHover) { vHover.pause(); vHover.currentTime = 0; }
+
+/* ── SAFELY PLAY HOVER VIDEOS ── */
+function playHoverVideo(card) {
+    const v = card.querySelector('.card-hover-panel video');
+    if(v) v.play();
+}
+function pauseHoverVideo(card) {
+    const v = card.querySelector('.card-hover-panel video');
+    if(v) { v.pause(); v.currentTime = 0; }
 }
 
 /* ── PAGE ROUTER ── */
@@ -920,11 +930,9 @@ function go(pageId, scrollTarget) {
   pg.classList.add('on');
   window.scrollTo(0, 0);
 
-  document.querySelectorAll('.proj-card').forEach(c => pauseVideo(c));
+  document.querySelectorAll('.card-hover-panel video').forEach(v => { v.pause(); v.currentTime = 0; });
 
-  document.querySelectorAll('.nav-links a').forEach(a => {
-      if(a.dataset.pg){ a.classList.toggle('act', a.dataset.pg === pageId); }
-  });
+  document.querySelectorAll('.nav-links a').forEach(a => { if(a.dataset.pg){ a.classList.toggle('act', a.dataset.pg === pageId); } });
 
   if (scrollTarget) {
     setTimeout(() => {
@@ -935,11 +943,8 @@ function go(pageId, scrollTarget) {
 }
 
 function scrollTo_contact() {
-  if (!document.getElementById('pg-home').classList.contains('on')) {
-    go('pg-home', 'contact-strip');
-  } else {
-    document.getElementById('contact-strip').scrollIntoView({ behavior: 'smooth' });
-  }
+  if (!document.getElementById('pg-home').classList.contains('on')) { go('pg-home', 'contact-strip'); } 
+  else { document.getElementById('contact-strip').scrollIntoView({ behavior: 'smooth' }); }
 }
 
 /* ── 🌟 INTERACTIVE LIGHTBOX CAROUSEL ── */
@@ -949,22 +954,16 @@ let lbCurrentIndex = 0;
 function openLB(el, containerSelector = null) {
   const img = el.tagName === 'IMG' ? el : el.querySelector('img');
   if (!img || img.style.display === 'none') return;
-  
   lbImages = [];
-  
-  // Scans context to build a gallery list
   if (containerSelector) {
      const container = el.closest(containerSelector);
      if (container) {
-        container.querySelectorAll('img.side-gal-img, .gal-item img').forEach(i => {
+        container.querySelectorAll('img.side-gal-img, .gal-item img, .cm-ch3 img').forEach(i => {
            if (i.style.display !== 'none' && i.src) lbImages.push(i.src);
         });
      }
   }
-  
-  // Single image fallback
   if (lbImages.length === 0) lbImages.push(img.src);
-  
   lbCurrentIndex = lbImages.indexOf(img.src);
   if(lbCurrentIndex === -1) lbCurrentIndex = 0;
 
@@ -983,13 +982,8 @@ function navLB(dir) {
 }
 
 function closeLB() { document.getElementById('lightbox').classList.remove('open'); }
+document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLB(); });
 
-// Close on background click
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLB();
-});
-
-// KEYBOARD ARROWS
 document.addEventListener('keydown', function(e) {
   if (document.getElementById('lightbox').classList.contains('open')) {
      if (e.key === "Escape") closeLB();
@@ -998,17 +992,14 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// TOUCH SWIPE LOGIC
 let touchstartX = 0;
 let touchendX = 0;
 const lightboxEl = document.getElementById('lightbox');
-
 lightboxEl.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
 lightboxEl.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleSwipe(); }, {passive: true});
-
 function handleSwipe() {
-  if (touchendX < touchstartX - 40) navLB(1);  // Swipe Left
-  if (touchendX > touchstartX + 40) navLB(-1); // Swipe Right
+  if (touchendX < touchstartX - 40) navLB(1);
+  if (touchendX > touchstartX + 40) navLB(-1);
 }
 
 /* ── CONTACT FORM ── */
@@ -1018,10 +1009,7 @@ function submitForm(e) {
   btn.textContent = 'Sent ✓';
   btn.style.background = '#0f172a';
   btn.style.borderColor = '#0f172a';
-  setTimeout(() => {
-    btn.textContent = 'Send Message';
-    e.target.reset();
-  }, 3000);
+  setTimeout(() => { btn.textContent = 'Send Message'; e.target.reset(); }, 3000);
 }
 </script>
 </body>
