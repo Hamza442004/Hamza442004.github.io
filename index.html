@@ -174,10 +174,10 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .ch-cover video, .ch-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;}
 .ch-cover video::-webkit-media-controls { display: none !important; }
 
-/* 🌟 UPDATED: Bottom Half - Massive Images 🌟 */
+/* Bottom Half - Massive Image Flex Optimization */
 .ch-bottom { 
     height: 50%; 
-    padding: 0.8rem; /* Reduced padding to give images more room */
+    padding: 0.8rem; 
     display: flex; 
     flex-direction: column; 
     background: #fff; 
@@ -185,15 +185,15 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .ch-3imgs { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
-    gap: 0.5rem; /* Tighter gap */
-    flex: 1; /* Forces the grid to stretch vertically and fill the space */
-    min-height: 0; /* Important flexbox trick to prevent overflowing */
+    gap: 0.5rem; 
+    flex: 1; 
+    min-height: 0; 
     margin-bottom: 0.6rem; 
 }
 .ch-3imgs img { 
     width: 100%; 
-    height: 100%; /* Stretches to fill the flex container */
-    object-fit: cover; /* Prevents stretching/distortion */
+    height: 100%; 
+    object-fit: cover; 
     border-radius: 6px; 
     border: 1px solid #cbd5e1; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
@@ -220,11 +220,6 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .card-sum-grid{font-size:.85rem;color:var(--ink2);line-height:1.6;margin-bottom:1.2rem;flex:1}
 .card-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:0}
 .tool{font-family:var(--fd);font-size:.55rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--rule);color:var(--ink3); border-radius: 3px;}
-
-@media (hover: none) {
-  .card:active { opacity: 0.85; }
-  .card-hover-panel { display: none !important; }
-}
 
 /* ── SCIENTIFIC PAPER DETAIL PAGES ────── */
 .det-cover{position:relative;height:70vh;min-height:400px;overflow:hidden;background:#111;}
@@ -271,8 +266,7 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 .det-sidebar::-webkit-scrollbar { width: 6px; }
 .det-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 .side-gal-title { grid-column: 1 / -1; margin-bottom: 0.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; text-align: center; }
-.side-gal-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid var(--rule); transition: transform 0.2s, border-color 0.2s; }
-.side-gal-img:hover { transform: scale(1.05); border-color: var(--red); z-index: 5; position: relative;}
+.side-gal-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid var(--rule); transition: transform 0.2s, border-color 0.2s; z-index: 5; position: relative;}
 
 .sci-title { font-family: 'Inter', sans-serif; font-size: 2.2rem; font-weight: 800; text-align: center; line-height: 1.3; margin-bottom: 1rem; letter-spacing: -0.02em; max-width: 900px; margin-inline: auto; }
 .sci-auth { text-align: center; font-size: 1rem; font-style: italic; margin-bottom: 3rem; color: #444; }
@@ -317,7 +311,7 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 
 /* ── FOOTER & EXTRAS ── */
 footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--white);}
-.foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.foot-in{display:flex;align-items:center;justify-content:space-between;wrap:wrap;gap:1rem}
 .foot-c{font-size:.85rem;color:var(--ink3); font-weight: 500;}
 .foot-links { list-style: none; display: flex; gap: 1.5rem; }
 .foot-links li span { font-size: .8rem; font-weight: 600; color: var(--ink3); cursor: pointer; transition: color .15s; text-transform: uppercase; letter-spacing: .04em; font-family: var(--fd); }
@@ -351,8 +345,6 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
   .nav-cv { display: none; } 
   .sci-paper { padding: 3rem 2rem; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
-
-  /* ON MOBILE: Disable massive hover pop-out since there is no mouse! */
   .card-hover-panel { display: none !important; }
 }
 
@@ -377,6 +369,166 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
 </style>
 </head>
 <body>
+
+<div id="lightbox">
+  <span id="lb-close" onclick="closeLB()">✕</span>
+  <span id="lb-prev" class="lb-arrow" onclick="navLB(-1)">&#10094;</span>
+  <span id="lb-next" class="lb-arrow" onclick="navLB(1)">&#10095;</span>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-logo" onclick="go('pg-home')"><span data-text="initials"></span><b>.</b></div>
+    <ul class="nav-links">
+      <li><a onclick="go('pg-home')" data-pg="pg-home">Home</a></li>
+      <li><a onclick="go('pg-projects')" data-pg="pg-projects">Projects</a></li>
+      <li><a onclick="go('pg-gallery')" data-pg="pg-gallery">Gallery</a></li>
+      <li><a onclick="go('pg-home','contact-strip')" data-pg="pg-home">Contact</a></li>
+    </ul>
+    <a data-href="resumeLink" target="_blank" class="nav-cv" download onclick="gtag('event', 'download_resume');">Resume &darr;</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a onclick="mobileGo('pg-home')">Home</a></li>
+    <li><a onclick="mobileGo('pg-projects')">Projects</a></li>
+    <li><a onclick="mobileGo('pg-gallery')">Gallery</a></li>
+    <li><a onclick="mobileGo('pg-home','contact-strip')">Contact</a></li>
+  </ul>
+  <a data-href="resumeLink" target="_blank" class="mobile-menu-cv" onclick="gtag('event', 'download_resume');">Download Resume ↓</a>
+</div>
+
+<div id="pg-home" class="pg on">
+<div style="padding-top:calc(var(--nh)+5rem);padding-bottom:5rem">
+<div class="wrap">
+  <div class="hero-split">
+    <div>
+      <div class="featured-badge">Available for Internships & Graduate Roles</div>
+      <div class="hero-ey"><div class="hero-ey-line"></div><span class="eyebrow" data-text="title"></span></div>
+      <h1 class="hero-h1" data-text="name"></h1>
+      <p class="hero-uni" data-text="uni"></p>
+      <p class="hero-bio" data-text="bio"></p>
+      <div class="hero-btns">
+        <button class="btn" onclick="go('pg-projects')">View Projects</button>
+        <button class="btn btn-ghost" onclick="scrollTo_contact()">Get in Touch</button>
+      </div>
+    </div>
+    <div class="img-container hero-photo">
+      <img data-src="heroPic" alt="Hamza Abd ElKadir" onerror="this.style.display='none';"/>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Competition 1st Places</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">9</div>
+      <div class="stat-label">Engineering Projects</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Parts Supervised</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6.6×</div>
+      <div class="stat-label">Automation Speed Gain</div>
+    </div>
+  </div>
+
+  <div class="skills-strip">
+    <div class="skills-scroll" id="skills-scroll"></div>
+  </div>
+
+  <div class="about-strip">
+    <div class="divrow"><span class="eyebrow">About Me</span></div>
+    <div class="about-grid">
+      <div class="img-container about-portrait">
+        <img data-src="profilePic" alt="Portrait" onerror="this.style.display='none';"/>
+      </div>
+      <div>
+        <h2 class="about-h">Turning design intent into manufacturable reality.</h2>
+        <p class="about-p" data-text="about1"></p>
+        <p class="about-p" data-text="about2"></p>
+        <div style="margin-top:1.5rem; display:flex; gap:.8rem; flex-wrap:wrap;">
+          <button class="btn" onclick="go('pg-projects')">See My Work</button>
+          <a data-href="resumeLink" target="_blank" class="btn btn-ghost" onclick="gtag('event', 'download_resume');">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-strip" id="contact-strip">
+    <div class="divrow"><span class="eyebrow">Contact</span></div>
+    <h2 style="font-size:clamp(2rem,3vw,2.5rem);font-weight:800;margin-bottom:1rem; letter-spacing:-0.02em;">Let's work together.</h2>
+    <p style="font-size:1.05rem;font-weight:400;color:var(--ink2);line-height:1.8;max-width:52ch">I am looking for internship and graduate opportunities in mechanical design, product development, and manufacturing engineering.</p>
+    
+    <div class="cform-wrap">
+      <ul class="clinks">
+        <li><a data-href="email" id="link-email">
+            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            <span data-text="email"></span>
+          </a></li>
+        <li><a data-href="phone" id="link-phone">
+            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79(19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.22 2 2 0 0 1 2.98 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 5.5 5.5l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span data-text="phone"></span>
+          </a></li>
+        <li><a data-href="linkedinLink" target="_blank" rel="noopener">
+            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H9V9h4v2a6 6 0 0 1 3-3zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn — <span data-text="linkedin"></span>
+          </a></li>
+        <li><a data-href="grabcadLink" target="_blank" rel="noopener">
+            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            GrabCAD — <span data-text="grabcad"></span>
+          </a></li>
+      </ul>
+      <form class="cform" onsubmit="submitForm(event)">
+        <div class="fg"><label class="fl">Full Name</label><input class="fi" type="text" placeholder="Jane Smith" required/></div>
+        <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="jane@company.com" required/></div>
+        <div class="fg"><label class="fl">Message</label><textarea class="fta" placeholder="Tell me about your project…" required></textarea></div>
+        <button type="submit" class="btn" style="align-self:flex-start; margin-top: 0.5rem;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<footer><div class="wrap"><div class="foot-in"><p class="foot-c">© 2026 <span data-text="name"></span></p><ul class="foot-links"><li><span onclick="go('pg-projects')">Projects</span></li><li><span onclick="go('pg-gallery')">Gallery</span></li></ul></div></div></footer>
+</div>
+
+<div id="pg-projects" class="pg">
+<div style="padding-top:calc(var(--nh)+4rem);padding-bottom:6rem">
+<div class="wrap">
+  <div class="divrow"><span class="eyebrow">Selected Work</span></div>
+  <h1 style="font-size:clamp(2rem,4vw,3.5rem);font-weight:800;margin-bottom:.5rem; letter-spacing: -0.03em;">Engineering Projects</h1>
+  <p style="font-size:1rem;color:var(--ink3);margin-bottom:2rem;">Hover any card to preview · Click to read the full case study</p>
+  <div class="filter-bar" id="auto-filter-bar"><button class="fb act" data-f="all">All</button></div>
+  <div class="cards" id="project-cards-container"></div>
+</div>
+</div>
+<footer><div class="wrap"><div class="foot-in"><p class="foot-c">© 2026 <span data-text="name"></span></p><ul class="foot-links"><li><span onclick="go('pg-home')">Home</span></li><li><span onclick="go('pg-gallery')">Gallery</span></li></ul></div></div></footer>
+</div>
+
+<div id="dynamic-pages-container"></div>
+
+<div id="pg-gallery" class="pg">
+<div style="padding-top:calc(var(--nh)+4rem);padding-bottom:6rem">
+<div class="wrap">
+  <div class="divrow"><span class="eyebrow">Gallery</span></div>
+  <h1 style="font-size:clamp(2rem,4vw,3.5rem);font-weight:800;margin-bottom:1rem; letter-spacing: -0.03em;">Project Gallery</h1>
+  <p style="font-size:1rem;color:var(--ink3);margin-bottom:3rem">Click any image to enlarge · Use arrow keys to navigate</p>
+  <div class="gallery-grid" id="auto-gallery-grid"></div>
+</div>
+</div>
+<footer><div class="wrap"><div class="foot-in"><p class="foot-c">© 2026 <span data-text="name"></span></p><ul class="foot-links"><li><span onclick="go('pg-home')">Home</span></li><li><span onclick="go('pg-projects')">Projects</span></li></ul></div></div></footer>
+</div>
 
 <script>
     const PROJECT_ORDER = ['flowmeter', 'conveyor', 'stirling', 'rover', 'thermo', 'elevator', 'canon', 'die', 'lantern'];
@@ -408,13 +560,11 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         flowmeter_Tools: "SolidWorks|DFMA|Python|Blender",
         flowmeter_CardVideo: "media/thumbnail_anime.webm", 
         flowmeter_DetailVideo: "media/flowmeter_Cpage.webm", 
-        
         flowmeter_PopPhotos: [
             "media/flowmeter_fig1.jpeg",
             "media/turbine_manu.png",
             "media/flowmeter_fig2.jpeg"
         ],
-
         flowmeter_PaperTitle: "Design and Fabrication of a Conventionally-Machinable Smart Turbine Flowmeter with Integrated Multi-Sensor Calibration",
         flowmeter_Auth: "Ain Shams University Design Competition, Sep 2024 – Feb 2025",
         flowmeter_Abs: "A 6-inch turbine flowmeter was designed for a flow range of 0.05–0.6 m³/s using only conventional cutting machines. A smart control system integrating tachometer, pressure, and temperature sensors was programmed and individually calibrated, achieving the highest measurement accuracy among 35 competing teams and winning 1st place.",
@@ -435,13 +585,11 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         conveyor_CardSum: "60 s → 9 s cycle time (6.6×). Fully validated by physics simulation before build.",
         conveyor_Tools: "SolidWorks|Physics Sim|DFMA",
         conveyor_Cover: "media/tawlefa_Cpage.jpeg",
-        
         conveyor_PopPhotos: [
             "media/tawlefa_fig1.png",
             "media/tawlefa_Cpage.jpeg",
             "media/tawlefa_fig1.png"
         ],
-
         conveyor_PaperTitle: "Mechanical Design of a High-Speed Automated Tea Bag Packaging System with Physics-Based Process Validation",
         conveyor_Auth: "Hamza Abd ElKadir — Royal Herbs IHUB Competition, Jan 2026 – Apr 2026",
         conveyor_Abs: "A complete mechanical packaging system was designed to fully automate tea bag insertion into boxes for Royal Herbs. A solid-body physics simulation validated the process before any physical build, achieving a cycle-time reduction from 60 s to 9 s per box and winning 1st place at the IHUB Competition.",
@@ -459,13 +607,11 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         rover_CardSum: "Designed, optimised and manufactured for the European Rover Challenge, Poland.",
         rover_Tools: "SolidWorks|FEA|Mech Design",
         rover_Cover: "media/sus_fig4.png",
-        
         rover_PopPhotos: [
             "media/sus_fig2.png",
             "media/sus_fig3.png",
             "media/sus_fig4.png"
         ],
-
         rover_PaperTitle: "Design and Optimisation of a 4WD Differential Rod Suspension Mechanism for a Mars Surface Exploration Rover",
         rover_Auth: "Hamza Abd ElKadir — ASU Racing Team (ROAR), Oct 2025 – Present",
         rover_Abs: "A 4WD differential rod suspension mechanism was designed for the ROAR Mars rover to improve stability on uneven terrain. The mechanism was modelled, parametrically optimised, and fully manufactured for the European Rover Challenge in Poland.",
@@ -484,13 +630,11 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         stirling_CardSum: "Precise phase angle kinematics modeled for sustained thermodynamic operation.",
         stirling_Tools: "SolidWorks|Kinematics",
         stirling_CardVideo: "media/stirling_thumbnail.webm",
-        
         stirling_PopPhotos: [
             "media/stiriling-fig1.png",
             "media/stiriling-fig2.png",
             "media/stiriling-fig1.png"
         ],
-
         stirling_PaperTitle: "Kinematic Modeling of a Functioning Stirling Engine Assembly",
         stirling_Auth: "Hamza Abd ElKadir",
         stirling_Abs: "Modeled a functioning Stirling engine assembly, focusing on the precise phase angle differences between the displacer and power pistons required for operation.",
@@ -528,13 +672,11 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         elevator_CardSum: "Zero assembly errors across 100+ part systems, supervised end-to-end.",
         elevator_Tools: "Sheet Metal|DFMA",
         elevator_Cover: "media/elevator_cabin.png",
-        
         elevator_PopPhotos: [
             "media/elevator_cabin.png",
             "media/elevator_mc.png",
             "media/elevator_cabin.png"
         ],
-
         elevator_PaperTitle: "DFMA-Driven Sheet Metal Design of Elevator Cabins and Chassis for Cost-Effective Manufacturing",
         elevator_Auth: "Hamza Abd ElKadir — GOBA for Elevators, Cairo, Jun – Oct 2025",
         elevator_Abs: "Elevator cabins and chassis were designed in SolidWorks sheet metal with DFMA standards. Full documentation — BOM, cost reports, assembly drawings — was generated. Manufacturing of 100+ part systems was supervised with zero assembly errors.",
@@ -572,13 +714,11 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         die_CardSum: "Sheet metal strip layout and heavy-duty punch block architecture.",
         die_Tools: "SolidWorks|Tooling",
         die_Cover: "media/Progressive_die_Cpage.png",
-        
         die_PopPhotos: [
             "media/Progressive_die_Cpage.png",
             "media/Progressive_die_Cpage.png", 
             "media/Progressive_die_Cpage.png" 
         ],
-
         die_PaperTitle: "Strip Layout Planning and Tool Architecture for Progressive Die Manufacturing",
         die_Auth: "Hamza Abd ElKadir",
         die_Abs: "Designed an optimized sheet metal strip layout to maximize material utilization, calculating exact station progression for punching and blanking operations.",
@@ -610,67 +750,87 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
     };
 </script>
 
-<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
-
-<nav>
-  <div class="nav-in">
-    <div class="nav-logo" onclick="go('pg-home')"><span data-text="initials"></span><b>.</b></div>
-    <ul class="nav-links">
-      <li><a onclick="go('pg-home')" data-pg="pg-home">Home</a></li>
-      <li><a onclick="go('pg-projects')" data-pg="pg-projects">Projects</a></li>
-      <li><a onclick="go('pg-gallery')" data-pg="pg-gallery">Gallery</a></li>
-      <li><a onclick="go('pg-home','contact-strip')" data-pg="pg-home">Contact</a></li>
-    </ul>
-    <a data-href="resumeLink" target="_blank" class="nav-cv" download onclick="gtag('event', 'download_resume');">Resume &darr;</a>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<div class="mobile-menu" id="mobile-menu">
-  <ul>
-    <li><a onclick="mobileGo('pg-home')">Home</a></li>
-    <li><a onclick="mobileGo('pg-projects')">Projects</a></li>
-    <li><a onclick="mobileGo('pg-gallery')">Gallery</a></li>
-    <li><a onclick="mobileGo('pg-home','contact-strip')">Contact</a></li>
-  </ul>
-  <a data-href="resumeLink" target="_blank" class="mobile-menu-cv" onclick="gtag('event', 'download_resume');">Download Resume ↓</a>
-</div>
-
-<div id="dynamic-pages-container"></div>
-
 <script>
-const SKILLS = [
-  "SolidWorks (CSWA)", "Sheet Metal Design", "DFMA", "FEA Analysis",
-  "Kinematics", "Python", "MATLAB", "Manufacturing Supervision",
-  "BOM & Cost Reports", "Blender 3D", "Physics Simulation",
-  "Tolerance Stack-Up", "Assembly Design", "Thermodynamics", "Pneumatics"
-];
-
 document.addEventListener("DOMContentLoaded", () => {
-    // Fill static data
-    if(DATA.email) document.getElementById('link-email').href = "mailto:" + DATA.email;
-    if(DATA.phone) document.getElementById('link-phone').href = "tel:" + DATA.phone.replace(/\s+/g, '');
-    document.querySelectorAll('[data-text]').forEach(el => { el.textContent = DATA[el.getAttribute('data-text')] || ''; });
-    document.querySelectorAll('[data-src]').forEach(el => { el.src = DATA[el.getAttribute('data-src')] || ''; });
-    document.querySelectorAll('[data-href]').forEach(el => { el.href = DATA[el.getAttribute('data-href')] || '#'; });
-
-    // Build skills ticker
-    const skillsScroll = document.getElementById('skills-scroll');
-    if (skillsScroll) {
-        const allSkills = [...SKILLS, ...SKILLS];
-        skillsScroll.innerHTML = allSkills.map(s => `<span class="skill-chip"><span class="dot"></span>${s}</span>`).join('');
-    }
-
+    // Fill structural elements dynamically
+    const cardsContainer = document.getElementById('project-cards-container');
     const pagesContainer = document.getElementById('dynamic-pages-container');
+    const galleryContainer = document.getElementById('auto-gallery-grid');
+    const filterContainer = document.getElementById('auto-filter-bar');
+    
     let counter = 1;
+    let categoriesSet = new Set();
 
     PROJECT_ORDER.forEach(id => {
         if(DATA[id+'_Show'] === 0) return;
-        const numStr = counter < 10 ? '0'+counter : counter;
 
-        /* ── BUILD SCIENTIFIC PAPER DETAIL PAGE ── */
+        const numStr = counter < 10 ? '0'+counter : counter;
+        if(DATA[id+'_CardTags']) { categoriesSet.add(DATA[id+'_CardTags']); }
+
+        const cardImgSrc = DATA[id+'_CardImage'] || DATA[id+'_Cover'] || DATA[id+'_DetailImage'] || DATA[id+'_Fig1'];
+        const toolsHtml = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '').map(t => `<span class="tool">${t.trim()}</span>`).join('');
+        const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
+
+        let baseMedia = '';
+        let vidSrc = DATA[id+'_CardVideo'] || DATA[id+'_Video'];
+        
+        if (vidSrc) {
+            baseMedia = `<video src="${vidSrc}" muted loop playsinline preload="metadata" class="base-vid" style="width:100%;height:100%;object-fit:cover;"></video>`;
+        } else {
+            baseMedia = `<img src="${cardImgSrc}" onerror="this.style.display='none';" alt="" style="width:100%;height:100%;object-fit:cover;"/>`;
+        }
+
+        const popPhotos = DATA[id+'_PopPhotos'] || [];
+        const pop1 = popPhotos[0] || DATA[id+'_Fig1'] || '';
+        const pop2 = popPhotos[1] || DATA[id+'_Fig2'] || '';
+        const pop3 = popPhotos[2] || DATA[id+'_Fig3'] || '';
+        
+        let hoverMedia = '';
+        if(vidSrc) {
+            hoverMedia = `<video src="${vidSrc}" muted loop playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>`;
+        } else {
+            hoverMedia = `<img src="${cardImgSrc}" alt="" style="width:100%;height:100%;object-fit:cover;"/>`;
+        }
+
+        const img1Html = pop1 ? `<img src="${pop1}" onerror="this.style.display='none';"/>` : `<div></div>`;
+        const img2Html = pop2 ? `<img src="${pop2}" onerror="this.style.display='none';"/>` : `<div></div>`;
+        const img3Html = pop3 ? `<img src="${pop3}" onerror="this.style.display='none';"/>` : `<div></div>`;
+
+        // 🌟 INJECT CURRENT PROJECT CARD
+        const cardHTML = `
+            <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" 
+                 onclick="go('pg-det-${id}')" 
+                 onmouseenter="playHoverVideo(this)" 
+                 onmouseleave="pauseHoverVideo(this)">
+              <div class="card-cover img-container">
+                ${baseMedia}
+                <span class="card-num">${numStr}</span>
+              </div>
+              <div class="card-body">
+                <div class="card-tags">${tagsHtml}</div>
+                <div class="card-title">${DATA[id+'_CardTitle'] || ''}</div>
+                <div class="card-sum-grid">${DATA[id+'_CardSum'] || ''}</div>
+                <div class="card-tools">${toolsHtml}</div>
+              </div>
+              <div class="card-hover-panel">
+                <div class="ch-cover">
+                    ${hoverMedia}
+                    <span class="card-num">${numStr}</span>
+                </div>
+                <div class="ch-bottom">
+                  <div class="ch-3imgs">
+                    ${img1Html}
+                    ${img2Html}
+                    ${img3Html}
+                  </div>
+                  <div class="ch-cta">Click to explore full project &rarr;</div>
+                </div>
+              </div>
+            </div>
+        `;
+        cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
+
+        /* ── INJECT CURRENT DETAILED STUDY PAGE ── */
         const contribArray = (DATA[id+'_Contrib'] || '').split('|').filter(t => t.trim() !== '');
         const contribHtml = contribArray.map(c => `<li>${c.trim()}</li>`).join('');
 
@@ -688,17 +848,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if(DATA[id+'_Fig3']) { extraFigsHtml += `<div class="sci-fig"><div class="img-container" style="background:#fff;padding:6px;"><img src="${DATA[id+'_Fig3']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/></div><p class="sci-cap"><b>Fig. 3.</b> ${DATA[id+'_Fig3Cap'] || ''}</p></div>`; }
         if(DATA[id+'_Fig4']) { extraFigsHtml += `<div class="sci-fig"><div class="img-container" style="background:#fff;padding:6px;"><img src="${DATA[id+'_Fig4']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/></div><p class="sci-cap"><b>Fig. 4.</b> ${DATA[id+'_Fig4Cap'] || ''}</p></div>`; }
 
-        // Hero Slider
-        const detImgSrc = DATA[id+'_DetailImage'] || DATA[id+'_Cover'] || DATA[id+'_CardImage'];
-        let baseCover = '';
-        if(DATA[id+'_DetailVideo']) {
-            baseCover = `<video src="${DATA[id+'_DetailVideo']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
-        } else if(DATA[id+'_Video'] && !DATA[id+'_DetailImage']) {
-            baseCover = `<video src="${DATA[id+'_Video']}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video>`;
-        } else {
-            baseCover = `<img src="${detImgSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/>`;
-        }
-
         let slidesHtml = `<div class="cover-slide">${baseCover}</div>`;
         if (DATA[id+'_Gallery']) {
             DATA[id+'_Gallery'].forEach(img => {
@@ -706,7 +855,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Sidebar Gallery
         let sidebarHtml = '';
         if (DATA[id+'_Gallery']) {
             DATA[id+'_Gallery'].forEach(img => {
@@ -727,13 +875,11 @@ document.addEventListener("DOMContentLoaded", () => {
               <h2 style="font-family:'Inter',sans-serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:900;color:#fff;letter-spacing:-0.03em;max-width:700px;line-height:1.2;">${DATA[id+'_CardTitle'] || ''}</h2>
             </div>
           </div>
-          
           <div class="det-layout">
             <div class="sci-paper">
               <h1 class="sci-title">${DATA[id+'_PaperTitle']}</h1>
               <p class="sci-auth">${DATA[id+'_Auth']}</p>
               <div class="sci-abs-wrap"><p class="sci-abs"><b>Abstract</b>—${DATA[id+'_Abs']}</p></div>
-              
               <div class="sci-section">
                 <div class="sci-text">
                   <h2 class="sci-h2">I. Objectives & Methodology</h2>
@@ -749,7 +895,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                 </div>
               </div>
-              
               <div class="sci-section rev">
                 <div class="sci-visual">
                   <div class="sci-fig">
@@ -766,63 +911,62 @@ document.addEventListener("DOMContentLoaded", () => {
                   <p class="sci-p">${DATA[id+'_Outcomes']}</p>
                 </div>
               </div>
-              
               <div style="text-align:center;margin-top:4rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
                 <button class="btn btn-ghost" onclick="go('pg-projects')">&larr; Return to All Projects</button>
                 <button class="btn" onclick="scrollTo_contact()">Get in Touch &rarr;</button>
               </div>
             </div>
-
             <div class="det-sidebar">
                 <span class="eyebrow side-gal-title" style="color:var(--ink3);">Fabrication Gallery</span>
                 ${sidebarHtml}
             </div>
           </div>
-          
           <footer style="background:#f8fafc;border-top:1px solid #e2e8f0;padding-block:2rem;">
-            <div class="wrap"><div class="foot-in">
-              <p class="foot-c" style="font-family:'Inter',sans-serif;">© 2026 ${DATA.name}</p>
-              <ul class="foot-links"><li><span onclick="go('pg-projects')">All Projects</span></li></ul>
-            </div></div>
+            <div class="wrap"><div class="foot-in"><p class="foot-c" style="font-family:'Inter',sans-serif;">© 2026 ${DATA.name}</p><ul class="foot-links"><li><span onclick="go('pg-projects')">All Projects</span></li></ul></div></div>
           </footer>
         </div>
         `;
         pagesContainer.insertAdjacentHTML('beforeend', pageHTML);
 
-        // --- MAIN PAGE GALLERY ---
-        const galleryContainer = document.getElementById('auto-gallery-grid');
+        // --- INJECT GALLERY ITEMS ---
         if(DATA[id+'_Fig1']) { galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item ${counter % 3 === 1 ? 'wide' : ''} img-container" onclick="openLB(this, '.gallery-grid')"><img src="${DATA[id+'_Fig1']}" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig1Cap'] || ''}</span></div></div>`); }
         if(DATA[id+'_Fig2']) { galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item img-container" onclick="openLB(this, '.gallery-grid')"><img src="${DATA[id+'_Fig2']}" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig2Cap'] || ''}</span></div></div>`); }
         counter++;
     });
 
-    // Javascript trick to FORCE the first frame of WebM videos to paint!
-    document.querySelectorAll('video').forEach(v => {
-        v.addEventListener('loadedmetadata', () => {
-            v.currentTime = 0.1; // Safely forces the browser to paint the frame
-        }, {once: true});
+    // Filters and categories set assembly
+    categoriesSet.forEach(cat => { filterContainer.insertAdjacentHTML('beforeend', `<button class="fb-btn" data-f="${cat}">${cat}</button>`); });
+    document.querySelectorAll('.fb-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.fb-btn').forEach(x => x.classList.remove('act'));
+        b.classList.add('act');
+        const f = b.dataset.f;
+        document.querySelectorAll('.proj-card').forEach(c => {
+          c.style.display = (f === 'all' || c.dataset.cat === f) ? 'flex' : 'none';
+        });
+      });
     });
 
-    // 🌟 MOBILE AUTO-PLAY FIX 🌟
+    // Force painting strategy
+    document.querySelectorAll('video').forEach(v => {
+        v.addEventListener('loadedmetadata', () => { v.currentTime = 0.1; }, {once: true});
+    });
+
+    // Mobile observer core engine trigger
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && entry.target.closest('.pg.on')) { 
-                // If it's a mobile screen, play the base cards automatically
                 if (entry.target.classList.contains('base-vid') && window.innerWidth <= 900) {
                     entry.target.play().catch(()=>{});
-                } 
-                // Always play the detail page banner videos
-                else if (entry.target.classList.contains('scroll-video')) {
+                } else if (entry.target.classList.contains('scroll-video')) {
                     entry.target.play().catch(()=>{});
                 }
-            } else { 
-                entry.target.pause(); 
-            }
+            } else { entry.target.pause(); }
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.scroll-video, .base-vid').forEach(video => { videoObserver.observe(video); });
 
-    // Back-to-top visibility
+    // Back to top behavior
     window.addEventListener('scroll', () => {
         const btn = document.getElementById('back-to-top');
         if (window.scrollY > 400) { btn.classList.add('visible'); }
@@ -830,40 +974,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { passive: true });
 });
 
-/* ── CAROUSEL ── */
+/* ── INTERACTIVE CONTROLS ENGINE ── */
 function scrollSlider(id, dir) {
     const slider = document.getElementById('slider-' + id);
     if (!slider) return;
     slider.scrollBy({ left: dir * slider.offsetWidth, behavior: 'smooth' });
 }
 
-/* ── 🌟 HOVER VIDEO PLAY & RESET LOGIC 🌟 ── */
 function playHoverVideo(card) {
-    // Play the base card video (frame-1 -> animation starts)
     const vBase = card.querySelector('.card-cover video');
     if(vBase) vBase.play().catch(()=>{});
-
-    // Play the popup panel video
     const vHover = card.querySelector('.card-hover-panel video');
     if(vHover) vHover.play().catch(()=>{});
 }
 function pauseHoverVideo(card) {
-    // Pause base video and reset to 0.1s (to keep first frame painted)
     const vBase = card.querySelector('.card-cover video');
-    if(vBase) { 
-        vBase.pause(); 
-        vBase.currentTime = 0.1; 
-    }
-
-    // Pause hover video and reset to 0.1s
+    if(vBase) { vBase.pause(); vBase.currentTime = 0.1; }
     const vHover = card.querySelector('.card-hover-panel video');
-    if(vHover) { 
-        vHover.pause(); 
-        vHover.currentTime = 0.1; 
-    }
+    if(vHover) { vHover.pause(); vHover.currentTime = 0.1; }
 }
 
-/* ── MOBILE MENU ── */
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     const burger = document.getElementById('hamburger');
@@ -881,7 +1011,6 @@ function mobileGo(pageId, scrollTarget) {
     setTimeout(() => go(pageId, scrollTarget), 50);
 }
 
-/* ── PAGE ROUTER ── */
 function go(pageId, scrollTarget) {
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
     const pg = document.getElementById(pageId);
@@ -889,7 +1018,6 @@ function go(pageId, scrollTarget) {
     pg.classList.add('on');
     window.scrollTo(0, 0);
 
-    // Stop all hover-panel videos
     document.querySelectorAll('.card-hover-panel video').forEach(v => { v.pause(); v.currentTime = 0.1; });
 
     document.querySelectorAll('.nav-links a').forEach(a => {
@@ -973,7 +1101,6 @@ lightboxEl.addEventListener('touchend', e => {
     if (dx > 40) navLB(-1);
 }, {passive: true});
 
-// Slider swipe logic
 document.addEventListener('touchstart', e => {
     const slider = e.target.closest('.cover-slider');
     if (slider) slider._touchX = e.changedTouches[0].screenX;
