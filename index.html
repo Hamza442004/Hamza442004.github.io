@@ -155,17 +155,17 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 /* 🌟 MASSIVE HOVER TAKEOVER PANEL 🌟 */
 .card-hover-panel {
     position: absolute; 
-    top: -40px; left: -40px; right: -40px; bottom: -40px; /* Expands outwards */
+    top: -30px; left: -30px; right: -30px; bottom: -30px; /* Expands outwards */
     background: #fff; z-index: 100; 
     opacity: 0; pointer-events: none; 
     transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border-radius: 12px; box-shadow: 0 40px 100px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.05);
     display: flex; flex-direction: column; overflow: hidden; 
-    transform: scale(0.85);
+    transform: scale(0.9);
 }
 .card:hover { z-index: 50; } 
 .card:hover .card-hover-panel, .card.is-hovered .card-hover-panel { 
-    opacity: 1; pointer-events: auto; transform: scale(1.08); 
+    opacity: 1; pointer-events: auto; transform: scale(1.05); 
 }
 
 /* Top Half: Takeover Video */
@@ -553,7 +553,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
         grabcad: "grabcad.com/Hamza Abd Al-kadir",
         grabcadLink: "https://grabcad.com/hamza.abd.al.kadir-1",
         resumeLink: "https://drive.google.com/file/d/1tBVU8LNILnr-Cznld7hs2I8pGI609MhE/view?usp=sharing", 
-        heroPic: "media/Hamza_whiteShirt.jpg",
+        heroPic: "media/Hamza_photo.jpg",
         profilePic: "media/prof-pic.jpeg",
         
         // --- PROJECT 1: FLOWMETER ---
@@ -757,9 +757,27 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+    
+    // SAFEGUARD: Ensure core containers exist before running any JavaScript
+    const cardsContainer = document.getElementById('project-cards-container');
+    const pagesContainer = document.getElementById('dynamic-pages-container');
+    const galleryContainer = document.getElementById('auto-gallery-grid');
+    const filterContainer = document.getElementById('auto-filter-bar');
+    
+    if (!cardsContainer || !pagesContainer || !galleryContainer) {
+        console.error("Critical HTML elements are missing. Halting script execution to prevent crash.");
+        return;
+    }
+
     // Fill static data into the DOM
-    if(DATA.email) document.getElementById('link-email').href = "mailto:" + DATA.email;
-    if(DATA.phone) document.getElementById('link-phone').href = "tel:" + DATA.phone.replace(/\s+/g, '');
+    if(DATA.email) {
+        const mailLink = document.getElementById('link-email');
+        if(mailLink) mailLink.href = "mailto:" + DATA.email;
+    }
+    if(DATA.phone) {
+        const phoneLink = document.getElementById('link-phone');
+        if(phoneLink) phoneLink.href = "tel:" + DATA.phone.replace(/\s+/g, '');
+    }
     document.querySelectorAll('[data-text]').forEach(el => { el.textContent = DATA[el.getAttribute('data-text')] || ''; });
     document.querySelectorAll('[data-src]').forEach(el => { el.src = DATA[el.getAttribute('data-src')] || ''; });
     document.querySelectorAll('[data-href]').forEach(el => { el.href = DATA[el.getAttribute('data-href')] || '#'; });
@@ -770,11 +788,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const allSkills = [...SKILLS, ...SKILLS];
         skillsScroll.innerHTML = allSkills.map(s => `<span class="skill-chip"><span class="dot"></span>${s}</span>`).join('');
     }
-
-    const cardsContainer = document.getElementById('project-cards-container');
-    const pagesContainer = document.getElementById('dynamic-pages-container');
-    const galleryContainer = document.getElementById('auto-gallery-grid');
-    const filterContainer = document.getElementById('auto-filter-bar');
     
     let counter = 1;
     let categoriesSet = new Set();
@@ -867,7 +880,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if(DATA[id+'_Fig3']) { extraFigsHtml += `<div class="sci-fig"><div class="img-container" style="background:#fff;padding:6px;"><img src="${DATA[id+'_Fig3']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/></div><p class="sci-cap"><b>Fig. 3.</b> ${DATA[id+'_Fig3Cap'] || ''}</p></div>`; }
         if(DATA[id+'_Fig4']) { extraFigsHtml += `<div class="sci-fig"><div class="img-container" style="background:#fff;padding:6px;"><img src="${DATA[id+'_Fig4']}" alt="" style="position:relative;z-index:2;width:100%;height:auto;" onerror="this.style.display='none';"/></div><p class="sci-cap"><b>Fig. 4.</b> ${DATA[id+'_Fig4Cap'] || ''}</p></div>`; }
 
-        let slidesHtml = `<div class="cover-slide">${baseCover}</div>`;
+        let slidesHtml = '';
+        let baseCoverVid = DATA[id+'_DetailVideo'] || DATA[id+'_Video'];
+        
+        if (baseCoverVid) {
+             slidesHtml += `<div class="cover-slide"><video src="${baseCoverVid}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video></div>`;
+        } else {
+             slidesHtml += `<div class="cover-slide"><img src="${detImgSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/></div>`;
+        }
+
         if (DATA[id+'_Gallery']) {
             DATA[id+'_Gallery'].forEach(img => {
                 slidesHtml += `<div class="cover-slide"><img src="${img}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/></div>`;
@@ -880,6 +901,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 sidebarHtml += `<img src="${img}" class="side-gal-img" onclick="openLB(this, '.det-sidebar')" alt="" onerror="this.style.display='none';"/>`;
             });
         }
+
+        const pageTitleText = DATA[id+'_PaperTitle'] || DATA[id+'_CardTitle'] || '';
+        const pageAuthText = DATA[id+'_Auth'] || '';
+        const pageObjText = DATA[id+'_Obj'] || '';
+        const pageOutcomesText = DATA[id+'_Outcomes'] || '';
 
         const pageHTML = `
         <div id="pg-det-${id}" class="pg">
@@ -896,13 +922,13 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="det-layout">
             <div class="sci-paper">
-              <h1 class="sci-title">${DATA[id+'_PaperTitle']}</h1>
-              <p class="sci-auth">${DATA[id+'_Auth']}</p>
-              <div class="sci-abs-wrap"><p class="sci-abs"><b>Abstract</b>—${DATA[id+'_Abs']}</p></div>
+              <h1 class="sci-title">${pageTitleText}</h1>
+              <p class="sci-auth">${pageAuthText}</p>
+              <div class="sci-abs-wrap"><p class="sci-abs"><b>Abstract</b>—${DATA[id+'_Abs'] || ''}</p></div>
               <div class="sci-section">
                 <div class="sci-text">
                   <h2 class="sci-h2">I. Objectives & Methodology</h2>
-                  <p class="sci-p">${DATA[id+'_Obj']}</p>
+                  <p class="sci-p">${pageObjText}</p>
                   <ul class="sci-list">${contribHtml}</ul>
                 </div>
                 <div class="sci-visual">
@@ -927,7 +953,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="sci-text">
                   <h2 class="sci-h2">II. Technical Specifications & Outcomes</h2>
                   ${specsTableHtml}
-                  <p class="sci-p">${DATA[id+'_Outcomes']}</p>
+                  <p class="sci-p">${pageOutcomesText}</p>
                 </div>
               </div>
               <div style="text-align:center;margin-top:4rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
@@ -954,17 +980,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Filters and categories set assembly
-    categoriesSet.forEach(cat => { filterContainer.insertAdjacentHTML('beforeend', `<button class="fb-btn" data-f="${cat}">${cat}</button>`); });
-    document.querySelectorAll('.fb-btn').forEach(b => {
-      b.addEventListener('click', () => {
-        document.querySelectorAll('.fb-btn').forEach(x => x.classList.remove('act'));
-        b.classList.add('act');
-        const f = b.dataset.f;
-        document.querySelectorAll('.proj-card').forEach(c => {
-          c.style.display = (f === 'all' || c.dataset.cat === f) ? 'flex' : 'none';
+    if (filterContainer) {
+        categoriesSet.forEach(cat => { filterContainer.insertAdjacentHTML('beforeend', `<button class="fb-btn" data-f="${cat}">${cat}</button>`); });
+        document.querySelectorAll('.fb-btn').forEach(b => {
+          b.addEventListener('click', () => {
+            document.querySelectorAll('.fb-btn').forEach(x => x.classList.remove('act'));
+            b.classList.add('act');
+            const f = b.dataset.f;
+            document.querySelectorAll('.proj-card').forEach(c => {
+              c.style.display = (f === 'all' || c.dataset.cat === f) ? 'flex' : 'none';
+            });
+          });
         });
-      });
-    });
+    }
 
     // Force WebM painting to solve the "grey box" issue
     document.querySelectorAll('video').forEach(v => {
@@ -972,22 +1000,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Mobile observer core engine trigger
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && entry.target.closest('.pg.on')) { 
-                if (entry.target.classList.contains('base-vid') && window.innerWidth <= 900) {
-                    entry.target.play().catch(()=>{});
-                } else if (entry.target.classList.contains('scroll-video')) {
-                    entry.target.play().catch(()=>{});
-                }
-            } else { entry.target.pause(); }
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.scroll-video, .base-vid').forEach(video => { videoObserver.observe(video); });
+    if (typeof IntersectionObserver !== 'undefined') {
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.closest('.pg.on')) { 
+                    if (entry.target.classList.contains('base-vid') && window.innerWidth <= 900) {
+                        entry.target.play().catch(()=>{});
+                    } else if (entry.target.classList.contains('scroll-video')) {
+                        entry.target.play().catch(()=>{});
+                    }
+                } else { entry.target.pause(); }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.scroll-video, .base-vid').forEach(video => { videoObserver.observe(video); });
+    }
 
     // Back to top behavior
     window.addEventListener('scroll', () => {
         const btn = document.getElementById('back-to-top');
+        if (!btn) return;
         if (window.scrollY > 400) { btn.classList.add('visible'); }
         else { btn.classList.remove('visible'); }
     }, { passive: true });
@@ -1016,13 +1047,15 @@ function pauseHoverVideo(card) {
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     const burger = document.getElementById('hamburger');
-    const isOpen = menu.classList.toggle('open');
-    burger.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    if(menu) menu.classList.toggle('open');
+    if(burger) burger.classList.toggle('open');
+    document.body.style.overflow = (menu && menu.classList.contains('open')) ? 'hidden' : '';
 }
 function closeMobileMenu() {
-    document.getElementById('mobile-menu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+    if(menu) menu.classList.remove('open');
+    if(burger) burger.classList.remove('open');
     document.body.style.overflow = '';
 }
 function mobileGo(pageId, scrollTarget) {
@@ -1062,8 +1095,13 @@ function go(pageId, scrollTarget) {
 }
 
 function scrollTo_contact() {
-    if (!document.getElementById('pg-home').classList.contains('on')) { go('pg-home', 'contact-strip'); } 
-    else { document.getElementById('contact-strip').scrollIntoView({ behavior: 'smooth' }); }
+    const homePg = document.getElementById('pg-home');
+    if (homePg && !homePg.classList.contains('on')) { 
+        go('pg-home', 'contact-strip'); 
+    } else { 
+        const contactStrip = document.getElementById('contact-strip');
+        if (contactStrip) contactStrip.scrollIntoView({ behavior: 'smooth' }); 
+    }
 }
 
 /* ── LIGHTBOX (WITH ARROWS & SWIPE) ── */
@@ -1086,10 +1124,15 @@ function openLB(el, containerSelector = null) {
     lbCurrentIndex = lbImages.indexOf(img.src);
     if(lbCurrentIndex === -1) lbCurrentIndex = 0;
 
-    document.getElementById('lb-img').src = lbImages[lbCurrentIndex];
-    document.getElementById('lightbox').classList.add('open');
-    document.getElementById('lb-prev').style.display = lbImages.length > 1 ? 'block' : 'none';
-    document.getElementById('lb-next').style.display = lbImages.length > 1 ? 'block' : 'none';
+    const lbImg = document.getElementById('lb-img');
+    const lightbox = document.getElementById('lightbox');
+    const lbPrev = document.getElementById('lb-prev');
+    const lbNext = document.getElementById('lb-next');
+
+    if(lbImg) lbImg.src = lbImages[lbCurrentIndex];
+    if(lightbox) lightbox.classList.add('open');
+    if(lbPrev) lbPrev.style.display = lbImages.length > 1 ? 'block' : 'none';
+    if(lbNext) lbNext.style.display = lbImages.length > 1 ? 'block' : 'none';
     document.body.style.overflow = 'hidden';
 }
 
@@ -1097,14 +1140,24 @@ function navLB(dir) {
     lbCurrentIndex += dir;
     if (lbCurrentIndex < 0) lbCurrentIndex = lbImages.length - 1;
     if (lbCurrentIndex >= lbImages.length) lbCurrentIndex = 0;
-    document.getElementById('lb-img').src = lbImages[lbCurrentIndex];
+    const lbImg = document.getElementById('lb-img');
+    if(lbImg) lbImg.src = lbImages[lbCurrentIndex];
 }
 
-function closeLB() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
-document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLB(); });
+function closeLB() { 
+    const lightbox = document.getElementById('lightbox');
+    if(lightbox) lightbox.classList.remove('open'); 
+    document.body.style.overflow = ''; 
+}
+
+const lightbox = document.getElementById('lightbox');
+if(lightbox) {
+    lightbox.addEventListener('click', function(e) { if (e.target === this) closeLB(); });
+}
 
 document.addEventListener('keydown', function(e) {
-    if (document.getElementById('lightbox').classList.contains('open')) {
+    const lb = document.getElementById('lightbox');
+    if (lb && lb.classList.contains('open')) {
         if (e.key === "Escape") closeLB();
         if (e.key === "ArrowLeft") navLB(-1);
         if (e.key === "ArrowRight") navLB(1);
@@ -1112,13 +1165,14 @@ document.addEventListener('keydown', function(e) {
 });
 
 let touchstartX = 0;
-const lightboxEl = document.getElementById('lightbox');
-lightboxEl.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
-lightboxEl.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].screenX - touchstartX;
-    if (dx < -40) navLB(1);
-    if (dx > 40) navLB(-1);
-}, {passive: true});
+if(lightbox) {
+    lightbox.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
+    lightbox.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].screenX - touchstartX;
+        if (dx < -40) navLB(1);
+        if (dx > 40) navLB(-1);
+    }, {passive: true});
+}
 
 document.addEventListener('touchstart', e => {
     const slider = e.target.closest('.cover-slider');
@@ -1135,10 +1189,16 @@ document.addEventListener('touchend', e => {
 function submitForm(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button[type=submit]');
+    if(!btn) return;
     btn.textContent = 'Sent ✓';
     btn.style.background = '#16a34a';
     btn.style.borderColor = '#16a34a';
-    setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; btn.style.borderColor = ''; e.target.reset(); }, 3000);
+    setTimeout(() => { 
+        btn.textContent = 'Send Message'; 
+        btn.style.background = ''; 
+        btn.style.borderColor = ''; 
+        e.target.reset(); 
+    }, 3000);
 }
 </script>
 </body>
