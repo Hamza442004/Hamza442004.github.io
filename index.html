@@ -155,17 +155,17 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 /* 🌟 MASSIVE HOVER TAKEOVER PANEL 🌟 */
 .card-hover-panel {
     position: absolute; 
-    top: -30px; left: -30px; right: -30px; bottom: -30px; /* Expands outwards */
+    top: -40px; left: -40px; right: -40px; bottom: -40px; /* Expands outwards */
     background: #fff; z-index: 100; 
     opacity: 0; pointer-events: none; 
     transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border-radius: 12px; box-shadow: 0 40px 100px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.05);
     display: flex; flex-direction: column; overflow: hidden; 
-    transform: scale(0.9);
+    transform: scale(0.85);
 }
 .card:hover { z-index: 50; } 
 .card:hover .card-hover-panel, .card.is-hovered .card-hover-panel { 
-    opacity: 1; pointer-events: auto; transform: scale(1.05); 
+    opacity: 1; pointer-events: auto; transform: scale(1.08); 
 }
 
 /* Top Half: Takeover Video */
@@ -176,24 +176,24 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 /* 🌟 BOTTOM HALF: MASSIVE IMAGE FLEX TRICK 🌟 */
 .ch-bottom { 
     height: 55%; 
-    padding: 0.6rem; /* Minimal padding to let images stretch */
+    padding: 0.6rem; 
     display: flex; 
     flex-direction: column; 
     justify-content: space-between;
     background: #fff; 
 }
 .ch-3imgs { 
-    display: flex; /* Flex handles stretching far better than Grid here */
+    display: flex; 
     gap: 0.5rem; 
-    flex: 1; /* Force the container to take ALL vertical space available */
+    flex: 1; /* Forces the container to take ALL vertical space available */
     min-height: 0; 
     margin-bottom: 0.5rem; 
 }
 .ch-3imgs img { 
     flex: 1; /* Forces all 3 images to share horizontal space equally */
-    width: 0; /* Tells flex to ignore native image width and stretch it */
+    width: 0; /* Tells flex to ignore native image width and stretch */
     height: 100%; /* Forces image to stretch top-to-bottom */
-    object-fit: cover; /* Ensures the image doesn't distort while stretching */
+    object-fit: cover; /* Ensures the image doesn't distort */
     border-radius: 4px; 
     border: 1px solid #cbd5e1; 
     box-shadow: 0 3px 8px rgba(0,0,0,0.12); 
