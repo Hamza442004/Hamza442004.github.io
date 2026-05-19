@@ -1,1125 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R45T9C7D1G"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R45T9C7D1G"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-R45T9C7D1G');
 </script>
-  
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Hamza Abd ElKadir | Mechanical Design Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
 <style>
-/* ── RESET ─────────────────────────────── */
+/* ── RESET & BASE ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --red:#c8102e; --redlt:#f7e8ea;
-  --ink:#0f172a; --ink2:#334155; --ink3:#64748b;
-  --paper:#f8fafc; --white:#fff; --rule:#e2e8f0;
-  --fd:'Inter', sans-serif;
-  --fb:'Inter', sans-serif;
-  --mw:1160px; --g:clamp(1.25rem,4vw,3.5rem); --nh:60px;
-  --ease:cubic-bezier(.19,1,.22,1);
-}
-html{font-size:16px; scroll-behavior: smooth;}
-body{font-family:var(--fb);background:var(--paper);color:var(--ink);
-     line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3,h4{font-family:var(--fd);letter-spacing:-.025em;line-height:1.15}
-a{color:inherit;text-decoration:none}
-img, video{display:block;width:100%;height:100%;object-fit:cover}
-
-/* ── UTILS ──────────────────────────────── */
-.wrap{width:100%;max-width:var(--mw);margin-inline:auto;padding-inline:var(--g)}
-.eyebrow{font-family:var(--fd);font-size:.65rem;font-weight:700;
-         letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
-.divrow{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem}
-.divrow::after{content:'';flex:1;height:1px;background:var(--rule)}
-
-/* Base Image Containers */
-.img-container { position: relative; background: #fff; overflow: hidden; border: 1px solid #cbd5e1; padding: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
-.img-container img, .img-container video { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; }
-
-/* ── NAV ────────────────────────────────── */
-nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
-    background:rgba(255,255,255,.98);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--rule); box-shadow: 0 1px 2px rgba(0,0,0,0.03);}
-.nav-in{max-width:var(--mw);margin-inline:auto;padding-inline:var(--g);
-        height:100%;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:800;cursor:pointer; letter-spacing: -0.02em;}
-.nav-logo b{color:var(--red)}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-size:.7rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
-             color:var(--ink3);position:relative;transition:color .15s;cursor:pointer}
-.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;
-                    background:var(--red);transform:scaleX(0);transform-origin:left;
-                    transition:transform .2s var(--ease)}
-.nav-links a:hover,.nav-links a.act{color:var(--ink)}
-.nav-links a.act::after,.nav-links a:hover::after{transform:scaleX(1)}
-.nav-cv{font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.05em;
-        text-transform:uppercase;padding:.4rem 1.2rem; border-radius: 4px;
-        border:1.5px solid var(--ink);color:var(--ink);transition:background .18s,color .18s; cursor: pointer;}
-.nav-cv:hover{background:var(--ink);color:var(--white)}
-
-/* ── HAMBURGER ── */
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; z-index: 1001; }
-.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s var(--ease); }
-.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity: 0; }
-.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-.mobile-menu { display: none; position: fixed; top: var(--nh); left: 0; right: 0; background: rgba(255,255,255,0.99); border-bottom: 1px solid var(--rule); box-shadow: 0 8px 30px rgba(0,0,0,0.08); z-index: 998; padding: 1.5rem var(--g) 2rem; transform: translateY(-10px); opacity: 0; transition: transform 0.25s var(--ease), opacity 0.2s; pointer-events: none; }
-.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-.mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
-.mobile-menu ul li a { display: block; padding: 1rem 0; font-size: 1.1rem; font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--rule); cursor: pointer; letter-spacing: -0.01em; }
-.mobile-menu ul li:last-child a { border-bottom: none; }
-.mobile-menu-cv { margin-top: 1.5rem; display: block; text-align: center; font-family: var(--fd); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: .9rem; border-radius: 4px; border: 1.5px solid var(--ink); color: var(--ink); background: var(--white); transition: background .18s, color .18s; }
-.mobile-menu-cv:hover { background: var(--ink); color: var(--white); }
-
-/* ── BUTTONS ───────────────────────────── */
-.pg{display:none; animation: fadeIn 0.4s ease;}
+:root{--red:#c8102e;--ink:#0f172a;--ink2:#334155;--ink3:#64748b;--paper:#f8fafc;--white:#fff;--rule:#e2e8f0;--nh:60px;}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;overflow-x:hidden}
+.pg{display:none;animation:fadeIn 0.4s ease;}
 .pg.on{display:block}
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.btn{font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em; text-transform:uppercase;padding:.8rem 1.6rem;border:1.5px solid var(--ink); background:var(--ink);color:var(--white);cursor:pointer;display:inline-block; transition:background .18s,border-color .18s,transform .12s; border-radius: 4px;}
-.btn:hover{background:var(--red);border-color:var(--red);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--ink)}
-.btn-ghost:hover{background:var(--ink);color:var(--white)}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.wrap{width:100%;max-width:1160px;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3.5rem)}
+img,video{display:block;width:100%;height:100%;object-fit:cover}
 
-/* ── HOME & CONTACT ─────────────────────────── */
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:999;height:var(--nh);background:rgba(255,255,255,.98);border-bottom:1px solid var(--rule);display:flex;align-items:center;}
+.nav-in{width:100%;max-width:1160px;margin:0 auto;padding-inline:clamp(1.25rem,4vw,3.5rem);display:flex;justify-content:space-between;align-items:center;}
+.nav-logo{font-weight:800;cursor:pointer;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.7rem;font-weight:600;text-transform:uppercase;color:var(--ink3);cursor:pointer;}
+.nav-cv{font-size:.65rem;font-weight:700;text-transform:uppercase;padding:.4rem 1.2rem;border:1.5px solid var(--ink);border-radius:4px;cursor:pointer;}
+
+/* ── HOME ── */
 #pg-home{padding-top:calc(var(--nh) + 5rem);padding-bottom:5rem}
-.hero-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:6rem}
-.hero-ey{display:flex;align-items:center;gap:.65rem;margin-bottom:1.2rem}
-.hero-ey-line{width:2rem;height:2px;background:var(--red);flex-shrink:0}
-.hero-h1{font-size:clamp(2.8rem,5vw,5rem);font-weight:800;line-height:1.05;margin-bottom:.5rem; letter-spacing: -0.03em;}
-.hero-h1 em{font-style:normal;color:var(--red)}
-.hero-uni{font-family:var(--fd);font-size:.85rem;font-weight:600;color:var(--ink3);letter-spacing:.02em;margin-bottom:1.5rem}
-.hero-bio{font-size:1.05rem;font-weight:400;color:var(--ink2);line-height:1.8;margin-bottom:2.5rem}
-.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap}
-.hero-photo{aspect-ratio:4/5; border-radius: 6px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.15); overflow: hidden; position: relative;}
+.hero-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.hero-h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1rem;}
+.hero-photo{aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:#e2e8f0;}
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule);border-radius:8px;margin-block:5rem;background:var(--white);}
+.stat-item{padding:2rem 1rem;text-align:center;border-right:1px solid var(--rule);}
+.stat-num{font-size:2.5rem;font-weight:900;color:var(--red);}
 
-/* SKILLS STRIP */
-.skills-strip { padding: 3rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 5rem; overflow: hidden; }
-.skills-scroll { display: flex; gap: 2rem; animation: scrollSkills 30s linear infinite; width: max-content; }
-.skills-scroll:hover { animation-play-state: paused; }
-@keyframes scrollSkills { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.skill-chip { display: flex; align-items: center; gap: .5rem; padding: .5rem 1.2rem; border: 1px solid var(--rule); border-radius: 100px; background: var(--white); font-family: var(--fd); font-size: .7rem; font-weight: 600; letter-spacing: .04em; color: var(--ink2); white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
-.skill-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+/* ── PROJECT CARDS ── */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);border-left:1px solid var(--rule);}
+.card{background:var(--white);cursor:pointer;position:relative;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.card-cover{aspect-ratio:3/2;overflow:hidden;background:var(--rule);}
+.card-body{padding:1.5rem;}
+.card-hover-panel{position:absolute;top:-40px;left:-40px;right:-40px;bottom:-40px;background:#fff;z-index:100;opacity:0;pointer-events:none;transition:all 0.25s;transform:scale(0.85);display:flex;flex-direction:column;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,0.2);}
+.card:hover .card-hover-panel{opacity:1;pointer-events:auto;transform:scale(1.08);}
+.ch-bottom{flex:1;padding:0.8rem;display:flex;gap:0.5rem;}
+.ch-bottom img{flex:1;height:100%;object-fit:cover;border-radius:4px;}
 
-/* STATS BAR */
-.stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin-bottom: 5rem; background: var(--white); box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
-.stat-item { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid var(--rule); transition: background 0.2s; }
-.stat-item:last-child { border-right: none; }
-.stat-item:hover { background: var(--redlt); }
-.stat-num { font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 900; color: var(--red); line-height: 1; letter-spacing: -0.03em; margin-bottom: .4rem; }
-.stat-label { font-size: .7rem; font-weight: 600; color: var(--ink3); letter-spacing: .05em; text-transform: uppercase; }
-
-.about-strip{padding-top:5rem;border-top:1px solid var(--rule)}
-.about-grid{display:grid;grid-template-columns:240px 1fr;gap:4rem;align-items:start;margin-top:2rem}
-.about-portrait{aspect-ratio:1; border-radius: 50%; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); overflow: hidden; position: relative;}
-.about-h{font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:800;margin-bottom:1.2rem; letter-spacing: -0.02em;}
-.about-p{font-size:1rem;font-weight:400;color:var(--ink2);line-height:1.8;margin-bottom:1rem}
-.about-p strong{font-weight:600;color:var(--ink)}
-
-.featured-badge { display: inline-flex; align-items: center; gap: .5rem; background: var(--ink); color: var(--white); font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .3rem .8rem; border-radius: 3px; margin-bottom: 2.5rem; }
-.featured-badge::before { content: '★'; color: #fbbf24; }
-
-.contact-strip{padding-top:5rem;border-top:1px solid var(--rule);margin-top:5rem}
-.cform-wrap{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem}
-.clinks{list-style:none;display:flex;flex-direction:column;gap:1.2rem}
-.clinks a{display:flex;align-items:center;gap:.8rem;font-size:.95rem;font-weight:500;color:var(--ink2);transition:color .15s}
-.clinks a:hover{color:var(--red)}
-.ci{width:18px;height:18px;color:var(--red);flex-shrink:0}
-.cform{display:flex;flex-direction:column;gap:1.2rem}
-.fg{display:flex;flex-direction:column;gap:.4rem}
-.fl{font-family:var(--fd);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
-.fi,.fta{font-family:var(--fb);font-size:.95rem;color:var(--ink);background:var(--white); border:1px solid var(--rule);padding:.8rem 1rem;outline:none; border-radius: 4px; transition:border-color .15s;width:100%;resize:vertical}
-.fi:focus,.fta:focus{border-color:var(--ink)}
-.fta{min-height:120px}
-
-/* ── CARDS (PROJECTS GRID) ──────────────── */
-#pg-projects{padding-top:calc(var(--nh)+4rem);padding-bottom:5rem}
-.filter-bar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:3rem}
-.fb-btn{font-family:var(--fd);font-size:.65rem;font-weight:600;letter-spacing:.05em; text-transform:uppercase;padding:.5rem 1.2rem;border:1px solid var(--rule); border-radius: 4px; background:var(--white);color:var(--ink3);cursor:pointer;transition:all .15s}
-.fb-btn:hover{border-color:var(--ink3);color:var(--ink2)}
-.fb-btn.act{border-color:var(--red);background:var(--red);color:var(--white)}
-
-.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--rule); border-left:1px solid var(--rule); }
-.card{ background:var(--white); display:flex; flex-direction:column; cursor:pointer; position:relative; border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); transition: transform 0.3s var(--ease), z-index 0.3s; }
-.card-cover{ overflow:hidden; aspect-ratio:3/2; position:relative; background:var(--rule); z-index: 1; border-bottom: 1px solid var(--rule); }
-.card-cover video::-webkit-media-controls { display: none !important; }
-
-/* 🌟 MASSIVE HOVER TAKEOVER PANEL 🌟 */
-.card-hover-panel {
-    position: absolute; 
-    top: -40px; left: -40px; right: -40px; bottom: -40px; /* 40px Expansions */
-    background: #fff; z-index: 100; 
-    opacity: 0; pointer-events: none; 
-    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border-radius: 12px; box-shadow: 0 40px 100px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.05);
-    display: flex; flex-direction: column; overflow: hidden; 
-    transform: scale(0.85);
-}
-.card:hover { z-index: 50; } 
-.card:hover .card-hover-panel, .card.is-hovered .card-hover-panel { 
-    opacity: 1; pointer-events: auto; transform: scale(1.08); /* Massive Scale up */
-}
-
-/* Top Half: Takeover Video */
-.ch-cover { height: 45%; width: 100%; position: relative; background: #111; border-bottom: 1px solid var(--rule); }
-.ch-cover video, .ch-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;}
-.ch-cover video::-webkit-media-controls { display: none !important; }
-
-/* 🌟 BOTTOM HALF: MASSIVE IMAGE FLEX TRICK 🌟 */
-.ch-bottom { 
-    height: 55%; 
-    padding: 0.6rem; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between;
-    background: #fff; 
-}
-.ch-3imgs { 
-    display: flex; 
-    gap: 0.5rem; 
-    flex: 1; /* Forces the container to stretch perfectly */
-    min-height: 0; 
-    margin-bottom: 0.5rem; 
-}
-.ch-3imgs img { 
-    flex: 1; /* Forces all 3 to share horizontal space equally */
-    width: 0; 
-    height: 100%; /* Stretches from top to bottom */
-    object-fit: cover; 
-    border-radius: 4px; 
-    border: 1px solid #cbd5e1; 
-    box-shadow: 0 3px 8px rgba(0,0,0,0.12); 
-}
-.ch-cta { 
-    flex-shrink: 0; 
-    text-align: center; 
-    font-family: var(--fd); 
-    font-size: 0.8rem; 
-    font-weight: 800; 
-    color: var(--red); 
-    text-transform: uppercase; 
-    letter-spacing: 0.05em; 
-}
-
-/* Inner Card Base Info */
-.card-num{position:absolute;top:.8rem;left:1rem;font-family:var(--fd);font-size:.6rem;font-weight:800;letter-spacing:.05em;color:rgba(255,255,255,.9);z-index:3; text-shadow: 0 2px 4px rgba(0,0,0,0.6);}
-.card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column; position: relative;}
-.card-tags{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
-.tag{font-family:var(--fd);font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .6rem;background:var(--redlt);color:var(--red); border-radius: 3px;}
-.award{font-family:var(--fd);font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .6rem;background:#fef3c7;color:#b45309;border:1px solid #fde68a; border-radius: 3px;}
-.card-title{font-family:var(--fd);font-size:1.05rem;font-weight:800;line-height:1.2;margin-bottom:.5rem; letter-spacing: -0.01em;}
-.card-sum-grid{font-size:.85rem;color:var(--ink2);line-height:1.6;margin-bottom:1.2rem;flex:1}
-.card-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:0}
-.tool{font-family:var(--fd);font-size:.55rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--rule);color:var(--ink3); border-radius: 3px;}
-
-@media (hover: none) {
-  .card:active { opacity: 0.85; }
-  .card-hover-panel { display: none !important; }
-}
-
-/* ── SCIENTIFIC PAPER DETAIL PAGES ────── */
-.det-cover{position:relative;height:70vh;min-height:400px;overflow:hidden;background:#111;}
-.cover-slider { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; position: relative; z-index: 5;}
-.cover-slider::-webkit-scrollbar { display: none; }
-.cover-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; position: relative; }
-.cover-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(15,23,42,0.45); color: #fff; font-size: 2rem; padding: 0.6rem 1.1rem; cursor: pointer; z-index: 25; border-radius: 6px; transition: background 0.2s; user-select: none; border: none;}
-.cover-arrow:hover { background: rgba(15,23,42,0.85); }
-.cover-arrow.left { left: 1.5rem; }
-.cover-arrow.right { right: 1.5rem; }
-
-.cov-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,0.95) 0%,rgba(15,23,42,0.1) 60%,transparent 100%); z-index: 10; pointer-events: none;}
-.cov-txt{position:absolute;bottom:0;left:0;right:0;padding:3rem var(--g);max-width:1450px;margin-inline:auto; z-index: 20;}
-.cov-back{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.75);cursor:pointer;margin-bottom:1.5rem;transition:color .15s; border: 1px solid rgba(255,255,255,0.2); padding: .4rem 1rem; border-radius: 4px; backdrop-filter: blur(4px);}
-.cov-back:hover{color:var(--white); background: rgba(255,255,255,0.1);}
-
-.det-layout { max-width: 1450px; margin: -60px auto 4rem; position: relative; z-index: 30; display: flex; align-items: flex-start; gap: 4rem; padding-inline: var(--g); }
-.sci-paper { flex: 1; min-width: 0; background: #ffffff; padding: 5rem 4.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.1); font-family: 'Lora', serif; color: #000; }
-
-.det-sidebar { width: 340px; flex-shrink: 0; position: sticky; top: calc(var(--nh) + 20px); max-height: calc(100vh - var(--nh) - 40px); overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; align-content: start; background: #fff; padding: 1.2rem; border: 1px solid var(--rule); box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-radius: 6px; }
-.det-sidebar::-webkit-scrollbar { width: 6px; }
-.det-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-.side-gal-title { grid-column: 1 / -1; margin-bottom: 0.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; text-align: center; }
-.side-gal-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid var(--rule); transition: transform 0.2s, border-color 0.2s; z-index: 5; position: relative;}
-.side-gal-img:hover { transform: scale(1.05); border-color: var(--red); z-index: 5; position: relative;}
-
-/* 🌟 DEDICATED FIX FOR THE SCIENTIFIC PAPER PHOTOS 🌟 */
-.sci-fig-inner {
-    background: #fff;
-    padding: 6px;
-    border: 1px solid #cbd5e1;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
-    border-radius: 6px;
-}
-.sci-fig-inner img {
-    display: block;
-    width: 100%;
-    height: auto; /* Restores the natural height of the image */
-    border-radius: 2px;
-}
-
-.sci-title { font-family: 'Inter', sans-serif; font-size: 2.2rem; font-weight: 800; text-align: center; line-height: 1.3; margin-bottom: 1rem; letter-spacing: -0.02em; max-width: 900px; margin-inline: auto; }
-.sci-auth { text-align: center; font-size: 1rem; font-style: italic; margin-bottom: 3rem; color: #444; }
-.sci-abs-wrap { display: flex; justify-content: center; margin-bottom: 5rem; border-bottom: 2px solid #000; padding-bottom: 3rem; }
-.sci-abs { max-width: 800px; font-size: 1.05rem; font-weight: 500; text-align: justify; line-height: 1.8; }
-.sci-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 6rem; }
-.sci-section.rev { grid-template-columns: 7fr 4fr; }
-.sci-text { text-align: justify; font-size: 1.05rem; line-height: 1.8; }
-.sci-h2 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin: 0 0 1.5rem; color: #000; letter-spacing: 0.05em; border-bottom: 1px solid #cbd5e1; padding-bottom: 0.4rem; }
-.sci-p { margin-bottom: 1.2rem; }
-.sci-list { padding-left: 1.2rem; margin-bottom: 1.5rem; list-style-type: disc; }
-.sci-list li { margin-bottom: 0.6rem; padding-left: 0.3rem;}
-.sci-table { width: 100%; border-top: 2px solid #000; border-bottom: 2px solid #000; border-collapse: collapse; margin-bottom: 2rem; font-family: 'Inter', sans-serif; font-size: 0.85rem; text-align: left; }
-.sci-table th, .sci-table td { padding: 0.8rem 0.5rem; border-bottom: 1px solid #e2e8f0; }
-.sci-table tr:last-child td { border-bottom: none; }
-.sci-table dt { font-weight: 700; color: #000; }
-.sci-visual { display: flex; flex-direction: column; gap: 3rem; }
-.sci-fig { width: 100%; }
-.sci-cap { font-family: 'Inter', sans-serif; font-size: 0.85rem; text-align: center; margin-top: 1rem; color: #475569; }
-
-/* ── MAIN GALLERY GRID ───────────────────────────── */
-#pg-gallery{padding-top:calc(var(--nh)+4rem);padding-bottom:5rem}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
-.gal-item{aspect-ratio:4/3;overflow:hidden;cursor:pointer;position:relative;background:var(--rule); border-radius: 6px;}
-.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease); position: relative; z-index: 2;}
-.gal-item:hover img{transform:scale(1.05)}
-.gal-item.wide{grid-column:span 2}
-.gal-cap{position:absolute;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:flex-end;padding:1.5rem;opacity:0;transition:opacity .25s; z-index: 5;}
-.gal-item:hover .gal-cap{opacity:1}
-.gal-cap span{font-family:var(--fd);font-size:.8rem;font-weight:600;letter-spacing:.05em;color:#fff}
-
-/* ── LIGHTBOX CAROUSEL ── */
-#lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.98);align-items:center;justify-content:center}
-#lightbox.open{display:flex}
-#lightbox img{max-width:85vw;max-height:85vh;object-fit:contain;display:block; user-select: none;}
-#lb-close{position:absolute;top:2rem;right:3rem;font-family:var(--fd);font-size:2rem;color:#fff;cursor:pointer;opacity:.6;transition:opacity .15s; z-index: 10;}
-#lb-close:hover{opacity:1}
-.lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 3rem; color: #fff; cursor: pointer; user-select: none; opacity: 0.5; padding: 1rem; z-index: 10; transition: opacity 0.2s; }
-.lb-arrow:hover { opacity: 1; }
-#lb-prev { left: 2rem; }
-#lb-next { right: 2rem; }
-
-/* ── FOOTER & EXTRAS ── */
-footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--white);}
-.foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.foot-c{font-size:.85rem;color:var(--ink3); font-weight: 500;}
-.foot-links { list-style: none; display: flex; gap: 1.5rem; }
-.foot-links li span { font-size: .8rem; font-weight: 600; color: var(--ink3); cursor: pointer; transition: color .15s; text-transform: uppercase; letter-spacing: .04em; font-family: var(--fd); }
-.foot-links li span:hover { color: var(--red); }
-
-#back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; background: var(--ink); color: #fff; border: none; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s, background 0.2s; pointer-events: none; }
-#back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-#back-to-top:hover { background: var(--red); }
-
-/* ════════ RESPONSIVE RULES ════════ */
-@media(max-width:1024px){
-  .sci-section, .sci-section.rev { grid-template-columns: 1fr; gap: 2rem; }
-  .sci-section.rev .sci-text { order: 1; }
-  .sci-section.rev .sci-visual { order: 2; }
-  .det-layout { flex-direction: column; gap: 2rem; }
-  .det-sidebar { width: 100%; position: static; max-height: none; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
-  .stats-bar .stat-item:nth-child(2) { border-right: none; }
-  .stats-bar .stat-item:nth-child(3) { border-top: 1px solid var(--rule); }
-}
+/* ── DETAIL PAGE ── */
+.det-layout{display:flex;gap:4rem;padding:5rem var(--g);}
+.sci-paper{flex:1;font-family:'Lora',serif;}
+.sci-fig-inner{background:#fff;padding:6px;border:1px solid #cbd5e1;border-radius:6px;margin-bottom:1rem;}
+.sci-fig-inner img{width:100%;height:auto;display:block;}
+.det-sidebar{width:300px;position:sticky;top:80px;height:fit-content;}
 
 @media(max-width:900px){
-  .hero-split{grid-template-columns:1fr; gap: 2rem;}
-  .hero-photo{max-width:380px;aspect-ratio:4/3;order:-1;}
-  .about-grid{grid-template-columns:1fr;}
-  .about-portrait{max-width: 250px;}
-  .cards, .gallery-grid{grid-template-columns:repeat(2,1fr)}
-  .cform-wrap{grid-template-columns:1fr}
-  .nav-links{display:none}
-  .nav-hamburger { display: flex; }
-  .nav-cv { display: none; } 
-  .sci-paper { padding: 3rem 2rem; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
-  .card-hover-panel { display: none !important; }
-}
-
-@media(max-width:768px){
-  .cover-arrow { font-size: 1.4rem; padding: 0.4rem 0.8rem; }
-  .cover-arrow.left { left: 0.5rem; }
-  .cover-arrow.right { right: 0.5rem; }
-  .det-cover { height: 50vh; }
-  #back-to-top { bottom: 1.2rem; right: 1.2rem; }
-}
-
-@media(max-width:560px){
-  .cards{grid-template-columns:1fr}
-  .gallery-grid{grid-template-columns:1fr}
-  .gal-item.wide{grid-column:span 1}
-  .sci-paper { padding: 2rem 1.2rem; }
-  .sci-title { font-size: 1.5rem; }
-  .stats-bar { grid-template-columns: 1fr 1fr; }
-  .hero-h1 { font-size: clamp(2rem, 10vw, 3rem); }
-  .cov-txt { padding: 2rem var(--g); }
+  .hero-split,.det-layout{grid-template-columns:1fr;display:block;}
+  .cards{grid-template-columns:1fr 1fr;}
+  .card-hover-panel{display:none;}
 }
 </style>
 </head>
 <body>
 
-<div id="lightbox">
-  <span id="lb-close" onclick="closeLB()">✕</span>
-  <span id="lb-prev" class="lb-arrow" onclick="navLB(-1)">&#10094;</span>
-  <span id="lb-next" class="lb-arrow" onclick="navLB(1)">&#10095;</span>
-  <img id="lb-img" src="" alt=""/>
-</div>
-
-<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
-
 <nav>
   <div class="nav-in">
-    <div class="nav-logo" onclick="go('pg-home')"><span data-text="initials"></span><b>.</b></div>
+    <div class="nav-logo" onclick="go('pg-home')">HM<b>.</b></div>
     <ul class="nav-links">
-      <li><a onclick="go('pg-home')" data-pg="pg-home">Home</a></li>
-      <li><a onclick="go('pg-projects')" data-pg="pg-projects">Projects</a></li>
-      <li><a onclick="go('pg-gallery')" data-pg="pg-gallery">Gallery</a></li>
-      <li><a onclick="go('pg-home','contact-strip')" data-pg="pg-home">Contact</a></li>
+      <li><a onclick="go('pg-home')">Home</a></li>
+      <li><a onclick="go('pg-projects')">Projects</a></li>
     </ul>
-    <a data-href="resumeLink" target="_blank" class="nav-cv" download onclick="gtag('event', 'download_resume');">Resume &darr;</a>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
-      <span></span><span></span><span></span>
-    </button>
+    <a data-href="resumeLink" target="_blank" class="nav-cv">Resume ↓</a>
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobile-menu">
-  <ul>
-    <li><a onclick="mobileGo('pg-home')">Home</a></li>
-    <li><a onclick="mobileGo('pg-projects')">Projects</a></li>
-    <li><a onclick="mobileGo('pg-gallery')">Gallery</a></li>
-    <li><a onclick="mobileGo('pg-home','contact-strip')">Contact</a></li>
-  </ul>
-  <a data-href="resumeLink" target="_blank" class="mobile-menu-cv" onclick="gtag('event', 'download_resume');">Download Resume ↓</a>
-</div>
-
 <div id="pg-home" class="pg on">
-<div style="padding-top:calc(var(--nh)+5rem);padding-bottom:5rem">
-<div class="wrap">
-  <div class="hero-split">
-    <div>
-      <div class="featured-badge">Available for Internships & Graduate Roles</div>
-      <div class="hero-ey"><div class="hero-ey-line"></div><span class="eyebrow" data-text="title"></span></div>
-      <h1 class="hero-h1" data-text="name"></h1>
-      <p class="hero-uni" data-text="uni"></p>
-      <p class="hero-bio" data-text="bio"></p>
-      <div class="hero-btns">
-        <button class="btn" onclick="go('pg-projects')">View Projects</button>
-        <button class="btn btn-ghost" onclick="scrollTo_contact()">Get in Touch</button>
-      </div>
-    </div>
-    <div class="img-container hero-photo">
-      <img data-src="heroPic" alt="Hamza Abd ElKadir" onerror="this.style.display='none';"/>
-    </div>
-  </div>
-
-  <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-num">2</div>
-      <div class="stat-label">Competition 1st Places</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">9</div>
-      <div class="stat-label">Engineering Projects</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">100+</div>
-      <div class="stat-label">Parts Supervised</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">6.6×</div>
-      <div class="stat-label">Automation Speed Gain</div>
-    </div>
-  </div>
-
-  <div class="skills-strip">
-    <div class="skills-scroll" id="skills-scroll"></div>
-  </div>
-
-  <div class="about-strip">
-    <div class="divrow"><span class="eyebrow">About Me</span></div>
-    <div class="about-grid">
-      <div class="img-container about-portrait">
-        <img data-src="profilePic" alt="Portrait" onerror="this.style.display='none';"/>
-      </div>
+  <div class="wrap" style="padding-top:100px;">
+    <div class="hero-split">
       <div>
-        <h2 class="about-h">Turning design intent into manufacturable reality.</h2>
-        <p class="about-p" data-text="about1"></p>
-        <p class="about-p" data-text="about2"></p>
-        <div style="margin-top:1.5rem; display:flex; gap:.8rem; flex-wrap:wrap;">
-          <button class="btn" onclick="go('pg-projects')">See My Work</button>
-          <a data-href="resumeLink" target="_blank" class="btn btn-ghost" onclick="gtag('event', 'download_resume');">Download CV</a>
-        </div>
+        <h1 class="hero-h1">Mechanical Design Engineer</h1>
+        <p>Building high-precision systems for industrial and competition environments.</p>
+        <button class="btn" style="margin-top:2rem;" onclick="go('pg-projects')">View Projects</button>
+      </div>
+      <div class="img-container hero-photo">
+        <img data-src="heroPic" alt="Profile" onerror="this.style.display='none';"/>
       </div>
     </div>
   </div>
-
-  <div class="contact-strip" id="contact-strip">
-    <div class="divrow"><span class="eyebrow">Contact</span></div>
-    <h2 style="font-size:clamp(2rem,3vw,2.5rem);font-weight:800;margin-bottom:1rem; letter-spacing:-0.02em;">Let's work together.</h2>
-    <p style="font-size:1.05rem;font-weight:400;color:var(--ink2);line-height:1.8;max-width:52ch">I am looking for internship and graduate opportunities in mechanical design, product development, and manufacturing engineering.</p>
-    
-    <div class="cform-wrap">
-      <ul class="clinks">
-        <li><a data-href="email" id="link-email">
-            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-            <span data-text="email"></span>
-          </a></li>
-        <li><a data-href="phone" id="link-phone">
-            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12 19.79 19.79 0 0 1 1 3.22 2 2 0 0 1 2.98 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 5.5 5.5l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span data-text="phone"></span>
-          </a></li>
-        <li><a data-href="linkedinLink" target="_blank" rel="noopener">
-            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H9V9h4v2a6 6 0 0 1 3-3zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn — <span data-text="linkedin"></span>
-          </a></li>
-        <li><a data-href="grabcadLink" target="_blank" rel="noopener">
-            <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-            GrabCAD — <span data-text="grabcad"></span>
-          </a></li>
-      </ul>
-      <form class="cform" onsubmit="submitForm(event)">
-        <div class="fg"><label class="fl">Full Name</label><input class="fi" type="text" placeholder="Jane Smith" required/></div>
-        <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="jane@company.com" required/></div>
-        <div class="fg"><label class="fl">Message</label><textarea class="fta" placeholder="Tell me about your project…" required></textarea></div>
-        <button type="submit" class="btn" style="align-self:flex-start; margin-top: 0.5rem;">Send Message</button>
-      </form>
-    </div>
-  </div>
-</div>
-</div>
-<footer><div class="wrap"><div class="foot-in"><p class="foot-c">© 2026 <span data-text="name"></span></p><ul class="foot-links"><li><span onclick="go('pg-projects')">Projects</span></li><li><span onclick="go('pg-gallery')">Gallery</span></li></ul></div></div></footer>
 </div>
 
 <div id="pg-projects" class="pg">
-<div style="padding-top:calc(var(--nh)+4rem);padding-bottom:6rem">
-<div class="wrap">
-  <div class="divrow"><span class="eyebrow">Selected Work</span></div>
-  <h1 style="font-size:clamp(2rem,4vw,3.5rem);font-weight:800;margin-bottom:.5rem; letter-spacing: -0.03em;">Engineering Projects</h1>
-  <p style="font-size:1rem;color:var(--ink3);margin-bottom:2rem;">Hover any card to preview · Click to read the full case study</p>
-  <div class="filter-bar" id="auto-filter-bar"><button class="fb act" data-f="all">All</button></div>
-  <div class="cards" id="project-cards-container"></div>
-</div>
-</div>
-<footer><div class="wrap"><div class="foot-in"><p class="foot-c">© 2026 <span data-text="name"></span></p><ul class="foot-links"><li><span onclick="go('pg-home')">Home</span></li><li><span onclick="go('pg-gallery')">Gallery</span></li></ul></div></div></footer>
+  <div class="wrap" style="padding-top:100px;">
+    <div class="cards" id="project-cards-container"></div>
+  </div>
 </div>
 
 <div id="dynamic-pages-container"></div>
 
-<div id="pg-gallery" class="pg">
-<div style="padding-top:calc(var(--nh)+4rem);padding-bottom:6rem">
-<div class="wrap">
-  <div class="divrow"><span class="eyebrow">Gallery</span></div>
-  <h1 style="font-size:clamp(2rem,4vw,3.5rem);font-weight:800;margin-bottom:1rem; letter-spacing: -0.03em;">Project Gallery</h1>
-  <p style="font-size:1rem;color:var(--ink3);margin-bottom:3rem">Click any image to enlarge · Use arrow keys to navigate</p>
-  <div class="gallery-grid" id="auto-gallery-grid"></div>
-</div>
-</div>
-<footer><div class="wrap"><div class="foot-in"><p class="foot-c">© 2026 <span data-text="name"></span></p><ul class="foot-links"><li><span onclick="go('pg-home')">Home</span></li><li><span onclick="go('pg-projects')">Projects</span></li></ul></div></div></footer>
-</div>
-
 <script>
-    const PROJECT_ORDER = ['flowmeter', 'conveyor', 'stirling', 'rover', 'thermo', 'elevator', 'canon', 'die', 'lantern'];
+const PROJECT_ORDER = ['flowmeter', 'conveyor', 'stirling', 'rover', 'elevator', 'die'];
+const DATA = {
+    heroPic: "media/Hamza_photo.jpg",
+    resumeLink: "https://drive.google.com/file/d/1tBVU8LNILnr-Cznld7hs2I8pGI609MhE/view?usp=sharing",
+    flowmeter: { title: "Smart Turbine Flowmeter", cover: "media/flowmeter_fig1.jpeg", summary: "Most accurate of 35 teams.", tools: "SolidWorks|Python", abs: "A 6-inch turbine flowmeter.", obj: "Design for conventional cutting.", contrib: "Blade geometry design.", specs: "Accuracy:±16%|Pipe:6 inch", outcomes: "1st Place winner.", figs: ["media/flowmeter_fig1.jpeg", "media/turbine_manu.png", "media/flowmeter_fig2.jpeg"] },
+    conveyor: { title: "Tea Bag Automation", cover: "media/tawlefa_Cpage.jpeg", summary: "6.6x cycle speed improvement.", tools: "SolidWorks|Sim", abs: "High speed packaging system.", obj: "Automate tea bag insertion.", contrib: "Simulation validation.", specs: "Speed:6.6x", outcomes: "1st Place IHUB.", figs: ["media/tawlefa_fig1.png", "media/tawlefa_Cpage.jpeg", "media/tawlefa_fig1.png"] },
+    stirling: { title: "Stirling Engine", cover: "media/stiriling-fig1.png", summary: "Kinematic modeling analysis.", tools: "SolidWorks", abs: "Kinematic motion study.", obj: "Perfect phase angles.", contrib: "Mechanism modeling.", specs: "Phase:90 deg", outcomes: "Verified design.", figs: ["media/stiriling-fig1.png", "media/stiriling-fig2.png", "media/stiriling-fig1.png"] },
+    rover: { title: "Mars Rover Suspension", cover: "media/sus_fig4.png", summary: "Manufactured for ERC Poland.", tools: "FEA|SolidWorks", abs: "4WD suspension system.", obj: "Stability on terrain.", contrib: "Geometry design.", specs: "Drive:4WD", outcomes: "Manufactured.", figs: ["media/sus_fig2.png", "media/sus_fig3.png", "media/sus_fig4.png"] },
+    elevator: { title: "Elevator Cabin", cover: "media/elevator_cabin.png", summary: "Supervised 100+ part system.", tools: "Sheet Metal", abs: "DFMA elevator design.", obj: "Cost reduction.", contrib: "Sheet metal BOM.", specs: "Parts:100+", outcomes: "Zero errors.", figs: ["media/elevator_cabin.png", "media/elevator_mc.png", "media/elevator_cabin.png"] },
+    die: { title: "Progressive Die", cover: "media/Progressive_die_Cpage.png", summary: "Sheet metal strip layout.", tools: "SolidWorks", abs: "Optimized die architecture.", obj: "Maximize utilization.", contrib: "Station design.", specs: "Op:Punching", outcomes: "Max material use.", figs: ["media/Progressive_die_Cpage.png", "media/Progressive_die_Cpage.png", "media/Progressive_die_Cpage.png"] }
+};
 
-    const DATA = {
-        initials: "HM",
-        name: "Hamza Abd ElKadir",
-        title: "Mechanical Design & Production Engineer",
-        uni: "B.Eng. Mechanical Engineering — Ain Shams University (2022–2027)",
-        bio: "I design mechanical systems that are precise, manufacturable, and built to solve real problems — from award-winning flow instrumentation to fully automated industrial machinery. Two competition first-places, one industry role, nine engineering projects.",
-        about1: "I am a 3rd-year Mechanical Engineering student at Ain Shams University, specialising in Design & Production. My work sits at the intersection of precision mechanical design, DFMA, and hands-on manufacturing supervision — I do not just model parts, I see them through to the shop floor.",
-        about2: "My experience spans elevator systems, flow instrumentation, packaging automation, and space-rover suspension. CSWA-certified in SolidWorks. Currently designing the suspension for a Mars rover targeting the European Rover Challenge in Poland with ASU Racing Team (ROAR).",
-        email: "hamzahamza050875@gmail.com",
-        phone: "+20 103 377 0304",
-        linkedin: "linkedin.com/in/hamza-abdelkadir",
-        linkedinLink: "https://www.linkedin.com/in/hamza-abd-elkadir-6407b81a8",
-        grabcad: "grabcad.com/Hamza Abd Al-kadir",
-        grabcadLink: "https://grabcad.com/hamza.abd.al.kadir-1",
-        resumeLink: "https://drive.google.com/file/d/1tBVU8LNILnr-Cznld7hs2I8pGI609MhE/view?usp=sharing", 
-        heroPic: "media/Hamza_photo.jpg",
-        profilePic: "media/prof-pic.jpeg",
-        
-        // --- PROJECT 1: FLOWMETER ---
-        flowmeter_Show: 1, 
-        flowmeter_CardTags: "Instrumentation",
-        flowmeter_CardAward: "🏆 1st Place",
-        flowmeter_CardTitle: "Smart Turbine Flowmeter",
-        flowmeter_CardSum: "Most accurate of 35 teams. 6-inch turbine, 0.05–0.6 m³/s, calibrated tachometer + pressure + temperature.",
-        flowmeter_Tools: "SolidWorks|DFMA|Python|Blender",
-        flowmeter_CardVideo: "media/thumbnail_anime.webm", 
-        flowmeter_DetailVideo: "media/flowmeter_Cpage.webm", 
-        flowmeter_PopPhotos: [
-            "media/flowmeter_fig1.jpeg",
-            "media/turbine_manu.png",
-            "media/flowmeter_fig2.jpeg"
-        ],
-        flowmeter_PaperTitle: "Design and Fabrication of a Conventionally-Machinable Smart Turbine Flowmeter with Integrated Multi-Sensor Calibration",
-        flowmeter_Auth: "Ain Shams University Design Competition, Sep 2024 – Feb 2025",
-        flowmeter_Abs: "A 6-inch turbine flowmeter was designed for a flow range of 0.05–0.6 m³/s using only conventional cutting machines. A smart control system integrating tachometer, pressure, and temperature sensors was programmed and individually calibrated, achieving the highest measurement accuracy among 35 competing teams and winning 1st place.",
-        flowmeter_Obj: "Design a turbine flowmeter manufacturable entirely by conventional cutting processes while maximising measurement accuracy. Integrate a smart sensing system and compete against 35 teams at the ASU Design Competition.",
-        flowmeter_Contrib: "Designed turbine blade geometry for full conventional machinability using DFMA principles.|Programmed the complete smart control system (tachometer, pressure transducer, temperature sensor).|Individually calibrated each sensor — achieved ±16% accuracy, best in competition.|Supervised all manufacturing stages from raw stock to final assembly.|Created Blender 3D fluid-dynamics rendering for visual documentation.",
-        flowmeter_Specs: "Pipe diameter : 6 inches | Flow range : 0.05 – 0.6 m³/s | Accuracy : ±16% — best of 35 teams | Manufacturing : Conventional cutting only | Sensors : Tachometer, pressure transducer, temperature",
-        flowmeter_Outcomes: "1st place at the ASU Design Competition 2024–2025. Most accurate flowmeter among all 35 teams. Smart control system programmed and calibrated from scratch.",
-        flowmeter_Fig1: "media/flowmeter_fig1.jpeg", flowmeter_Fig1Cap: "Turbine rotor and flowmeter assembly",
-        flowmeter_Fig2: "media/flowmeter_fig2.jpeg", flowmeter_Fig2Cap: "Smart sensor system and calibration setup",
-        flowmeter_Fig3: "media/turbine_manu.png", flowmeter_Fig3Cap: "Fluid dynamics trajectory mapping",
-        flowmeter_Gallery: ["media/flowmeter_fig1.jpeg", "media/flowmeter_fig2.jpeg", "media/turbine_manu.png", "media/flowmeter-cover.jpg"],
-
-        // --- PROJECT 2: CONVEYOR ---
-        conveyor_Show: 1, 
-        conveyor_CardTags: "Automation",
-        conveyor_CardAward: "🏆 1st Place",
-        conveyor_CardTitle: "Tea Bag Packaging Automation",
-        conveyor_CardSum: "60 s → 9 s cycle time (6.6×). Fully validated by physics simulation before build.",
-        conveyor_Tools: "SolidWorks|Physics Sim|DFMA",
-        conveyor_Cover: "media/tawlefa_Cpage.jpeg",
-        conveyor_PopPhotos: [
-            "media/tawlefa_fig1.png",
-            "media/tawlefa_Cpage.jpeg",
-            "media/tawlefa_fig1.png"
-        ],
-        conveyor_PaperTitle: "Mechanical Design of a High-Speed Automated Tea Bag Packaging System with Physics-Based Process Validation",
-        conveyor_Auth: "Hamza Abd ElKadir — Royal Herbs IHUB Competition, Jan 2026 – Apr 2026",
-        conveyor_Abs: "A complete mechanical packaging system was designed to fully automate tea bag insertion into boxes for Royal Herbs. A solid-body physics simulation validated the process before any physical build, achieving a cycle-time reduction from 60 s to 9 s per box and winning 1st place at the IHUB Competition.",
-        conveyor_Obj: "Fully automate the tea bag packaging process to reach near-zero error rate and dramatically reduce cycle time. Validate the design via simulation before committing to physical build.",
-        conveyor_Contrib: "Designed the complete mechanical packaging mechanism from concept to detailed design.|Built a solid-body physics simulation to validate timing and detect collisions.|Resolved critical timing and interference issues during simulation phase.|Achieved 6.6× speed improvement (60 s → 9 s) with near-zero error rate.",
-        conveyor_Specs: "Cycle time (before) : 60 seconds per box | Cycle time (after) : 9 seconds per box | Improvement : 6.6× faster | Validation : Solid-body physics simulation | Error rate : Near zero",
-        conveyor_Outcomes: "1st place, Royal Herbs IHUB Competition 2026. Design validated entirely in simulation before build, eliminating costly redesigns.",
-        conveyor_Fig1: "media/tawlefa_fig1.png", conveyor_Fig1Cap: "Full mechanical packaging system",
-        conveyor_Gallery: ["media/tawlefa_fig1.png", "media/tawlefa_Cpage.jpeg"],
-
-        // --- PROJECT 3: ROVER ---
-        rover_Show: 1, 
-        rover_CardTags: "Competition",
-        rover_CardTitle: "Mars Rover Suspension",
-        rover_CardSum: "Designed, optimised and manufactured for the European Rover Challenge, Poland.",
-        rover_Tools: "SolidWorks|FEA|Mech Design",
-        rover_Cover: "media/sus_fig4.png",
-        rover_PopPhotos: [
-            "media/sus_fig2.png",
-            "media/sus_fig3.png",
-            "media/sus_fig4.png"
-        ],
-        rover_PaperTitle: "Design and Optimisation of a 4WD Differential Rod Suspension Mechanism for a Mars Surface Exploration Rover",
-        rover_Auth: "Hamza Abd ElKadir — ASU Racing Team (ROAR), Oct 2025 – Present",
-        rover_Abs: "A 4WD differential rod suspension mechanism was designed for the ROAR Mars rover to improve stability on uneven terrain. The mechanism was modelled, parametrically optimised, and fully manufactured for the European Rover Challenge in Poland.",
-        rover_Obj: "Develop a robust rocker-to-chassis connection for an ERC Mars Yard rover prototype to prevent axial and radial play under extreme dynamic loading conditions.",
-        rover_Contrib: "Designed 4WD differential rod suspension geometry from scratch.|Modelled and optimised suspension travel and ground clearance.|Engineered a custom connection utilizing rolling element bearings in SolidWorks.|Conducted thorough tolerance stack-up analysis to ensure an exact interference fit within the housing.|Manufactured and assembled all suspension components.",
-        rover_Specs: "Team : ASU Racing Team (ROAR) | Competition : European Rover Challenge, Poland | Drive : 4WD differential rod",
-        rover_Outcomes: "Full suspension designed, parametrically optimised, and manufactured for competition.",
-        rover_Fig1: "media/sus_fig2.png", rover_Fig1Cap: "Suspension assembly and bearing housing",
-        rover_Fig2: "media/sus_fig3.png", rover_Fig2Cap: "Full rover assembly",
-        rover_Gallery: ["media/sus_fig2.png", "media/sus_fig3.png", "media/sus_fig4.png"],
-
-        // --- PROJECT 4: STIRLING ---
-        stirling_Show: 1, 
-        stirling_CardTags: "Design",
-        stirling_CardTitle: "Stirling Engine",
-        stirling_CardSum: "Precise phase angle kinematics modeled for sustained thermodynamic operation.",
-        stirling_Tools: "SolidWorks|Kinematics",
-        stirling_CardVideo: "media/stirling_thumbnail.webm",
-        stirling_PopPhotos: [
-            "media/stiriling-fig1.png",
-            "media/stiriling-fig2.png",
-            "media/stiriling-fig1.png"
-        ],
-        stirling_PaperTitle: "Kinematic Modeling of a Functioning Stirling Engine Assembly",
-        stirling_Auth: "Hamza Abd ElKadir",
-        stirling_Abs: "Modeled a functioning Stirling engine assembly, focusing on the precise phase angle differences between the displacer and power pistons required for operation.",
-        stirling_Obj: "Design the complex linkage system connecting the displacer piston, power piston, and flywheel, ensuring smooth translation of linear thermal expansion into rotational energy.",
-        stirling_Contrib: "Modeled all components and mechanical linkages in SolidWorks.|Performed kinematic motion studies to perfect the 90-degree phase difference required for the thermodynamic cycle.|Verified clearance tolerances at top-dead-center.",
-        stirling_Specs: "Cycle : Thermodynamic expansion/compression | Phase Difference : 90 Degrees | Validation : Motion Study",
-        stirling_Outcomes: "Kinematic motion successfully verified prior to physical prototyping.",
-        stirling_Fig1: "media/stiriling-fig1.png", stirling_Fig1Cap: "Kinematic linkage design",
-        stirling_Fig2: "media/stiriling-fig2.png", stirling_Fig2Cap: "Phase angle alignment study",
-        stirling_Gallery: ["media/stiriling-fig1.png", "media/stiriling-fig2.png"],
-
-        // --- PROJECT 5: THERMO ---
-        thermo_Show: 0, 
-        thermo_CardTags: "Analysis",
-        thermo_CardTitle: "Stirling Thermodynamics",
-        thermo_CardSum: "Heat transfer FEA mapping and comprehensive mechanical efficiency lab report.",
-        thermo_Tools: "Thermodynamics|FEA",
-        thermo_Cover: "media/thermo-cover.jpg",
-        thermo_PopPhotos: [],
-        thermo_PaperTitle: "Heat Transfer Mapping and Mechanical Efficiency Analysis of a Stirling Cycle",
-        thermo_Auth: "Hamza Abd ElKadir",
-        thermo_Abs: "Analyzed the heat conduction through the hot cylinder walls to determine the optimal material thickness, balancing structural integrity with thermal efficiency.",
-        thermo_Obj: "Calculate mechanical efficiency based on varying temperature gradients.",
-        thermo_Contrib: "Conducted FEA heat transfer mapping.|Compiled a comprehensive lab report calculating mechanical efficiency.|Incorporated three distinct data samples collected across varying temperature gradients.",
-        thermo_Specs: "Analysis : Thermal Conduction | Data Samples : 3 Temperature Gradients",
-        thermo_Outcomes: "Optimal material thickness identified to maximize thermal efficiency safely.",
-        thermo_Fig1: "media/thermo-fig1.jpg", thermo_Fig1Cap: "Thermal conduction heat-map",
-        thermo_Fig2: "media/thermo-fig2.jpg", thermo_Fig2Cap: "Sample plotting and efficiency results",
-        thermo_Gallery: [],
-
-        // --- PROJECT 6: ELEVATOR ---
-        elevator_Show: 1, 
-        elevator_CardTags: "Design",
-        elevator_CardTitle: "Elevator Cabin & Chassis",
-        elevator_CardSum: "Zero assembly errors across 100+ part systems, supervised end-to-end.",
-        elevator_Tools: "Sheet Metal|DFMA",
-        elevator_Cover: "media/elevator_cabin.png",
-        elevator_PopPhotos: [
-            "media/elevator_cabin.png",
-            "media/elevator_mc.png",
-            "media/elevator_cabin.png"
-        ],
-        elevator_PaperTitle: "DFMA-Driven Sheet Metal Design of Elevator Cabins and Chassis for Cost-Effective Manufacturing",
-        elevator_Auth: "Hamza Abd ElKadir — GOBA for Elevators, Cairo, Jun – Oct 2025",
-        elevator_Abs: "Elevator cabins and chassis were designed in SolidWorks sheet metal with DFMA standards. Full documentation — BOM, cost reports, assembly drawings — was generated. Manufacturing of 100+ part systems was supervised with zero assembly errors.",
-        elevator_Obj: "Design manufacturable elevator cabins and chassis that minimise production cost while meeting structural requirements and safety constraints.",
-        elevator_Contrib: "Designed cabins and chassis in SolidWorks sheet metal with DFMA.|Calculated required braking torque and designed the overspeed governor mechanism.|Generated complete BOM, cost reports, and assembly drawings.|Supervised manufacturing and assembly of 100+ part systems — zero errors.",
-        elevator_Specs: "Assembly errors : Zero | Parts per system : 100+ | Standard : DFMA | Mechanisms : Overspeed governor, mechanical safety wedges",
-        elevator_Outcomes: "Complete production-ready documentation delivered. All systems assembled efficiently and safely.",
-        elevator_Fig1: "media/elevator_cabin.png", elevator_Fig1Cap: "Cabin sheet metal design",
-        elevator_Fig2: "media/elevator_mc.png", elevator_Fig2Cap: "Assembly drawing and safety mechanism",
-        elevator_Gallery: ["media/elevator_cabin.png", "media/elevator_mc.png"],
-
-        // --- PROJECT 7: CANON ---
-        canon_Show: 0, 
-        canon_CardTags: "Design",
-        canon_CardTitle: "Pneumatic Canon",
-        canon_CardSum: "3-DOF MATLAB trajectory calculator and pressure vessel design.",
-        canon_Tools: "MATLAB|Pneumatics",
-        canon_Cover: "media/canon-cover.jpg",
-        canon_PopPhotos: [],
-        canon_PaperTitle: "Pneumatic Pressure Vessel Design and 3-DOF MATLAB Trajectory Simulation",
-        canon_Auth: "Hamza Abd ElKadir",
-        canon_Abs: "Engineered a pneumatic chamber capable of safely retaining high PSI air limits, designing a fast-actuating valve system for instant air release.",
-        canon_Obj: "Develop a complex MATLAB script to calculate a pneumatic 3-DOF rocket launcher trajectory, simulating both the internal sliding phase and external impact phases.",
-        canon_Contrib: "Designed pneumatic chamber for high PSI retention.|Engineered fast-actuating valve geometry.|Developed 3-DOF MATLAB script to map trajectory physics.",
-        canon_Specs: "Simulation : MATLAB 3-DOF | Mechanism : Fast-actuating pneumatic valve",
-        canon_Outcomes: "Accurate physical trajectory prediction mapped directly from CAD pressure constraints.",
-        canon_Fig1: "media/canon-fig1.jpg", canon_Fig1Cap: "Pressure vessel schematic",
-        canon_Fig2: "media/canon-fig2.jpg", canon_Fig2Cap: "MATLAB trajectory plotting",
-        canon_Gallery: [],
-
-        // --- PROJECT 8: PROGRESSIVE DIE ---
-        die_Show: 1, 
-        die_CardTags: "Manufacturing",
-        die_CardTitle: "Progressive Die",
-        die_CardSum: "Sheet metal strip layout and heavy-duty punch block architecture.",
-        die_Tools: "SolidWorks|Tooling",
-        die_Cover: "media/Progressive_die_Cpage.png",
-        die_PopPhotos: [
-            "media/Progressive_die_Cpage.png",
-            "media/Progressive_die_Cpage.png", 
-            "media/Progressive_die_Cpage.png" 
-        ],
-        die_PaperTitle: "Strip Layout Planning and Tool Architecture for Progressive Die Manufacturing",
-        die_Auth: "Hamza Abd ElKadir",
-        die_Abs: "Designed an optimized sheet metal strip layout to maximize material utilization, calculating exact station progression for punching and blanking operations.",
-        die_Obj: "Model heavy-duty punch and die blocks, accounting for shear stress and stripper plate clearance to prevent material binding.",
-        die_Contrib: "Optimized sheet metal strip layout.|Calculated exact station progression.|Modeled heavy-duty punch and die blocks in SolidWorks.",
-        die_Specs: "Operations : Punching, Bending, Blanking | Mitigation : Stripper plate clearance, Shear stress",
-        die_Outcomes: "Maximized material utilization and prevented binding during upstroke.",
-        die_Fig1: "media/Progressive_die_Cpage.png", die_Fig1Cap: "Sheet metal strip progression layout",
-        die_Gallery: ["media/Progressive_die_Cpage.png"],
-
-        // --- PROJECT 9: LANTERN ---
-        lantern_Show: 0, 
-        lantern_CardTags: "Design",
-        lantern_CardTitle: "Chinese Lantern",
-        lantern_CardSum: "Thermal draft analysis for interlocking mechanical frame.",
-        lantern_Tools: "Thermodynamics|CAD",
-        lantern_Cover: "media/lantern-cover.jpg",
-        lantern_PopPhotos: [],
-        lantern_PaperTitle: "Thermal Drafting and Interlocking Structural Integration of a Paper Lantern",
-        lantern_Auth: "Hamza Abd ElKadir",
-        lantern_Abs: "Undertook a specialized CAD project combining mechanical structure with traditional cultural forms. Engineered an interlocking, collapsible frame that eliminated the need for chemical adhesives.",
-        lantern_Obj: "Calculate internal volume and estimate convective heat transfer from the candle element needed to generate sufficient upward lift.",
-        lantern_Contrib: "Engineered interlocking, collapsible frame without adhesives.|Calculated internal volume.|Estimated convective heat transfer for thermal drafting.",
-        lantern_Specs: "Structure : Adhesiveless Interlocking | Analysis : Convective heat transfer",
-        lantern_Outcomes: "Successful structural integration yielding sufficient thermal lift.",
-        lantern_Fig1: "media/lantern-fig1.jpg", lantern_Fig1Cap: "Interlocking structural frame",
-        lantern_Fig2: "media/lantern-fig2.jpg", lantern_Fig2Cap: "Internal volume convection estimates",
-        lantern_Gallery: []
-    };
-</script>
-
-<script>
 document.addEventListener("DOMContentLoaded", () => {
-    
-    const cardsContainer = document.getElementById('project-cards-container');
-    const pagesContainer = document.getElementById('dynamic-pages-container');
-    const galleryContainer = document.getElementById('auto-gallery-grid');
-    const filterContainer = document.getElementById('auto-filter-bar');
-    
-    if (!cardsContainer || !pagesContainer || !galleryContainer) {
-        console.error("Critical containers missing. Halting execution.");
-        return;
-    }
+    document.querySelectorAll('[data-src]').forEach(el => el.src = DATA[el.getAttribute('data-src')]);
+    document.querySelectorAll('[data-href]').forEach(el => el.href = DATA[el.getAttribute('data-href')]);
 
-    let counter = 1;
-    let categoriesSet = new Set();
+    const cont = document.getElementById('project-cards-container');
+    const pages = document.getElementById('dynamic-pages-container');
 
-    // 🌟 BUILD HTML DYNAMICALLY TO PREVENT TRUNCATION 🌟
     PROJECT_ORDER.forEach(id => {
-        if(DATA[id+'_Show'] === 0) return;
-
-        const numStr = counter < 10 ? '0'+counter : counter;
-        if(DATA[id+'_CardTags']) { categoriesSet.add(DATA[id+'_CardTags']); }
-
-        const cardImgSrc = DATA[id+'_CardImage'] || DATA[id+'_Cover'] || DATA[id+'_DetailImage'] || DATA[id+'_Fig1'];
-        const toolsHtml = (DATA[id+'_Tools'] || '').split('|').filter(t => t.trim() !== '').map(t => `<span class="tool">${t.trim()}</span>`).join('');
-        const tagsHtml = `<span class="tag">${DATA[id+'_CardTags'] || ''}</span>` + (DATA[id+'_CardAward'] ? `<span class="award">${DATA[id+'_CardAward']}</span>` : '');
-
-        let vidSrc = DATA[id+'_CardVideo'] || DATA[id+'_Video'];
-        let baseMedia = vidSrc ? `<video src="${vidSrc}" muted loop playsinline preload="metadata" class="base-vid" style="width:100%;height:100%;object-fit:cover;"></video>` : `<img src="${cardImgSrc}" onerror="this.style.display='none';" alt="" style="width:100%;height:100%;object-fit:cover;"/>`;
-        let hoverMedia = vidSrc ? `<video src="${vidSrc}" muted loop playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>` : `<img src="${cardImgSrc}" alt="" style="width:100%;height:100%;object-fit:cover;"/>`;
-
-        const pop1 = (DATA[id+'_PopPhotos'] || [])[0] || DATA[id+'_Fig1'] || '';
-        const pop2 = (DATA[id+'_PopPhotos'] || [])[1] || DATA[id+'_Fig2'] || '';
-        const pop3 = (DATA[id+'_PopPhotos'] || [])[2] || DATA[id+'_Fig3'] || '';
-        const img1Html = pop1 ? `<img src="${pop1}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
-        const img2Html = pop2 ? `<img src="${pop2}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
-        const img3Html = pop3 ? `<img src="${pop3}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
-
-        // 1. INJECT PROJECT CARD
-        cardsContainer.insertAdjacentHTML('beforeend', `
-            <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" onclick="go('pg-det-${id}')" onmouseenter="playHoverVideo(this)" onmouseleave="pauseHoverVideo(this)">
-              <div class="card-cover img-container">
-                ${baseMedia}<span class="card-num">${numStr}</span>
-              </div>
-              <div class="card-body">
-                <div class="card-tags">${tagsHtml}</div>
-                <div class="card-title">${DATA[id+'_CardTitle'] || ''}</div>
-                <div class="card-sum-grid">${DATA[id+'_CardSum'] || ''}</div>
-                <div class="card-tools">${toolsHtml}</div>
-              </div>
-              <div class="card-hover-panel">
-                <div class="ch-cover">${hoverMedia}<span class="card-num">${numStr}</span></div>
-                <div class="ch-bottom">
-                  <div class="ch-3imgs">${img1Html}${img2Html}${img3Html}</div>
-                  <div class="ch-cta">Click to explore full project &rarr;</div>
+        if(!DATA[id]) return;
+        const p = DATA[id];
+        cont.insertAdjacentHTML('beforeend', `
+            <div class="card" onclick="go('pg-det-${id}')">
+                <div class="card-cover"><img src="${p.cover}"/></div>
+                <div class="card-body"><h3>${p.title}</h3><p>${p.summary}</p></div>
+                <div class="card-hover-panel">
+                    <div class="ch-cover"><img src="${p.cover}"/></div>
+                    <div class="ch-bottom"><div class="ch-3imgs"><img src="${p.figs[0]}"/><img src="${p.figs[1]}"/><img src="${p.figs[2]}"/></div><div class="ch-cta">Explore Project</div></div>
                 </div>
-              </div>
             </div>
         `);
-
-        // 2. INJECT DETAILED PAPER PAGE
-        const contribHtml = (DATA[id+'_Contrib'] || '').split('|').filter(t => t.trim() !== '').map(c => `<li>${c.trim()}</li>`).join('');
-        const specsHtml = (DATA[id+'_Specs'] || '').split('|').filter(t => t.trim() !== '').map(pair => {
-            const colonIdx = pair.indexOf(':');
-            if (colonIdx === -1) return '';
-            return `<tr><td><dt>${pair.slice(0, colonIdx).trim()}</dt></td><td>${pair.slice(colonIdx + 1).trim()}</td></tr>`;
-        }).join('');
-        const specsTableHtml = specsHtml ? `<table class="sci-table">${specsHtml}</table>` : '';
-
-        // Safely injecting extra figures
-        let extraFigsHtml = '';
-        if(DATA[id+'_Fig3']) extraFigsHtml += `<div class="sci-fig"><div class="sci-fig-inner"><img src="${DATA[id+'_Fig3']}" alt="" onerror="this.style.display='none';"/></div><p class="sci-cap"><b>Fig. 3.</b> ${DATA[id+'_Fig3Cap'] || ''}</p></div>`;
-        if(DATA[id+'_Fig4']) extraFigsHtml += `<div class="sci-fig"><div class="sci-fig-inner"><img src="${DATA[id+'_Fig4']}" alt="" onerror="this.style.display='none';"/></div><p class="sci-cap"><b>Fig. 4.</b> ${DATA[id+'_Fig4Cap'] || ''}</p></div>`;
-
-        // Hero Slider Assembly
-        const detImgSrc = DATA[id+'_DetailImage'] || DATA[id+'_Cover'] || DATA[id+'_CardImage'];
-        let slidesHtml = '';
-        let baseCoverVid = DATA[id+'_DetailVideo'] || DATA[id+'_Video'];
-        if (baseCoverVid) slidesHtml += `<div class="cover-slide"><video src="${baseCoverVid}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" muted loop playsinline preload="metadata" class="scroll-video"></video></div>`;
-        else slidesHtml += `<div class="cover-slide"><img src="${detImgSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/></div>`;
-        if (DATA[id+'_Gallery']) {
-            DATA[id+'_Gallery'].forEach(img => { slidesHtml += `<div class="cover-slide"><img src="${img}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/></div>`; });
-        }
-
-        // Sidebar Assembly
-        let sidebarHtml = '';
-        if (DATA[id+'_Gallery']) {
-            DATA[id+'_Gallery'].forEach(img => { sidebarHtml += `<img src="${img}" class="side-gal-img" onclick="openLB(this, '.det-sidebar')" alt="" onerror="this.style.display='none';"/>`; });
-        }
-
-        pagesContainer.insertAdjacentHTML('beforeend', `
-        <div id="pg-det-${id}" class="pg">
-          <div class="det-cover" style="position:relative;background:#111;">
-            <div class="cover-slider" id="slider-${id}">${slidesHtml}</div>
-            <button class="cover-arrow left" onclick="scrollSlider('${id}', -1)">&#10094;</button>
-            <button class="cover-arrow right" onclick="scrollSlider('${id}', 1)">&#10095;</button>
-            <div class="cov-grad"></div>
-            <div class="cov-txt">
-              <div class="cov-back" onclick="go('pg-projects')">&larr; Back to Projects</div>
-              <div class="eyebrow" style="color:rgba(255,255,255,.6); margin-bottom:.5rem;">${DATA[id+'_CardTags'] || ''} ${DATA[id+'_CardAward'] ? '· ' + DATA[id+'_CardAward'] : ''}</div>
-              <h2 style="font-family:'Inter',sans-serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:900;color:#fff;letter-spacing:-0.03em;max-width:700px;line-height:1.2;">${DATA[id+'_CardTitle'] || ''}</h2>
-            </div>
-          </div>
-          <div class="det-layout">
-            <div class="sci-paper">
-              <h1 class="sci-title">${DATA[id+'_PaperTitle'] || DATA[id+'_CardTitle'] || ''}</h1>
-              <p class="sci-auth">${DATA[id+'_Auth'] || ''}</p>
-              <div class="sci-abs-wrap"><p class="sci-abs"><b>Abstract</b>—${DATA[id+'_Abs'] || ''}</p></div>
-              <div class="sci-section">
-                <div class="sci-text">
-                  <h2 class="sci-h2">I. Objectives & Methodology</h2>
-                  <p class="sci-p">${DATA[id+'_Obj'] || ''}</p>
-                  <ul class="sci-list">${contribHtml}</ul>
-                </div>
-                <div class="sci-visual">
-                  <div class="sci-fig">
-                    <div class="sci-fig-inner">
-                      <img src="${DATA[id+'_Fig1'] || ''}" alt="" onerror="this.style.display='none';"/>
+        pages.insertAdjacentHTML('beforeend', `
+            <div id="pg-det-${id}" class="pg">
+                <div class="wrap det-layout">
+                    <div class="sci-paper">
+                        <h1>${p.title}</h1>
+                        <p>${p.abs}</p>
+                        <div class="sci-fig-inner"><img src="${p.figs[0]}"/></div>
+                        <h2 class="sci-h2">Methodology</h2><p>${p.obj}</p>
+                        <div class="sci-fig-inner"><img src="${p.figs[1]}"/></div>
+                        <p>${p.outcomes}</p>
                     </div>
-                    <p class="sci-cap"><b>Fig. 1.</b> ${DATA[id+'_Fig1Cap'] || ''}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="sci-section rev">
-                <div class="sci-visual">
-                  <div class="sci-fig">
-                    <div class="sci-fig-inner">
-                      <img src="${DATA[id+'_Fig2'] || ''}" alt="" onerror="this.style.display='none';"/>
+                    <div class="det-sidebar">
+                        <img src="${p.figs[0]}" style="border:1px solid #ccc;"/>
+                        <img src="${p.figs[1]}" style="border:1px solid #ccc;"/>
                     </div>
-                    <p class="sci-cap"><b>Fig. 2.</b> ${DATA[id+'_Fig2Cap'] || ''}</p>
-                  </div>
-                  ${extraFigsHtml}
                 </div>
-                <div class="sci-text">
-                  <h2 class="sci-h2">II. Technical Specifications & Outcomes</h2>
-                  ${specsTableHtml}
-                  <p class="sci-p">${DATA[id+'_Outcomes'] || ''}</p>
-                </div>
-              </div>
-              <div style="text-align:center;margin-top:4rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-                <button class="btn btn-ghost" onclick="go('pg-projects')">&larr; Return to All Projects</button>
-                <button class="btn" onclick="scrollTo_contact()">Get in Touch &rarr;</button>
-              </div>
             </div>
-            <div class="det-sidebar">
-                <span class="eyebrow side-gal-title" style="color:var(--ink3);">Fabrication Gallery</span>
-                ${sidebarHtml}
-            </div>
-          </div>
-          <footer style="background:#f8fafc;border-top:1px solid #e2e8f0;padding-block:2rem;">
-            <div class="wrap"><div class="foot-in"><p class="foot-c" style="font-family:'Inter',sans-serif;">© 2026 ${DATA.name}</p><ul class="foot-links"><li><span onclick="go('pg-projects')">All Projects</span></li></ul></div></div>
-          </footer>
-        </div>
         `);
-
-        // 3. INJECT GALLERY ITEMS
-        if(DATA[id+'_Fig1']) galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item ${counter % 3 === 1 ? 'wide' : ''} img-container" onclick="openLB(this, '.gallery-grid')"><img src="${DATA[id+'_Fig1']}" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig1Cap'] || ''}</span></div></div>`);
-        if(DATA[id+'_Fig2']) galleryContainer.insertAdjacentHTML('beforeend', `<div class="gal-item img-container" onclick="openLB(this, '.gallery-grid')"><img src="${DATA[id+'_Fig2']}" onerror="this.style.display='none';"/><div class="gal-cap" style="z-index:5;"><span>${DATA[id+'_Fig2Cap'] || ''}</span></div></div>`);
-        counter++;
     });
-
-    // Generate Filter Buttons
-    if (filterContainer) {
-        categoriesSet.forEach(cat => { filterContainer.insertAdjacentHTML('beforeend', `<button class="fb-btn" data-f="${cat}">${cat}</button>`); });
-        document.querySelectorAll('.fb-btn').forEach(b => {
-          b.addEventListener('click', () => {
-            document.querySelectorAll('.fb-btn').forEach(x => x.classList.remove('act'));
-            b.classList.add('act');
-            const f = b.dataset.f;
-            document.querySelectorAll('.proj-card').forEach(c => {
-              c.style.display = (f === 'all' || c.dataset.cat === f) ? 'flex' : 'none';
-            });
-          });
-        });
-    }
-
-    // Force WebM videos to paint their first frame to remove blank grey boxes
-    document.querySelectorAll('video').forEach(v => {
-        v.addEventListener('loadedmetadata', () => { v.currentTime = 0.1; }, {once: true});
-    });
-
-    // Mobile Autoplay & Viewport Intersection trigger
-    if (typeof IntersectionObserver !== 'undefined') {
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.target.closest('.pg.on')) { 
-                    if (entry.target.classList.contains('base-vid') && window.innerWidth <= 900) {
-                        entry.target.play().catch(()=>{});
-                    } else if (entry.target.classList.contains('scroll-video')) {
-                        entry.target.play().catch(()=>{});
-                    }
-                } else { entry.target.pause(); }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.scroll-video, .base-vid').forEach(video => { videoObserver.observe(video); });
-    }
-
-    // Back to top behavior
-    window.addEventListener('scroll', () => {
-        const btn = document.getElementById('back-to-top');
-        if (!btn) return;
-        if (window.scrollY > 400) { btn.classList.add('visible'); }
-        else { btn.classList.remove('visible'); }
-    }, { passive: true });
 });
-
-/* ── INTERACTIVE CONTROLS ENGINE ── */
-function scrollSlider(id, dir) {
-    const slider = document.getElementById('slider-' + id);
-    if (!slider) return;
-    slider.scrollBy({ left: dir * slider.offsetWidth, behavior: 'smooth' });
-}
-
-function playHoverVideo(card) {
-    const vBase = card.querySelector('.card-cover video');
-    if(vBase) vBase.play().catch(()=>{});
-    const vHover = card.querySelector('.card-hover-panel video');
-    if(vHover) vHover.play().catch(()=>{});
-}
-function pauseHoverVideo(card) {
-    const vBase = card.querySelector('.card-cover video');
-    if(vBase) { vBase.pause(); vBase.currentTime = 0.1; }
-    const vHover = card.querySelector('.card-hover-panel video');
-    if(vHover) { vHover.pause(); vHover.currentTime = 0.1; }
-}
-
-function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    const burger = document.getElementById('hamburger');
-    if(menu) menu.classList.toggle('open');
-    if(burger) burger.classList.toggle('open');
-    document.body.style.overflow = (menu && menu.classList.contains('open')) ? 'hidden' : '';
-}
-function closeMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    const burger = document.getElementById('hamburger');
-    if(menu) menu.classList.remove('open');
-    if(burger) burger.classList.remove('open');
-    document.body.style.overflow = '';
-}
-function mobileGo(pageId, scrollTarget) {
-    closeMobileMenu();
-    setTimeout(() => go(pageId, scrollTarget), 50);
-}
-
-function go(pageId, scrollTarget) {
-    document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
-    const pg = document.getElementById(pageId);
-    if (!pg) return;
-    pg.classList.add('on');
-    window.scrollTo(0, 0);
-
-    document.querySelectorAll('.card-hover-panel video').forEach(v => { v.pause(); v.currentTime = 0.1; });
-    document.querySelectorAll('.nav-links a').forEach(a => {
-        if(a.dataset.pg) a.classList.toggle('act', a.dataset.pg === pageId); 
-    });
-
-    if (typeof gtag === 'function') {
-        if (pageId.startsWith('pg-det-')) gtag('event', 'view_project', { 'project_id': pageId.replace('pg-det-', '') });
-        else gtag('event', 'page_view', { 'page_title': pageId.toUpperCase() });
-    }
-
-    if (scrollTarget) {
-        setTimeout(() => {
-            const el = document.getElementById(scrollTarget);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 60);
-    }
-}
-
-function scrollTo_contact() {
-    const homePg = document.getElementById('pg-home');
-    if (homePg && !homePg.classList.contains('on')) go('pg-home', 'contact-strip');
-    else {
-        const cs = document.getElementById('contact-strip');
-        if(cs) cs.scrollIntoView({ behavior: 'smooth' });
-    }
-}
-
-/* ── LIGHTBOX (WITH ARROWS & SWIPE) ── */
-let lbImages = [];
-let lbCurrentIndex = 0;
-
-function openLB(el, containerSelector = null) {
-    const img = el.tagName === 'IMG' ? el : el.querySelector('img');
-    if (!img || img.style.display === 'none') return;
-    lbImages = [];
-    if (containerSelector) {
-        const container = el.closest(containerSelector);
-        if (container) {
-            container.querySelectorAll('img.side-gal-img, .gal-item img').forEach(i => {
-                if (i.style.display !== 'none' && i.src) lbImages.push(i.src);
-            });
-        }
-    }
-    if (lbImages.length === 0) lbImages.push(img.src);
-    lbCurrentIndex = lbImages.indexOf(img.src);
-    if(lbCurrentIndex === -1) lbCurrentIndex = 0;
-
-    const lbImg = document.getElementById('lb-img');
-    const lightbox = document.getElementById('lightbox');
-    const lbPrev = document.getElementById('lb-prev');
-    const lbNext = document.getElementById('lb-next');
-
-    if(lbImg) lbImg.src = lbImages[lbCurrentIndex];
-    if(lightbox) lightbox.classList.add('open');
-    if(lbPrev) lbPrev.style.display = lbImages.length > 1 ? 'block' : 'none';
-    if(lbNext) lbNext.style.display = lbImages.length > 1 ? 'block' : 'none';
-    document.body.style.overflow = 'hidden';
-}
-
-function navLB(dir) {
-    lbCurrentIndex += dir;
-    if (lbCurrentIndex < 0) lbCurrentIndex = lbImages.length - 1;
-    if (lbCurrentIndex >= lbImages.length) lbCurrentIndex = 0;
-    const lbImg = document.getElementById('lb-img');
-    if(lbImg) lbImg.src = lbImages[lbCurrentIndex];
-}
-
-function closeLB() { 
-    const lightbox = document.getElementById('lightbox');
-    if(lightbox) lightbox.classList.remove('open'); 
-    document.body.style.overflow = ''; 
-}
-
-const lightbox = document.getElementById('lightbox');
-if(lightbox) lightbox.addEventListener('click', function(e) { if (e.target === this) closeLB(); });
-
-document.addEventListener('keydown', function(e) {
-    const lb = document.getElementById('lightbox');
-    if (lb && lb.classList.contains('open')) {
-        if (e.key === "Escape") closeLB();
-        if (e.key === "ArrowLeft") navLB(-1);
-        if (e.key === "ArrowRight") navLB(1);
-    }
-});
-
-let touchstartX = 0;
-if(lightbox) {
-    lightbox.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
-    lightbox.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].screenX - touchstartX;
-        if (dx < -40) navLB(1);
-        if (dx > 40) navLB(-1);
-    }, {passive: true});
-}
-
-document.addEventListener('touchstart', e => {
-    const slider = e.target.closest('.cover-slider');
-    if (slider) slider._touchX = e.changedTouches[0].screenX;
-}, {passive: true});
-document.addEventListener('touchend', e => {
-    const slider = e.target.closest('.cover-slider');
-    if (slider && slider._touchX !== undefined) {
-        const dx = e.changedTouches[0].screenX - slider._touchX;
-        if (Math.abs(dx) > 40) slider.scrollBy({ left: dx < 0 ? slider.offsetWidth : -slider.offsetWidth, behavior: 'smooth' });
-    }
-}, {passive: true});
-
-function submitForm(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type=submit]');
-    if(!btn) return;
-    btn.textContent = 'Sent ✓';
-    btn.style.background = '#16a34a';
-    btn.style.borderColor = '#16a34a';
-    setTimeout(() => { 
-        btn.textContent = 'Send Message'; 
-        btn.style.background = ''; 
-        btn.style.borderColor = ''; 
-        e.target.reset(); 
-    }, 3000);
+function go(id){
+    document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+    document.getElementById(id).classList.add('on');
+    window.scrollTo(0,0);
 }
 </script>
 </body>
