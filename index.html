@@ -155,58 +155,58 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);
 /* 🌟 MASSIVE HOVER TAKEOVER PANEL 🌟 */
 .card-hover-panel {
     position: absolute; 
-    top: -40px; left: -40px; right: -40px; bottom: -40px; 
+    top: -30px; left: -30px; right: -30px; bottom: -30px; /* Expands outwards */
     background: #fff; z-index: 100; 
     opacity: 0; pointer-events: none; 
     transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border-radius: 12px; box-shadow: 0 40px 100px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.05);
     display: flex; flex-direction: column; overflow: hidden; 
-    transform: scale(0.85);
+    transform: scale(0.9);
 }
 .card:hover { z-index: 50; } 
 .card:hover .card-hover-panel, .card.is-hovered .card-hover-panel { 
-    opacity: 1; pointer-events: auto; transform: scale(1.08); 
+    opacity: 1; pointer-events: auto; transform: scale(1.05); 
 }
 
 /* Top Half: Takeover Video */
-.ch-cover { height: 50%; width: 100%; position: relative; background: #111; border-bottom: 1px solid var(--rule); }
+.ch-cover { height: 45%; width: 100%; position: relative; background: #111; border-bottom: 1px solid var(--rule); }
 .ch-cover video, .ch-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;}
 .ch-cover video::-webkit-media-controls { display: none !important; }
 
-/* Bottom Half: Massive Image Flex Optimization */
+/* 🌟 BOTTOM HALF: MASSIVE IMAGE FLEX TRICK 🌟 */
 .ch-bottom { 
-    height: 50%; 
-    padding: 0.8rem; 
+    height: 55%; 
+    padding: 0.6rem; /* Minimal padding to let images stretch */
     display: flex; 
     flex-direction: column; 
+    justify-content: space-between;
     background: #fff; 
 }
 .ch-3imgs { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
+    display: flex; /* Flex handles stretching far better than Grid here */
     gap: 0.5rem; 
-    flex: 1; 
+    flex: 1; /* Force the container to take ALL vertical space available */
     min-height: 0; 
-    margin-bottom: 0.6rem; 
+    margin-bottom: 0.5rem; 
 }
 .ch-3imgs img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    border-radius: 6px; 
+    flex: 1; /* Forces all 3 images to share horizontal space equally */
+    width: 0; /* Tells flex to ignore native image width and stretch it */
+    height: 100%; /* Forces image to stretch top-to-bottom */
+    object-fit: cover; /* Ensures the image doesn't distort while stretching */
+    border-radius: 4px; 
     border: 1px solid #cbd5e1; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12); 
 }
 .ch-cta { 
     flex-shrink: 0; 
     text-align: center; 
     font-family: var(--fd); 
-    font-size: 0.85rem; 
+    font-size: 0.8rem; 
     font-weight: 800; 
     color: var(--red); 
     text-transform: uppercase; 
     letter-spacing: 0.05em; 
-    padding-bottom: 0.2rem;
 }
 
 /* Inner Card Base Info */
@@ -757,7 +757,7 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Fill static data
+    // Fill static data into the DOM
     if(DATA.email) document.getElementById('link-email').href = "mailto:" + DATA.email;
     if(DATA.phone) document.getElementById('link-phone').href = "tel:" + DATA.phone.replace(/\s+/g, '');
     document.querySelectorAll('[data-text]').forEach(el => { el.textContent = DATA[el.getAttribute('data-text')] || ''; });
@@ -810,9 +810,9 @@ document.addEventListener("DOMContentLoaded", () => {
             hoverMedia = `<img src="${cardImgSrc}" alt="" style="width:100%;height:100%;object-fit:cover;"/>`;
         }
 
-        const img1Html = pop1 ? `<img src="${pop1}" onerror="this.style.display='none';"/>` : `<div></div>`;
-        const img2Html = pop2 ? `<img src="${pop2}" onerror="this.style.display='none';"/>` : `<div></div>`;
-        const img3Html = pop3 ? `<img src="${pop3}" onerror="this.style.display='none';"/>` : `<div></div>`;
+        const img1Html = pop1 ? `<img src="${pop1}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
+        const img2Html = pop2 ? `<img src="${pop2}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
+        const img3Html = pop3 ? `<img src="${pop3}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
 
         // 🌟 INJECT CURRENT PROJECT CARD
         const cardHTML = `
@@ -830,6 +830,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-sum-grid">${DATA[id+'_CardSum'] || ''}</div>
                 <div class="card-tools">${toolsHtml}</div>
               </div>
+              
               <div class="card-hover-panel">
                 <div class="ch-cover">
                     ${hoverMedia}
@@ -965,7 +966,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Force painting strategy
+    // Force WebM painting to solve the "grey box" issue
     document.querySelectorAll('video').forEach(v => {
         v.addEventListener('loadedmetadata', () => { v.currentTime = 0.1; }, {once: true});
     });
