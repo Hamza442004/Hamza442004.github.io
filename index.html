@@ -487,12 +487,7 @@ window.onerror = function(msg, url, lineNo) {
             GrabCAD — <span data-text="grabcad"></span>
           </a></li>
       </ul>
-      <form class="cform" onsubmit="submitForm(event)">
-        <div class="fg"><label class="fl">Full Name</label><input class="fi" type="text" placeholder="Jane Smith" required/></div>
-        <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="jane@company.com" required/></div>
-        <div class="fg"><label class="fl">Message</label><textarea class="fta" placeholder="Tell me about your project…" required></textarea></div>
-        <button type="submit" class="btn" style="align-self:flex-start; margin-top: 0.5rem;">Send Message</button>
-      </form>
+
     </div>
   </div>
 </div>
@@ -1137,19 +1132,7 @@ document.addEventListener('touchend', e => {
     }
 }, {passive: true});
 
-function submitForm(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type=submit]');
-    if(!btn) return;
-    btn.textContent = 'Sent ✓';
-    btn.style.background = '#16a34a';
-    btn.style.borderColor = '#16a34a';
-    setTimeout(() => { 
-        btn.textContent = 'Send Message'; 
-        btn.style.background = ''; 
-        btn.style.borderColor = ''; 
-        e.target.reset(); 
-    }, 3000);
+
 }
 </script>
 </body>
