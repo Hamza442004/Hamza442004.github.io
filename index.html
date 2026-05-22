@@ -63,8 +63,10 @@ img, video{display:block;width:100%;height:100%;object-fit:cover}
 /* ── NAV ────────────────────────────────── */
 nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);background:rgba(255,255,255,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule); box-shadow: 0 1px 2px rgba(0,0,0,0.03);}
 .nav-in{max-width:var(--mw);margin-inline:auto;padding-inline:var(--g);height:100%;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:800;cursor:pointer; letter-spacing: -0.02em;}
-.nav-logo b{color:var(--red)}
+/* FIX 1: nav-logo — ensure it is fully clickable with no child blocking */
+.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:800;cursor:pointer;letter-spacing:-0.02em;user-select:none;-webkit-tap-highlight-color:rgba(200,16,46,0.15);}
+.nav-logo b{color:var(--red);pointer-events:none;}
+.nav-logo span{pointer-events:none;}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{font-size:.7rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);position:relative;transition:color .15s;cursor:pointer}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .2s var(--ease)}
@@ -74,16 +76,37 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);background:rgba
 .nav-cv:hover{background:var(--ink);color:var(--white)}
 
 /* ── HAMBURGER ── */
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; z-index: 1001; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; z-index: 1001; -webkit-tap-highlight-color: transparent; }
 .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s var(--ease); }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-.mobile-menu { display: none; position: fixed; top: var(--nh); left: 0; right: 0; background: rgba(255,255,255,0.99); border-bottom: 1px solid var(--rule); box-shadow: 0 8px 30px rgba(0,0,0,0.08); z-index: 998; padding: 1.5rem var(--g) 2rem; transform: translateY(-10px); opacity: 0; transition: transform 0.25s var(--ease), opacity 0.2s; pointer-events: none; }
-.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+/* FIX 2: Mobile menu — use display:block always, control visibility via opacity+transform+pointer-events */
+.mobile-menu {
+  display: block;
+  position: fixed;
+  top: var(--nh);
+  left: 0; right: 0;
+  background: rgba(255,255,255,0.99);
+  border-bottom: 1px solid var(--rule);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  z-index: 998;
+  padding: 1.5rem var(--g) 2rem;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform 0.25s var(--ease), opacity 0.2s;
+  pointer-events: none;
+  visibility: hidden;
+}
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
 .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
-.mobile-menu ul li a { display: block; padding: 1rem 0; font-size: 1.1rem; font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--rule); cursor: pointer; letter-spacing: -0.01em; }
+.mobile-menu ul li a { display: block; padding: 1rem 0; font-size: 1.1rem; font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--rule); cursor: pointer; letter-spacing: -0.01em; -webkit-tap-highlight-color: transparent; }
 .mobile-menu ul li:last-child a { border-bottom: none; }
 .mobile-menu-cv { margin-top: 1.5rem; display: block; text-align: center; font-family: var(--fd); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: .9rem; border-radius: 4px; border: 1.5px solid var(--ink); color: var(--ink); background: var(--white); transition: background .18s, color .18s; }
 .mobile-menu-cv:hover { background: var(--ink); color: var(--white); }
@@ -163,7 +186,7 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);background:rgba
 /* 🌟 MASSIVE HOVER TAKEOVER PANEL 🌟 */
 .card-hover-panel {
     position: absolute; 
-    top: -40px; left: -40px; right: -40px; bottom: -40px; /* 40px Expansions */
+    top: -40px; left: -40px; right: -40px; bottom: -40px;
     background: #fff; z-index: 100; 
     opacity: 0; pointer-events: none; 
     transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -173,15 +196,13 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);background:rgba
 }
 .card:hover { z-index: 50; } 
 .card:hover .card-hover-panel, .card.is-hovered .card-hover-panel { 
-    opacity: 1; pointer-events: auto; transform: scale(1.08); /* Massive Scale up */
+    opacity: 1; pointer-events: auto; transform: scale(1.08);
 }
 
-/* Top Half: Takeover Video */
 .ch-cover { height: 45%; width: 100%; position: relative; background: #111; border-bottom: 1px solid var(--rule); }
 .ch-cover video, .ch-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;}
 .ch-cover video::-webkit-media-controls { display: none !important; }
 
-/* 🌟 BOTTOM HALF: MASSIVE IMAGE FLEX TRICK 🌟 */
 .ch-bottom { 
     height: 55%; 
     padding: 0.8rem; 
@@ -193,14 +214,14 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);background:rgba
 .ch-3imgs { 
     display: flex; 
     gap: 0.6rem; 
-    flex: 1; /* Forces the container to stretch perfectly */
+    flex: 1;
     min-height: 0; 
     margin-bottom: 0.6rem; 
 }
 .ch-3imgs img { 
-    flex: 1; /* Forces all 3 to share horizontal space equally */
+    flex: 1;
     width: 0; 
-    height: 100%; /* Stretches from top to bottom */
+    height: 100%;
     object-fit: cover; 
     border-radius: 4px; 
     border: 1px solid #cbd5e1; 
@@ -227,6 +248,22 @@ nav{position:fixed;inset:0 0 auto 0;z-index:999;height:var(--nh);background:rgba
 .card-sum-grid{font-size:.85rem;color:var(--ink2);line-height:1.6;margin-bottom:1.2rem;flex:1}
 .card-tools{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:0}
 .tool{font-family:var(--fd);font-size:.55rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--rule);color:var(--ink3); border-radius: 3px;}
+
+/* FIX 3: Mobile card preview photo strip */
+.card-mobile-preview {
+  display: none; /* shown only on mobile via media query */
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+  background: var(--rule);
+  position: relative;
+}
+.card-mobile-preview img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+  position: static;
+}
 
 @media (hover: none) {
   .card:active { opacity: 0.85; }
@@ -336,6 +373,8 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
   .sci-paper { padding: 3rem 2rem; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); }
   .card-hover-panel { display: none !important; }
+  /* FIX 3: Show mobile preview photo on tablet/mobile */
+  .card-mobile-preview { display: block; }
 }
 
 @media(max-width:768px){
@@ -378,7 +417,8 @@ window.onerror = function(msg, url, lineNo) {
 
 <nav>
   <div class="nav-in">
-    <div class="nav-logo" onclick="go('pg-home')"><span data-text="initials"></span><b>.</b></div>
+    <!-- FIX 1: nav-logo click area hardened -->
+    <div class="nav-logo" onclick="go('pg-home')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')go('pg-home')">HM<b>.</b></div>
     <ul class="nav-links">
       <li><a onclick="go('pg-home')" data-pg="pg-home">Home</a></li>
       <li><a onclick="go('pg-projects')" data-pg="pg-projects">Projects</a></li>
@@ -386,20 +426,22 @@ window.onerror = function(msg, url, lineNo) {
       <li><a onclick="go('pg-home','contact-strip')" data-pg="pg-home">Contact</a></li>
     </ul>
     <a data-href="resumeLink" target="_blank" class="nav-cv" download onclick="gtag('event', 'download_resume');">Resume &darr;</a>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <!-- FIX 2: hamburger button - removed inline onclick, using addEventListener below -->
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobile-menu">
+<!-- FIX 2: Mobile menu is always in DOM, shown/hidden via CSS class -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
   <ul>
     <li><a onclick="mobileGo('pg-home')">Home</a></li>
     <li><a onclick="mobileGo('pg-projects')">Projects</a></li>
     <li><a onclick="mobileGo('pg-gallery')">Gallery</a></li>
     <li><a onclick="mobileGo('pg-home','contact-strip')">Contact</a></li>
   </ul>
-  <a data-href="resumeLink" target="_blank" class="mobile-menu-cv" onclick="gtag('event', 'download_resume');">Download Resume ↓</a>
+  <a data-href="resumeLink" target="_blank" class="mobile-menu-cv" onclick="closeMobileMenu(); gtag('event', 'download_resume');">Download Resume ↓</a>
 </div>
 
 <div id="pg-home" class="pg on">
@@ -407,7 +449,7 @@ window.onerror = function(msg, url, lineNo) {
 <div class="wrap">
   <div class="hero-split">
     <div>
-      <div class="featured-badge">Available for Internships & Graduate Roles</div>
+      <div class="featured-badge">Available for Internships &amp; Graduate Roles</div>
       <div class="hero-ey"><div class="hero-ey-line"></div><span class="eyebrow" data-text="title"></span></div>
       <h1 class="hero-h1" data-text="name"></h1>
       <p class="hero-uni" data-text="uni"></p>
@@ -452,7 +494,7 @@ window.onerror = function(msg, url, lineNo) {
         <img data-src="profilePic" alt="Portrait" onerror="this.style.display='none';"/>
       </div>
       <div>
-        <h2 class="about-h">Turning design intent into manufacturable reality.</h2>
+        <h2 class="about-h">From CAD model to shop floor — without losing anything in translation.</h2>
         <p class="about-p" data-text="about1"></p>
         <p class="about-p" data-text="about2"></p>
         <div style="margin-top:1.5rem; display:flex; gap:.8rem; flex-wrap:wrap;">
@@ -466,7 +508,7 @@ window.onerror = function(msg, url, lineNo) {
   <div class="contact-strip" id="contact-strip">
     <div class="divrow"><span class="eyebrow">Contact</span></div>
     <h2 style="font-size:clamp(2rem,3vw,2.5rem);font-weight:800;margin-bottom:1rem; letter-spacing:-0.02em;">Let's work together.</h2>
-    <p style="font-size:1.05rem;font-weight:400;color:var(--ink2);line-height:1.8;max-width:52ch">I am looking for internship and graduate opportunities in mechanical design, product development, and manufacturing engineering.</p>
+    <p style="font-size:1.05rem;font-weight:400;color:var(--ink2);line-height:1.8;max-width:52ch">I am actively seeking internship and graduate opportunities in mechanical design, product development, and manufacturing engineering.</p>
     
     <div class="cform-wrap">
       <ul class="clinks">
@@ -530,9 +572,14 @@ window.onerror = function(msg, url, lineNo) {
         name: "Hamza Abd ElKadir",
         title: "Mechanical Design & Production Engineer",
         uni: "B.Eng. Mechanical Engineering — Ain Shams University (2022–2027)",
-        bio: "I design mechanical systems that are precise, manufacturable, and built to solve real problems — from award-winning flow instrumentation to fully automated industrial machinery. Two competition first-places, one industry role, nine engineering projects.",
-        about1: "I am a 3rd-year Mechanical Engineering student at Ain Shams University, specialising in Design & Production. My work sits at the intersection of precision mechanical design, DFMA, and hands-on manufacturing supervision — I do not just model parts, I see them through to the shop floor.",
-        about2: "My experience spans elevator systems, flow instrumentation, packaging automation, and space-rover suspension. CSWA-certified in SolidWorks. Currently designing the suspension for a Mars rover targeting the European Rover Challenge in Poland with ASU Racing Team (ROAR).",
+
+        // FIX 4: Revised hero bio
+        bio: "I design mechanical systems that hold tight tolerances, survive real manufacturing, and win competitions. CSWA-certified in SolidWorks, with two first-place finishes, a professional design role at GOBA for Elevators, a monorail HVAC internship at Orascom, and a Mars rover suspension currently being built for the European Rover Challenge in Poland.",
+
+        // FIX 4: Revised about paragraphs
+        about1: "I'm a 3rd-year Mechanical Engineering student at Ain Shams University (Design & Production track), and I work at the intersection of precision design, DFMA, and hands-on manufacturing. I don't just model parts — I follow them through the shop floor. At GOBA for Elevators I designed and supervised the full production of 100+ part elevator cabin systems with zero assembly errors. At Orascom I assisted in HVAC installation coordination on Cairo's East Nile Monorail. Every project I touch, I own end-to-end.",
+        about2: "My two 1st-place competition wins — a Smart Turbine Flowmeter (most accurate of 35 teams at the ASU Design Competition) and a Tea Bag Packaging Automation that cut cycle time from 60 seconds to 9 — both came from the same discipline: simulate and validate before you build, then see it through in the workshop. I'm CSWA-certified in SolidWorks, proficient in ANSYS FEA, MATLAB, Python, and Blender, and currently designing the suspension for the ROAR Mars rover targeting the European Rover Challenge in Poland.",
+
         email: "hamzahamza050875@gmail.com",
         phone: "+20 103 377 0304",
         linkedin: "linkedin.com/in/hamza-abdelkadir",
@@ -566,9 +613,8 @@ window.onerror = function(msg, url, lineNo) {
         flowmeter_Outcomes: "1st place at the ASU Design Competition 2024–2025. Most accurate flowmeter among all 35 teams. Smart control system programmed and calibrated from scratch.",
         flowmeter_Fig1: "media/flowmeter/flowmeter_elv.png", flowmeter_Fig1Cap: "Final Product",
         flowmeter_Fig2: "media/flowmeter_fig2.jpeg", flowmeter_Fig2Cap: "The flowmeter connected to the 6-inch pipe during testing",
-        flowmeter_Fig3: "media/flowmeter/turbine_manu.png", flowmeter_Fig3Cap: "The figure shows the set-up used in the horizontal milling M\C to produce the turbine hub",
+        flowmeter_Fig3: "media/flowmeter/turbine_manu.png", flowmeter_Fig3Cap: "The figure shows the set-up used in the horizontal milling M/C to produce the turbine hub",
         flowmeter_Fig4: "media/flowmeter/turbine(assembled).jpeg", flowmeter_Fig4Cap: "The assembled turbine",
-      
         flowmeter_Gallery: ["media/flowmeter_fig1.jpeg", "media/flowmeter_fig2.jpeg", "media/flowmeter/turbine_manu.png", "media/flowmeter/flowmeter-cover.jpg","media/flowmeter/flowmeter_lathe.png","media/flowmeter/turbine(assembled).jpeg","media/flowmeter/turbine(unassebmled).jpeg"],
 
         // --- PROJECT 2: CONVEYOR ---
@@ -593,7 +639,7 @@ window.onerror = function(msg, url, lineNo) {
         conveyor_Specs: "Cycle time (before) : 60 seconds per box | Cycle time (after) : 9 seconds per box | Improvement : 6.6× faster | Validation : Solid-body physics simulation | Error rate : Near zero",
         conveyor_Outcomes: "1st place, Royal Herbs IHUB Competition 2026. Design validated entirely in simulation before build, eliminating costly redesigns.",
         conveyor_Fig1: "media/tawlefa/tawlefa_fig1.png", conveyor_Fig1Cap: "Full mechanical packaging system",
-        conveyor_Fig2: "media/Tawlefa_side.jpeg", conveyor_Fig1Cap: "Full mechanical packaging system",
+        conveyor_Fig2: "media/Tawlefa_side.jpeg", conveyor_Fig2Cap: "Side view of the packaging mechanism",
         conveyor_Gallery: ["media/tawlefa/tawlefa_fig1.png", "media/tawlefa/tawlefa_Cpage.jpeg","media/tawlefa/Tawlefa_side.jpeg.png"],
 
         // --- PROJECT 3: ROVER ---
@@ -631,16 +677,16 @@ window.onerror = function(msg, url, lineNo) {
             "media/stirling/stilring_Us.png",
             "media/stiriling-fig2.png"
         ],
-        stirling_PaperTitle: "Desgin and Manufacrting of an Engine (Stirling Heat Engine)",
+        stirling_PaperTitle: "Design and Manufacturing of an Engine (Stirling Heat Engine)",
         stirling_Auth: "Hamza Abd ElKadir",
-        stirling_Abs: "Design of an Heat Engine based on the Stirling Cycle and Manufactring it in workshops",
+        stirling_Abs: "Design of a Heat Engine based on the Stirling Cycle and Manufacturing it in workshops.",
         stirling_Obj: "Design the complex linkage system connecting the displacer piston, power piston, and flywheel, ensuring smooth translation of linear thermal expansion into rotational energy.",
         stirling_Contrib: "Modeled all components and mechanical linkages in SolidWorks.|Performed kinematic motion studies to perfect the 90-degree phase difference required for the thermodynamic cycle.|Verified clearance tolerances at top-dead-center.",
         stirling_Specs: "Cycle : Thermodynamic expansion/compression | Phase Difference : 90 Degrees | Validation : Motion Study",
         stirling_Outcomes: "Kinematic motion successfully verified prior to physical prototyping.",
         stirling_Fig1: "media/stiriling-fig1.png", stirling_Fig1Cap: "Kinematic linkage design",
-        stirling_Fig2: "media/stiriling-fig2.png", stirling_Fig2Cap: "Power piston and diplacer run on the same shaft with 90 degrees phase shift",
-        stirling_Fig3: "media/stirling/stilring(unassembled).png", stirling_Fig3Cap: "All the manufacted parts before assembly",
+        stirling_Fig2: "media/stiriling-fig2.png", stirling_Fig2Cap: "Power piston and displacer run on the same shaft with 90 degrees phase shift",
+        stirling_Fig3: "media/stirling/stilring(unassembled).png", stirling_Fig3Cap: "All the manufactured parts before assembly",
         stirling_Gallery: ["media/stiriling-fig1.png","media/stirling/stilring(unassembled).png", "media/stiriling-fig2.png"],
 
         // --- PROJECT 5: THERMO ---
@@ -757,6 +803,26 @@ const SKILLS = [
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    // FIX 2: Hamburger — attach event listener after DOM ready
+    const hamburgerBtn = document.getElementById('hamburger');
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const menu = document.getElementById('mobile-menu');
+        const burger = document.getElementById('hamburger');
+        if (menu && menu.classList.contains('open')) {
+            if (!menu.contains(e.target) && e.target !== burger && !burger.contains(e.target)) {
+                closeMobileMenu();
+            }
+        }
+    });
+
     const cardsContainer = document.getElementById('project-cards-container');
     const pagesContainer = document.getElementById('dynamic-pages-container');
     const galleryContainer = document.getElementById('auto-gallery-grid');
@@ -770,7 +836,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let counter = 1;
     let categoriesSet = new Set();
 
-    // 🌟 BUILD HTML DYNAMICALLY TO PREVENT TRUNCATION 🌟
     PROJECT_ORDER.forEach(id => {
         if(DATA[id+'_Show'] === 0) return;
 
@@ -792,7 +857,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const img2Html = pop2 ? `<img src="${pop2}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
         const img3Html = pop3 ? `<img src="${pop3}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
 
-        // 1. INJECT PROJECT CARD
+        // FIX 3: mobile preview photo (first pop photo or fig1)
+        const mobilePreviewSrc = pop1 || cardImgSrc || '';
+        const mobilePreviewHtml = mobilePreviewSrc
+            ? `<div class="card-mobile-preview"><img src="${mobilePreviewSrc}" alt="" onerror="this.parentElement.style.display='none';"/></div>`
+            : '';
+
+        // 1. INJECT PROJECT CARD (with mobile preview strip)
         cardsContainer.insertAdjacentHTML('beforeend', `
             <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" onclick="go('pg-det-${id}')" onmouseenter="playHoverVideo(this)" onmouseleave="pauseHoverVideo(this)">
               <div class="card-cover img-container">
@@ -804,6 +875,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-sum-grid">${DATA[id+'_CardSum'] || ''}</div>
                 <div class="card-tools">${toolsHtml}</div>
               </div>
+              ${mobilePreviewHtml}
               <div class="card-hover-panel">
                 <div class="ch-cover">${hoverMedia}<span class="card-num">${numStr}</span></div>
                 <div class="ch-bottom">
@@ -823,12 +895,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join('');
         const specsTableHtml = specsHtml ? `<table class="sci-table">${specsHtml}</table>` : '';
 
-        // Safely injecting extra figures with the new layout-friendly class
         let extraFigsHtml = '';
         if(DATA[id+'_Fig3']) extraFigsHtml += `<div class="sci-fig"><div class="sci-fig-inner"><img src="${DATA[id+'_Fig3']}" alt="" onerror="this.style.display='none';"/></div><p class="sci-cap"><b>Fig. 3.</b> ${DATA[id+'_Fig3Cap'] || ''}</p></div>`;
         if(DATA[id+'_Fig4']) extraFigsHtml += `<div class="sci-fig"><div class="sci-fig-inner"><img src="${DATA[id+'_Fig4']}" alt="" onerror="this.style.display='none';"/></div><p class="sci-cap"><b>Fig. 4.</b> ${DATA[id+'_Fig4Cap'] || ''}</p></div>`;
 
-        // Hero Slider Assembly
         const detImgSrc = DATA[id+'_DetailImage'] || DATA[id+'_Cover'] || DATA[id+'_CardImage'];
         let slidesHtml = '';
         let baseCoverVid = DATA[id+'_DetailVideo'] || DATA[id+'_Video'];
@@ -838,7 +908,6 @@ document.addEventListener("DOMContentLoaded", () => {
             DATA[id+'_Gallery'].forEach(img => { slidesHtml += `<div class="cover-slide"><img src="${img}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;" onerror="this.style.display='none';"/></div>`; });
         }
 
-        // Sidebar Assembly
         let sidebarHtml = '';
         if (DATA[id+'_Gallery']) {
             DATA[id+'_Gallery'].forEach(img => { sidebarHtml += `<img src="${img}" class="side-gal-img" onclick="openLB(this, '.det-sidebar')" alt="" onerror="this.style.display='none';"/>`; });
@@ -930,12 +999,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Force WebM videos to paint their first frame to remove blank grey boxes
     document.querySelectorAll('video').forEach(v => {
         v.addEventListener('loadedmetadata', () => { v.currentTime = 0.1; }, {once: true});
     });
 
-    // Mobile Autoplay & Viewport Intersection trigger
     if (typeof IntersectionObserver !== 'undefined') {
         const videoObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -951,7 +1018,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.scroll-video, .base-vid').forEach(video => { videoObserver.observe(video); });
     }
 
-    // Back to top behavior
     window.addEventListener('scroll', () => {
         const btn = document.getElementById('back-to-top');
         if (!btn) return;
@@ -959,7 +1025,6 @@ document.addEventListener("DOMContentLoaded", () => {
         else { btn.classList.remove('visible'); }
     }, { passive: true });
     
-    // 🌟 INITIALIZE HOME PAGE DATA 🌟
     if(DATA.email) {
         const ml = document.getElementById('link-email');
         if(ml) ml.href = "mailto:" + DATA.email;
@@ -999,20 +1064,35 @@ function pauseHoverVideo(card) {
     if(vHover) { vHover.pause(); vHover.currentTime = 0.1; }
 }
 
+/* FIX 2: toggleMobileMenu — robust implementation */
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     const burger = document.getElementById('hamburger');
-    if(menu) menu.classList.toggle('open');
-    if(burger) burger.classList.toggle('open');
-    document.body.style.overflow = (menu && menu.classList.contains('open')) ? 'hidden' : '';
+    if (!menu || !burger) return;
+    const isOpen = menu.classList.contains('open');
+    if (isOpen) {
+        menu.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    } else {
+        menu.classList.add('open');
+        burger.classList.add('open');
+        burger.setAttribute('aria-expanded', 'true');
+        menu.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
 }
+
 function closeMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     const burger = document.getElementById('hamburger');
-    if(menu) menu.classList.remove('open');
-    if(burger) burger.classList.remove('open');
+    if(menu) { menu.classList.remove('open'); menu.setAttribute('aria-hidden', 'true'); }
+    if(burger) { burger.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
     document.body.style.overflow = '';
 }
+
 function mobileGo(pageId, scrollTarget) {
     closeMobileMenu();
     setTimeout(() => go(pageId, scrollTarget), 50);
