@@ -355,6 +355,19 @@ footer{border-top:1px solid var(--rule);padding-block:2rem; background: var(--wh
   .hero-h1 { font-size: clamp(2rem, 10vw, 3rem); }
   .cov-txt { padding: 2rem var(--g); }
 }
+  /* 🌟 MOBILE PROJECT CARD FIXES 🌟 */
+.mobile-card-gallery { display: none; }
+.mobile-card-cta { display: none; }
+
+@media(max-width:900px){
+  /* Show the 3 photos */
+  .mobile-card-gallery { display: flex; gap: 0.5rem; margin-top: 1.2rem; margin-bottom: 0.5rem; height: 75px; }
+  .mobile-card-gallery img { flex: 1; width: 0; height: 100%; object-fit: cover; border-radius: 4px; border: 1px solid var(--rule); }
+  .mobile-card-gallery div { display: none; } /* Hides empty placeholders if a project has < 3 photos */
+  
+  /* Show the clickable button hint */
+  .mobile-card-cta { display: block; margin-top: auto; padding-top: 0.8rem; font-family: var(--fd); font-size: 0.8rem; font-weight: 800; color: var(--red); text-transform: uppercase; letter-spacing: 0.05em; }
+}
 </style>
 </head>
 <body>
@@ -790,6 +803,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const img3Html = pop3 ? `<img src="${pop3}" onerror="this.style.display='none';"/>` : `<div style="flex:1;"></div>`;
 
         // 1. INJECT PROJECT CARD
+// 1. INJECT PROJECT CARD
         cardsContainer.insertAdjacentHTML('beforeend', `
             <div class="card proj-card" data-cat="${DATA[id+'_CardTags']}" onclick="go('pg-det-${id}')" onmouseenter="playHoverVideo(this)" onmouseleave="pauseHoverVideo(this)">
               <div class="card-cover img-container">
@@ -800,6 +814,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-title">${DATA[id+'_CardTitle'] || ''}</div>
                 <div class="card-sum-grid">${DATA[id+'_CardSum'] || ''}</div>
                 <div class="card-tools">${toolsHtml}</div>
+                
+                <div class="mobile-card-gallery">${img1Html}${img2Html}${img3Html}</div>
+                <div class="mobile-card-cta">Read Case Study &rarr;</div>
+                
               </div>
               <div class="card-hover-panel">
                 <div class="ch-cover">${hoverMedia}<span class="card-num">${numStr}</span></div>
